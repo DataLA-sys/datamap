@@ -4,7 +4,7 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
-import ru.neoflex.datalog.actors.{OwConfigToTopologyActor, RenderActor}
+import ru.neoflex.datalog.actors.RenderActor
 import scala.util.Failure
 import scala.util.Success
 
@@ -28,10 +28,13 @@ object DatalogApp {
   //#start-http-server
   def main(args: Array[String]): Unit = {
       val rootBehavior = Behaviors.setup[Nothing] { context =>
+        var pname = ""
+        if(args.length > 0) {
+          pname = args(0)
+        }
         val renderActor = context.spawn(RenderActor(), "RenderActor")
-        val owConfigToTopologyActor = context.spawn(OwConfigToTopologyActor(), "owConfigToTopologyActor")
 
-        val routes = new RenderRoutes(owConfigToTopologyActor)(renderActor)(context.system)
+        val routes = new RenderRoutes(renderActor)(pname)(context.system)
         startHttpServer(routes.renderRoutes)(context.system)
 
         Behaviors.empty

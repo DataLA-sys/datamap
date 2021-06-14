@@ -11,12 +11,15 @@ import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.RenderTemplate
 import org.json4s.DefaultFormats
-import ru.neoflex.datalog.actors.{OwConfigToTopologyActor, RenderActor}
+import ru.neoflex.datalog.actors.RenderActor
 import ru.neoflex.datalog.engine.TemplateFile
 
 import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
 import spray.json.DefaultJsonProtocol._
+
+import java.nio.file.{Files, Paths}
+import scala.io.Source.fromFile
 
 trait CORSHandler{
 
@@ -50,22 +53,15 @@ trait CORSHandler{
 
 }
 
-class RenderRoutes(owConfigToTopologyActor: ActorRef[OwConfigToTopologyActor.Command])
-                  (renderActor: ActorRef[RenderActor.RenderCommand])
+class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
+                  (projectFile: String)
                   (implicit val system: ActorSystem[_]) extends CORSHandler  {
 
-  //#user-routes-class
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  //#import-json-formats
-
-  // If ask takes more time than this to complete the request is failed
-  //private implicit val timeout = 33.;//Timeout.create(system.settings.config.getDuration("my-app.routes.ask-timeout"))
   implicit val timeout: Timeout = 33.seconds
   implicit val ec = system.executionContext
   implicit val jobFormat = jsonFormat2(TemplateFile)
   implicit val formats = DefaultFormats
-
-  def getJson(): Future[String] =  owConfigToTopologyActor.ask(OwConfigToTopologyActor.RenderIt(_))
 
   def assets = {
     def redirectSingleSlash =
@@ -80,44 +76,33 @@ class RenderRoutes(owConfigToTopologyActor: ActorRef[OwConfigToTopologyActor.Com
   def renderRoutes(): Route = {
     concat(
       get {
-        path("render") {
-          complete(getJson())
-        }
-      },
-      get {
         corsHandler(
           path("renderTemplate") {
-          parameters("fileName".as[String], "params".as[String]) { (fileName, params) =>
-            //println(fileName)
-            val m = renderActor.ask(RenderTemplate(fileName, Some(params), _))
-            val s = m.flatMap(s => {
-              s match {
-                case RenderActor.RenderedTemplate(value, _) => {
-                  Future(value)
+            parameters("fileName".as[String], "params".as[String]) { (fileName, params) =>
+              val m = renderActor.ask(RenderTemplate(fileName, Some(params), _))
+              val s = m.flatMap(s => {
+                s match {
+                  case RenderActor.RenderedTemplate(value, _) => {
+                    Future(value)
+                  }
                 }
-              }
-            })
-            /*projectDir.map(s => {
-              s match {
-                case String => {
-                  println(s)
-                }
-              }
-            })*/
-            complete(s)
+              })
+              complete(s)
+            }
           }
-        })
+        )
       },
       get {
-        path("renderow") {
-          complete(owConfigToTopologyActor.ask(OwConfigToTopologyActor.ParseConfig("OW", "./src/main/resources/conf_ow.json", _)))
-        }
-      },
-      get {
-        path("renderbki") {
-          complete(owConfigToTopologyActor.ask(OwConfigToTopologyActor.ParseConfig(
-            "BKI",
-            "C:\\projects\\temp\\alfabank\\bki\\C5486671.Обогащение данных введённых в область dmin_risk\\oozie_workflows\\reg\\wf_reg_imbr_cre_req_deriveddata_daily\\conf\\conf.json", _)))
+        path("projectFile") {
+          if(Files.exists(Paths.get(projectFile))) {
+            val source = fromFile(projectFile)
+            val s = source.getLines.mkString
+            source.close()
+            complete(s)
+          } else {
+            println(s"Not found $projectFile")
+            complete(s"""{"message": "project file $projectFile not found"}""")
+          }
         }
       },
       post {
