@@ -1,0 +1,24 @@
+<mat-toolbar>
+    <span>Data topology</span>
+    <button mat-icon-button aria-label="Zoom to fit" (click)="zoomToFit()">
+      <mat-icon>fit_screen</mat-icon>
+    </button>
+    
+    <a *ngIf="selected != undefined" href="{{selected.data?.dataset?.sourceFile}}">{{selected.data?.dataset?.sourceFile}}</a>
+    
+    <span *ngFor="let project of selectedNodeProjects">{{project}}</span>
+
+    <mat-form-field appearance="fill">
+      <mat-select [(value)]="selectedProject" disableRipple (selectionChange)="projectSelected($event.value)">
+        <mat-option *ngFor="All" [value]=null></mat-option>
+        <mat-option *ngFor="let project of projects" [value]="project">
+          {{project}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button aria-label="Clear" (click)="clear()">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+</mat-toolbar>

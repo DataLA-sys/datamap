@@ -1,0 +1,13 @@
+<button mat-icon-button aria-label="Render" (click)="renderTemplate()">
+  <mat-icon>cake</mat-icon>
+</button>
+<input type="text" [(ngModel)]="fileName">
+<input type="params" [(ngModel)]="params">
+<button mat-icon-button aria-label="Set data" (click)="setData()">
+  <mat-icon>done</mat-icon>
+</button>
+
+<ace-editor
+[(text)]="fileContent"
+ #templateEditor style="height:600px;">
+</ace-editor>

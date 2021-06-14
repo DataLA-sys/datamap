@@ -1,0 +1,3028 @@
+[
+    {
+        "name": "ODPP.Legacy.acc",
+        "data":{
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "odpp_acc.inaccount_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp_acc.inevent_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inaccount_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inaccount_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inaccount_t.ql"
+                        },
+                        {
+                            "name": "odpp.account_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inaccount_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inaccount_t.ql"
+                },
+                {
+                    "name": "odpp_acc.inbalance_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp_acc.inevent_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inbalance_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inbalance_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inbalance_t.ql"
+                        },
+                        {
+                            "name": "odpp.account_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inbalance_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inbalance_t.ql"
+                },
+                {
+                    "name": "odpp_acc.incalcmeasure_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp_dict.clndr_bdate",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incalcmegure_t.ql"
+                        },
+                        {
+                            "name": "odpp_acc.inevent_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incalcmegure_t.ql"
+                        },
+                        {
+                            "name": "odpp_pwc.outgroupreport",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_pwc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incalcmegure_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incalcmegure_t.ql"
+                },
+                {
+                    "name": "odpp_acc.incashflow_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp_dict.settings",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.cashflow",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp_acc.inevent_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.events",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp_dict.event_trigger",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.transactions",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp0",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        },
+                        {
+                            "name": "odpp_acc.incontract_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incashflow_t.ql"
+                },
+                {
+                    "name": "odpp_acc.inclient_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp.subject_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inclient_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inclient_t.ql"
+                },
+                {
+                    "name": "odpp_acc.incontract_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp_dict.settings",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.inevent_t_ext",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp_dict.acceventtype",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp_dict.event_trigger",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.subject_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp_dict.accproduct",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.account_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp_dict.ga_product",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.default_client",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_ekpp_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.man_attr",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_acc_cost",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp0",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/incontract_t.ql"
+                },
+                {
+                    "name": "odpp_acc.increditline_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/increditline_t.ql"
+                        },
+                        {
+                            "name": "odpp.inevent_t_ext",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/increditline_t.ql"
+                        },
+                        {
+                            "name": "odpp.deal_acc_cost",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/increditline_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/increditline_t.ql"
+                },
+                {
+                    "name": "odpp_acc.inevent_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp.inevent_t_ext",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t.ql"
+                },
+                {
+                    "name": "odpp.inevent_t_ext",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp",
+                    "in": [
+                        {
+                            "name": "odpp_dict.settings",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp.events",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp_dict.event_trigger",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp_dict.acceventtype",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp.deal_ekpp_tmp",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp.transactions",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        },
+                        {
+                            "name": "odpp_dict.event_priority",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/inevent_t_ext.ql"
+                },
+                {
+                    "name": "odpp_acc.intransaction_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp.transactions",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/intransaction_t.ql"
+                        },
+                        {
+                            "name": "odpp_acc.inaccount_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/intransaction_t.ql"
+                        },
+                        {
+                            "name": "odpp_acc.inevent_t",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/intransaction_t.ql"
+                        },
+                        {
+                            "name": "odpp.inevent_t_ext",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/intransaction_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/intransaction_t.ql"
+                },
+                {
+                    "name": "odpp_acc.marketdata_t",
+                    "project": "ODPP.Legacy.acc",
+                    "layer": "odpp_acc",
+                    "in": [
+                        {
+                            "name": "odpp.exchangerate",
+                            "project": "ODPP.Legacy.acc",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/marketdata_t.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/acc/join_scripts/marketdata_t.ql"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "ODPP.Legacy.events",
+        "data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "utm_dev.t_bis_transit_mart",
+                    "project": "ODPP.Legacy.events",
+                    "layer": "utm_dev",
+                    "in": [
+                        {
+                            "name": "odpp_acc.outTransaction_t",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_acc",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        },
+                        {
+                            "name": "odpp.deal_ekpp_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        },
+                        {
+                            "name": "odpp_dict.accaccountmask",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        },
+                        {
+                            "name": "odpp_dict.ga_product0",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/complex_cl_tranch.ql"
+                },
+                {
+                    "name": "odpp.events",
+                    "project": "ODPP.Legacy.events",
+                    "layer": "odpp",
+                    "in": [
+                        {
+                            "name": "odpp.transactions",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_acc_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.deal_tmp2",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_dict.ga_product",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.account_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_dict.clndr_bdate",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.deal_ekpp_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.man_attr",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.cashflow",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.exchangerate",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.default_client",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.deal_asset_balance_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.default_deal",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_dict.default_bucket",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_dict.dpd_bucket",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_bis.seuddy",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_bis",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_bis.seuy",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_bis",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.rct_client",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.rct",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.subject_tmp",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp.inevent_t_ext",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        },
+                        {
+                            "name": "odpp_dict.event_trigger",
+                            "project": "ODPP.Legacy.events",
+                            "layer": "odpp_dict",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "oddp_legacy/config/test/mr/events/join_scripts/event_tx.ql"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "ODPP.Legacy.utm.acc",
+	    "data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "imbr_cre_comp_req",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_comp",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "company_request_bki",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "currency_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/currency_sdim/*.parquet"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "deal_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/deal_edim/month_part=??????/"
+                        },
+                        {
+                            "name": "bapplication",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BAPPLICATION"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "bcompany",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BCOMPANY"
+                        },
+                        {
+                            "name": "source_company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_comp_req",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_cre_req_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "imbr_request_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "person_request_bki_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "clientpapertype_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientpapertype_sdim"
+                        },
+                        {
+                            "name": "bapplication",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BAPPLICATION"
+                        },
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "birth_xdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/birth_xdim"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "bperson",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BPERSON"
+                        },
+                        {
+                            "name": "gender_lov",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/gender_lov"
+                        },
+                        {
+                            "name": "doc_type",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "None"
+                        },
+                        {
+                            "name": "source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "source_person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_cre_req_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "imbr_request_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_req_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "person_request_bki_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "clientpapertype_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientpapertype_sdim"
+                        },
+                        {
+                            "name": "gender_lov",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/gender_lov"
+                        },
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "birth_xdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/birth_xdim"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "doc_type",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "None"
+                        },
+                        {
+                            "name": "l_hdb_det.wsrm_log",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "{source_db}.source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_req_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_dataset_status",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "{imbr_table}",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_comp",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_req_rb",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_req_mb",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_COMP_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_comp_req",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "Olywer_Wyman",
+	    "data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "showcase_pravo",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_pravolevel2_searchcasearbitr",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_spark",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_spark_response_json_clob.tenders",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        },
+                        {
+                            "name": "showcase_spark_response_json_clob.risk_factors",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        },
+                        {
+                            "name": "showcase_spark_response_json_clob.company_status",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        },
+                        {
+                            "name": "showcase_spark_response_json_clob.entrepreneur_status",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_bias",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_bias_response_json_clob.get_fssp",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_beeline2",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_beeline2_response_json_clob.getscore",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_1of",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_2gis",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_2gis_level2",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_atol",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_atol_level2",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_csv_monitor_ved__",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_evotor",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_mailru",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_nebo",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_ofdya",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_ofdya_l_2",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_taxcom",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_geointellect",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_syn",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_source_processing",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_errors_backend",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_errors",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "showcase_errors_data_by_source",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        },
+                        {
+                            "name": "showcase_errors_data_by_source_nebo",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        },
+                        {
+                            "name": "showcase_errors_data_by_source_beeline_mailru",
+                            "project": "Oliver_Wyman",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_requests",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_requests",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_request_items_input",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_request_items",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                },
+                {
+                    "name": "showcase_request_items_output",
+                    "project": "Oliver_Wyman",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "ow_ow_prod_data_request_items",
+                            "project": "Oliver_Wyman",
+                            "layer": "Raw",
+                            "in": [
+                                {
+                                    "name": "source_processing",
+                                    "project": "Oliver_Wyman",
+                                    "layer": "External",
+                                    "in": [],
+                                    "out": [],
+                                    "datasetType": "Table",
+                                    "sourceFile": "conf.json"
+                                }
+                            ],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "conf.json"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table",
+                    "sourceFile": "conf.json"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "Connector Data",
+	    "data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "cr_connector_data_union_source",
+                    "project": "Connector_data",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "credreg_alfacre_connector_data",
+                            "project": "Connector_data",
+                            "layer": "Raw",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_source2_connector_data",
+                            "project": "Connector_data",
+                            "layer": "Raw",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        }
+                    ],
+                    "out": [
+                        {
+                            "name": "cr_connector_data_41",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_54",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_0",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_3",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_6",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_22",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_40",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_48",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        },
+                        {
+                            "name": "cr_connector_data_52",
+                            "project": "Connector_data",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table",
+                            "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                        }
+                    ],
+                    "datasetType": "Table",
+                    "sourceFile": "C:/projects/temp/alfabank/connectordata/Connector_Data/hdfs_home/scripts/Connector_Data/conf.json"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "Triggers",
+    	"data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "alfacre.trig_subsribe",
+                    "project": "triggers",
+                    "layer": "Oracle",
+                    "in": [],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "alfacre.trig",
+                    "project": "triggers",
+                    "layer": "Oracle",
+                    "in": [],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "credreg_trig_alfacre_trig_subscribe",
+                    "project": "triggers",
+                    "layer": "Hive",
+                    "in": [
+                        {
+                            "name": "alfacre.trig_subsribe",
+                            "project": "",
+                            "layer": "Oracle",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "credreg_trig_alfacre_triggers",
+                    "project": "triggers",
+                    "layer": "Hive",
+                    "in": [
+                        {
+                            "name": "alfacre.trig",
+                            "project": "",
+                            "layer": "Oracle",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "credreg_trig_alfacre_trig_enriched",
+                    "project": "triggers",
+                    "layer": "Hive",
+                    "in": [
+                        {
+                            "name": "credreg_trig_alfacre_triggers",
+                            "project": "",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "credreg_trig_alfacre_trig_subscribe",
+                            "project": "",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "credreg_trig_alfacre_trig_enriched_final",
+                    "project": "triggers",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "credreg_trig_alfacre_trig_enriched",
+                            "project": "",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                }
+            ],
+            "projectFiles": []
+        }
+    },
+    {
+        "name": "BKI",
+	    "data": {
+            "tools": [],
+            "actions": [],
+            "datasets": [
+                {
+                    "name": "imbr_cre_comp_req",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_comp",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "company_request_bki",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "currency_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/currency_sdim/*.parquet"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "deal_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/deal_edim/month_part=??????/"
+                        },
+                        {
+                            "name": "bapplication",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BAPPLICATION"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "bcompany",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BCOMPANY"
+                        },
+                        {
+                            "name": "source_company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_comp_req",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_cre_req_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "imbr_request_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "person_request_bki_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "clientpapertype_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientpapertype_sdim"
+                        },
+                        {
+                            "name": "bapplication",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BAPPLICATION"
+                        },
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "birth_xdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/birth_xdim"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "bperson",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/live_system/l_hdb/DET/SM3_MASS/BPERSON"
+                        },
+                        {
+                            "name": "gender_lov",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/gender_lov"
+                        },
+                        {
+                            "name": "doc_type",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "None"
+                        },
+                        {
+                            "name": "source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "source_person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_cre_req_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "imbr_request_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "imbr_request_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_req_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "person_request_bki_rb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "clientpapertype_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientpapertype_sdim"
+                        },
+                        {
+                            "name": "gender_lov",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/gender_lov"
+                        },
+                        {
+                            "name": "country_sdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/country_sdim"
+                        },
+                        {
+                            "name": "clientaddress_shist",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/clientaddress_shist/month_part=??????/*.parquet"
+                        },
+                        {
+                            "name": "clientppdconsent_htran",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/clientppdconsent_htran"
+                        },
+                        {
+                            "name": "client_edim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/client_edim/year_part=????/*.parquet"
+                        },
+                        {
+                            "name": "birth_xdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh4dm/db/birth_xdim"
+                        },
+                        {
+                            "name": "channel_hdim",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "/storage/s_dwh/db/channel_hdim"
+                        },
+                        {
+                            "name": "doc_type",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "file",
+                            "pathToData": "None"
+                        },
+                        {
+                            "name": "l_hdb_det.wsrm_log",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "{source_db}.source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "source_person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "broken_record_imbr_cre_req_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_mb",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "person_request_bki_rb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        },
+                        {
+                            "name": "person_request_bki_mb",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_dataset_status",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "{imbr_table}",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "imbr_request_comp",
+                    "project": "BKI",
+                    "layer": "DataMart",
+                    "in": [
+                        {
+                            "name": "company_request_bki",
+                            "project": "BKI",
+                            "layer": "Hive",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_req_rb",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_req_mb",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                },
+                {
+                    "name": "IMBR.IMBR_CRE_COMP_REQ",
+                    "project": "BKI",
+                    "layer": "External",
+                    "in": [
+                        {
+                            "name": "imbr_cre_comp_req",
+                            "project": "BKI",
+                            "layer": "DataMart",
+                            "in": [],
+                            "out": [],
+                            "datasetType": "Table"
+                        }
+                    ],
+                    "out": [],
+                    "datasetType": "Table"
+                }
+            ],
+            "projectFiles": []
+        }
+    }
+]

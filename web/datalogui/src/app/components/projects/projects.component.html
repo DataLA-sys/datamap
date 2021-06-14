@@ -1,0 +1,13 @@
+<mat-list>
+    <mat-list-item *ngFor="let project of projects">
+      <p matLine>
+          {{project.name}}
+      </p>
+      <p matLine>
+        {{project.template}}
+      </p>
+      <p matLine>
+        <button (click)="loadProject(project)">Show</button>
+      </p>
+    </mat-list-item>
+  </mat-list>

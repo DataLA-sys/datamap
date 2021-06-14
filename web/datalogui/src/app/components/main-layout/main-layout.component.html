@@ -1,0 +1,23 @@
+<div fxLayout="row">
+  <app-main-toolbar></app-main-toolbar>
+</div>
+<div fxLayout="row">
+    <div fxFlex="20%" style="overflow: auto;height: 90vh;">
+      <select-table></select-table>
+    </div>
+    <div fxFlex="5px" style="background-color: gray;">
+    </div>
+    <div fxFlex="80%" style="overflow: auto;height: 90vh;">
+      <mat-tab-group>
+        <mat-tab label="Topology">  
+          <app-topology></app-topology>      
+        </mat-tab>      
+        <mat-tab label="Templates">
+          <tepmlate-editor></tepmlate-editor>
+        </mat-tab>
+        <mat-tab label="Projects">
+          <app-projects></app-projects>
+        </mat-tab>
+      </mat-tab-group>      
+    </div>
+  </div>
