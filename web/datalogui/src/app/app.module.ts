@@ -22,6 +22,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -69,6 +70,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     MatInputModule,
     MatAutocompleteModule,
     MatListModule,
+    MatDividerModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule

@@ -19,8 +19,10 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
-  loadProject(project: Project) {
-    this.eventService.emitClearAllEvent()
+  loadProject(project: Project, clearAll: boolean = true) {
+    if(clearAll === true) {
+      this.eventService.emitClearAllEvent()
+    }    
     if(!project.data && !environment.singleHtml) {
       this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
         .subscribe((s: any) => {
@@ -30,6 +32,10 @@ export class ProjectsComponent implements OnInit {
     } else {
       this.eventService.emitProjectEvent(project);
     }    
+  }
+
+  object2str(value: any): string {
+    return JSON.stringify(value)
   }
 
   ngOnInit(): void {

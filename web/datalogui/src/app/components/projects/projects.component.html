@@ -1,13 +1,27 @@
 <mat-list>
-    <mat-list-item *ngFor="let project of projects">
-      <p matLine>
-          {{project.name}}
-      </p>
-      <p matLine>
-        {{project.template}}
-      </p>
-      <p matLine>
-        <button (click)="loadProject(project)">Show</button>
-      </p>
-    </mat-list-item>
+        <mat-list-item *ngFor="let project of projects">
+        <p matLine>
+            <b>{{project.name}}</b>
+        </p>
+        <p matLine>
+            {{project.template}}
+        </p>
+        <p matLine>
+            {{object2str(project.templateParams || {})}}
+        </p>
+        
+
+            <div class="button-container">
+                <button mat-mini-fab color="primary" (click)="loadProject(project)">
+                    <mat-icon>content_paste</mat-icon>
+                </button>
+            </div>
+            <div class="button-container">
+                <button mat-mini-fab color="primary" (click)="loadProject(project, false)">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </button>
+            </div>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+        
   </mat-list>

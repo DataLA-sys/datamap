@@ -92,6 +92,12 @@ export class TopologyComponent implements OnInit {
     eventService.clearAllEvent$.subscribe(value => this.clear())
     eventService.joinDataEvent$.subscribe(value => this.addData(value))
     eventService.projectEvent$.subscribe(value => this.addData(value.data || new Topology()))
+    eventService.tableSelectedEvent$.subscribe(value => { 
+      let found = this.nodes.find(node => node.data?.dataset?.name === value);
+      if(found) {
+        this.nodeClick(found)
+      }
+    })
   }
 
   zoomToFit() {
@@ -155,7 +161,8 @@ export class TopologyComponent implements OnInit {
   }
 
   getData(data: Topology, project: any = null) {
-    this.data = data
+    this.data = data;
+    this.selected = undefined;
     console.log(data);
     
     let inodes: Dataset[] = []

@@ -14,10 +14,10 @@ export class SelectTableComponent implements OnInit {
 
   tables: string[] = [];
   constructor(private eventService: EventService) { 
-    eventService.tableListEvent$.subscribe(value => this.tables = value)
+    eventService.tableListEvent$.subscribe(value => this.tables = value.sort())
   }
 
-  setData(value: string|undefined) {
+  selectTable(value: string|undefined) {
     this.eventService.emitTableSelectedEvent(value)
   }  
 
