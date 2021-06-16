@@ -62,7 +62,8 @@ export class TopologyComponent implements OnInit {
   codeValue: any = "<a>aa</a>"
 
   getNodeProjects(node: Node): (string | undefined)[] | undefined {
-    return this.data?.datasets.filter(d => d.name == node.data?.dataset.name).map(d => d.project)
+    //return this.data?.datasets.filter(d => d.name == node.data?.dataset.name).map(d => d.project)
+    return this.nodes.map(n => n.data?.dataset).filter(d => d && d.name == node.data?.dataset.name).map(d => d?.project)
   }
 
   getTables(): string[] {

@@ -1,0 +1,14 @@
+{
+    "datasets":[
+        {
+            "name": "odpp.marts",
+            "project": "marts",
+            "layer": "Hive",
+            "out": [
+                {"name": "ODPP.Legacy.acc", "project": "ODPP.Legacy.acc", "layer": "Hive"},
+                {"name": "ODPP.Legacy.events", "project": "ODPP.Legacy.events", "layer": "Hive"},
+                {"name": "ODPP.Legacy.utm.acc", "project": "ODPP.Legacy.utm.acc", "layer": "Hive"}
+            ]
+        }
+    ]
+}

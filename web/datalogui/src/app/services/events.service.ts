@@ -62,6 +62,12 @@ export class EventService {
   projectEvent$ = this.projectEventSource.asObservable();
   emitProjectEvent(data: any) {
     this.projectEventSource.next(data);
+  }
+
+  private projectNameEventSource = new Subject<string>();
+  projectNameEvent$ = this.projectNameEventSource.asObservable();
+  emitProjectNameEvent(data: any) {
+    this.projectNameEventSource.next(data);
   }  
 
   private tableListEventSource = new Subject<string[]>();

@@ -1,9 +1,17 @@
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
+
+import scala.collection.mutable.ListBuffer
 implicit val formats = DefaultFormats
 
-val params: Option[String] = Some(s"""{"a": "1"}""")
-params.map(s => {
-  val v = parse(s)
-  print((v \\ "a").extract[String])
+
+val s = ".saass /WD/aaa.sh -sss"
+val l = ListBuffer[String]()
+s.split(' ').foreach(str => {
+    str.indexOf(".sh") match {
+      case x: Int if x > -1 => l += str
+      case _ =>
+  }
 })
+
+l.toList

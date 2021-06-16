@@ -1,5 +1,11 @@
 [
     {
+        "name": "odpp projects",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_projects.ssp",
+        "templateParams": {},
+        "dataExists": false
+    },
+    {
         "name": "ODPP.Legacy.acc",
         "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_1.ssp",
         "templateParams": {

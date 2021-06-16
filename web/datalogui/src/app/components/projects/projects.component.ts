@@ -20,18 +20,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   loadProject(project: Project, clearAll: boolean = true) {
-    if(clearAll === true) {
-      this.eventService.emitClearAllEvent()
-    }    
-    if(!project.data && !environment.singleHtml) {
-      this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
-        .subscribe((s: any) => {
-          project.data = s
-          this.eventService.emitProjectEvent(project);
-        })        
-    } else {
-      this.eventService.emitProjectEvent(project);
-    }    
+    this.projectService.loadProject(project, clearAll)
   }
 
   object2str(value: any): string {

@@ -38,4 +38,9 @@ export class MainToolbarComponent implements OnInit {
     this.eventService.emitClearAllEvent()
   }
 
+  loadProject(project: string | undefined) {
+    if(project) {
+      this.eventService.emitProjectNameEvent(project)
+    }    
+  }
 }

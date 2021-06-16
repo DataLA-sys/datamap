@@ -7,8 +7,12 @@
     </div>
     
     <a *ngIf="selected != undefined" href="{{selected.data?.dataset?.sourceFile}}">{{selected.data?.dataset?.sourceFile}}</a>
-    
-    <span *ngFor="let project of selectedNodeProjects">{{project}}</span>
+    <span>&nbsp;</span>
+    <span *ngFor="let project of selectedNodeProjects">{{project}}
+      <button mat-mini-fab color="primary" (click)="loadProject(project)">
+        <mat-icon>content_paste</mat-icon>
+      </button>      
+    </span>
     <div class="button-container">
       <button mat-mini-fab color="primary" aria-label="Clear" (click)="clear()">
         <mat-icon>clear</mat-icon>

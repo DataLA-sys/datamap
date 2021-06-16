@@ -6,12 +6,20 @@ import projectsData from '../../assets/projects_data.json';
 import { Project } from '../classes/project';
 import { TemplateService } from './template.service';
 import { environment } from 'src/environments/environment';
+import { EventService } from './events.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService { 
-  constructor(private http: HttpClient, private templateService: TemplateService) { }
+  constructor(private http: HttpClient, private templateService: TemplateService, private eventService: EventService) { 
+    eventService.projectNameEvent$.subscribe(value => {
+      let p: Project | undefined = this.getProject(value)
+      if(p) {
+        this.loadProject(p)
+      }      
+    })
+  }
   getProjects(): Observable<Project[]> {
     
     if(environment.singleHtml == true) {
@@ -19,15 +27,8 @@ export class ProjectService {
         projects.forEach(project => {
           if(project.dataExists == true) {
             this.getJSONData(project)
-          } else {
-            this.templateService
-            .renderTemplate(project.template, JSON.stringify(project.templateParams))
-              .subscribe(projectData => {
-                this.setData(project, projectData)
-              })          
-            }
-          });
-        
+          }
+        });        
       return of(projects)
     } else {
       return this.http.get<Project[]>("/projectFile")
@@ -41,4 +42,23 @@ export class ProjectService {
   private setData(project: Project, data: any) {
     project.data = data;
   }
+
+  getProject(name: string): Project | undefined {
+    return configProjects.find((p: Project) => p.name === name);
+  }
+
+  loadProject(project: Project, clearAll: boolean = true) {
+    if(clearAll === true) {
+      this.eventService.emitClearAllEvent()
+    }    
+    if(!project.data && !environment.singleHtml) {
+      this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
+        .subscribe((s: any) => {
+          project.data = s
+          this.eventService.emitProjectEvent(project);
+        })        
+    } else {
+      this.eventService.emitProjectEvent(project);
+    }    
+  }  
 }
