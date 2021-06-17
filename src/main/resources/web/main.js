@@ -995,15 +995,17 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_30__["ɵɵdefineInjecto
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectService", function() { return ProjectService; });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var _assets_projects_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/projects.json */ "C+Dh");
-var _assets_projects_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../assets/projects.json */ "C+Dh", 1);
-/* harmony import */ var _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/projects_data.json */ "+lZI");
-var _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../assets/projects_data.json */ "+lZI", 1);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "AytR");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _template_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./template.service */ "dBhf");
-/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./events.service */ "riPR");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _assets_projects_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/projects.json */ "C+Dh");
+var _assets_projects_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../assets/projects.json */ "C+Dh", 1);
+/* harmony import */ var _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/projects_data.json */ "+lZI");
+var _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../assets/projects_data.json */ "+lZI", 1);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _template_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./template.service */ "dBhf");
+/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./events.service */ "riPR");
+
 
 
 
@@ -1018,15 +1020,16 @@ class ProjectService {
         this.templateService = templateService;
         this.eventService = eventService;
         eventService.projectNameEvent$.subscribe(value => {
-            let p = this.getProject(value);
-            if (p) {
-                this.loadProject(p);
-            }
+            this.getProject(value).subscribe(p => {
+                if (p) {
+                    this.loadProject(p);
+                }
+            });
         });
     }
     getProjects() {
-        if (src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].singleHtml == true) {
-            let projects = _assets_projects_json__WEBPACK_IMPORTED_MODULE_1__.filter((p) => p.enable !== false);
+        if (src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].singleHtml == true) {
+            let projects = _assets_projects_json__WEBPACK_IMPORTED_MODULE_2__.filter((p) => p.enable !== false);
             projects.forEach(project => {
                 if (project.dataExists == true) {
                     this.getJSONData(project);
@@ -1040,19 +1043,21 @@ class ProjectService {
     }
     getJSONData(project) {
         var _a;
-        project.data = (_a = _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_2__.find((d) => d.name === project.name)) === null || _a === void 0 ? void 0 : _a.data;
+        project.data = (_a = _assets_projects_data_json__WEBPACK_IMPORTED_MODULE_3__.find((d) => d.name === project.name)) === null || _a === void 0 ? void 0 : _a.data;
     }
     setData(project, data) {
         project.data = data;
     }
     getProject(name) {
-        return _assets_projects_json__WEBPACK_IMPORTED_MODULE_1__.find((p) => p.name === name);
+        let p = this.getProjects()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((projects) => projects.find(project => project.name === name)));
+        return p;
     }
     loadProject(project, clearAll = true) {
         if (clearAll === true) {
             this.eventService.emitClearAllEvent();
         }
-        if (!project.data && !src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].singleHtml) {
+        if (!project.data && !src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].singleHtml) {
             this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
                 .subscribe((s) => {
                 project.data = s;
@@ -1064,8 +1069,8 @@ class ProjectService {
         }
     }
 }
-ProjectService.ɵfac = function ProjectService_Factory(t) { return new (t || ProjectService)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_template_service__WEBPACK_IMPORTED_MODULE_6__["TemplateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵinject"](_events_service__WEBPACK_IMPORTED_MODULE_7__["EventService"])); };
-ProjectService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjectable"]({ token: ProjectService, factory: ProjectService.ɵfac, providedIn: 'root' });
+ProjectService.ɵfac = function ProjectService_Factory(t) { return new (t || ProjectService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_template_service__WEBPACK_IMPORTED_MODULE_7__["TemplateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](_events_service__WEBPACK_IMPORTED_MODULE_8__["EventService"])); };
+ProjectService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: ProjectService, factory: ProjectService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),

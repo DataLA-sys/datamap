@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import configProjects from '../../assets/projects.json';
 import projectsData from '../../assets/projects_data.json';
 import { Project } from '../classes/project';
@@ -12,14 +13,19 @@ import { EventService } from './events.service';
   providedIn: 'root'
 })
 export class ProjectService { 
+
+  
   constructor(private http: HttpClient, private templateService: TemplateService, private eventService: EventService) { 
     eventService.projectNameEvent$.subscribe(value => {
-      let p: Project | undefined = this.getProject(value)
-      if(p) {
-        this.loadProject(p)
-      }      
+
+      this.getProject(value).subscribe(p =>{
+        if(p) {
+          this.loadProject(p)
+        }          
+      })
     })
   }
+
   getProjects(): Observable<Project[]> {
     
     if(environment.singleHtml == true) {
@@ -43,8 +49,10 @@ export class ProjectService {
     project.data = data;
   }
 
-  getProject(name: string): Project | undefined {
-    return configProjects.find((p: Project) => p.name === name);
+  getProject(name: string): Observable<Project | undefined> {
+    let p: Observable<Project | undefined> = this.getProjects()
+      .pipe(map((projects: Project[]) => projects.find(project => project.name === name)));
+    return p;
   }
 
   loadProject(project: Project, clearAll: boolean = true) {
