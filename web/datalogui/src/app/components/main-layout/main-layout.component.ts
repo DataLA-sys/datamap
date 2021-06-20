@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { EventService } from 'src/app/services/events.service';
 import { TopologyComponent } from '../topology/topology.component'
 
 @Component({
@@ -11,7 +12,14 @@ export class MainLayoutComponent implements OnInit {
   @ViewChild(TopologyComponent)
   private topologyComponent!: TopologyComponent;
 
-  constructor() { }
+  showSpinner: boolean = false;
+
+  constructor(private eventService: EventService, public cd: ChangeDetectorRef) {
+    eventService.spinnerEvent$.subscribe(value => {
+      this.showSpinner = value;
+      cd.detectChanges();
+    })
+  }
 
   zoomToFit() {
     this.topologyComponent.zoomToFit();

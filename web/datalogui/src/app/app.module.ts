@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -34,6 +35,7 @@ import { SelectTableComponent } from './components/select_table/select-table.com
 import { MainToolbarComponent } from './components/main-toolbar/main-toolbar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { SelectedItemInspectorComponent } from './components/selected-item-inspector/selected-item-inspector.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     SelectTableComponent,
     MainToolbarComponent,
     MainLayoutComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    SelectedItemInspectorComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -71,6 +74,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     MatAutocompleteModule,
     MatListModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule

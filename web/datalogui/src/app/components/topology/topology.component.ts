@@ -61,9 +61,8 @@ export class TopologyComponent implements OnInit {
   data: Topology | undefined;
   codeValue: any = "<a>aa</a>"
 
-  getNodeProjects(node: Node): (string | undefined)[] | undefined {
-    //return this.data?.datasets.filter(d => d.name == node.data?.dataset.name).map(d => d.project)
-    return this.nodes.map(n => n.data?.dataset).filter(d => d && d.name == node.data?.dataset.name).map(d => d?.project)
+  getNodeProject(node: Node): string | undefined {
+    return node.data?.dataset.project;
   }
 
   getTables(): string[] {
@@ -82,7 +81,7 @@ export class TopologyComponent implements OnInit {
     eventService.zoomToFitEvent$.subscribe(value => this.zoomToFit());
 
     eventService.getSelectedNodeProjectEvent$.subscribe(node => 
-      eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProjects(node)));
+      eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
     
     eventService.projectSelectedEvent$.subscribe(value => {
       if(this.data) {

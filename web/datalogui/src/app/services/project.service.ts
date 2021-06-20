@@ -60,13 +60,15 @@ export class ProjectService {
       this.eventService.emitClearAllEvent()
     }    
     if(!project.data && !environment.singleHtml) {
+      this.eventService.emitSpinnerEvent(true)
       this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
         .subscribe((s: any) => {
           project.data = s
           this.eventService.emitProjectEvent(project);
+          this.eventService.emitSpinnerEvent(false)
         })        
     } else {
       this.eventService.emitProjectEvent(project);
-    }    
+    }
   }  
 }

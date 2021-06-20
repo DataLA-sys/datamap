@@ -34,9 +34,9 @@ export class EventService {
     this.getSelectedNodeProjectEventSource.next(node);
   }
 
-  private returnSelectedNodeProjectEventSource = new Subject<(string | undefined)[] | undefined>();
+  private returnSelectedNodeProjectEventSource = new Subject<string | undefined>();
   returnSelectedNodeProjectEvent$ = this.returnSelectedNodeProjectEventSource.asObservable();
-  emitReturnSelectedNodeProjectEvent(projects: (string | undefined)[] | undefined) {
+  emitReturnSelectedNodeProjectEvent(projects: string | undefined) {
     this.returnSelectedNodeProjectEventSource.next(projects);
   }
 
@@ -80,5 +80,11 @@ export class EventService {
   tableSelectedEvent$ = this.tableSelectedEventSource.asObservable();
   emitTableSelectedEvent(value: string|undefined) {
     this.tableSelectedEventSource.next(value);
+  }  
+
+  private spinnerEventSource = new Subject<boolean>();
+  spinnerEvent$ = this.spinnerEventSource.asObservable();
+  emitSpinnerEvent(value: boolean) {
+    this.spinnerEventSource.next(value);
   }  
 }

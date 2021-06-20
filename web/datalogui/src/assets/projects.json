@@ -1,2 +1,59 @@
 [
+    {
+        "name": "odpp projects",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_projects.ssp",
+        "templateParams": {},
+        "dataExists": false
+    },
+    {
+        "name": "ODPP.Legacy.acc",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_1.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts", 
+            "project": "ODPP.Legacy.acc", 
+            "sourcePrefix": "oddp_legacy/config/test/mr/acc/join_scripts/"},
+        "dataExists": true
+    },
+    {
+        "name": "ODPP.Legacy.events",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_1.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/events/join_scripts", 
+            "project": "ODPP.Legacy.events", 
+            "sourcePrefix": "oddp_legacy/config/test/mr/events/join_scripts/"},
+        "dataExists": true
+    },
+    {
+        "name": "ODPP.Legacy.utm.acc",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_1.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/utm/acc/join_scripts", 
+            "project": "ODPP.Legacy.utm.acc", 
+            "sourcePrefix": "oddp_legacy/config/test/mr/utm/acc/join_scripts/"},
+        "dataExists": true
+    },
+    {
+        "name": "Olywer_Wyman",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/ow_full.ssp",
+        "templateParams": {},
+        "dataExists": true
+    },
+    {
+        "name": "Connector Data",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/connector_data_full.ssp",
+        "templateParams": {},
+        "dataExists": true
+    },
+    {
+        "name": "Triggers",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/triggers.ssp",
+        "templateParams": {},
+        "dataExists": true
+    },
+    {
+        "name": "BKI",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/bki2topology_full.ssp",
+        "templateParams": {},
+        "dataExists": true
+    }
 ]

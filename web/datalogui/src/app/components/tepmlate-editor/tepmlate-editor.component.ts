@@ -30,14 +30,17 @@ export class TepmlateEditorComponent implements OnInit {
 
   renderTemplate() {
     if(this.fileName) {
+      this.eventService.emitSpinnerEvent(true);
       this.teplateService.renderTemplate(this.fileName, this.params)
         .subscribe(s => {
           this.fileContent = JSON.stringify(s, null, 4)
           this.eventService.emitJoinDataEvent(s)
+          this.eventService.emitSpinnerEvent(false);
         }, error => {        
           console.log("Error while parse template!")
           console.log(error)
           this.fileContent = error.error.text;
+          this.eventService.emitSpinnerEvent(false);
         })
     }
   }

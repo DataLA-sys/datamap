@@ -1,23 +1,39 @@
-<div fxLayout="row">
-  <app-main-toolbar></app-main-toolbar>
-</div>
-<div fxLayout="row">
-    <div fxFlex="20%" style="overflow: auto;height: 90vh;">
-      <select-table></select-table>
-    </div>
-    <div fxFlex="5px" style="background-color: gray;">
-    </div>
-    <div fxFlex="80%" style="overflow: auto;height: 90vh;">
-      <mat-tab-group>
-        <mat-tab label="Topology">  
-          <app-topology></app-topology>      
-        </mat-tab>      
-        <mat-tab label="Templates">
-          <tepmlate-editor></tepmlate-editor>
-        </mat-tab>
-        <mat-tab label="Projects">
-          <app-projects></app-projects>
-        </mat-tab>
-      </mat-tab-group>      
+<div class="wrapper">
+  <div class="overlay" *ngIf="showSpinner === true">
+    <div class="spinner-wrapper">
+      <mat-spinner></mat-spinner>
     </div>
   </div>
+
+  <div class="loaded-content" [class.blurred]="showSpinner">   
+    
+    <div fxLayout="row">
+      <app-main-toolbar></app-main-toolbar>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="20%" style="overflow: auto;height: 90vh;">
+          <selected-item-inspector></selected-item-inspector>
+          <mat-divider></mat-divider>
+          <select-table></select-table>
+        </div>
+        <div fxFlex="5px" style="background-color: gray;">
+        </div>
+        <div fxFlex="80%" style="overflow: auto;height: 90vh;">
+          <mat-tab-group>
+            <mat-tab label="Topology">  
+              <app-topology></app-topology>      
+            </mat-tab>      
+            <mat-tab label="Templates">
+              <tepmlate-editor></tepmlate-editor>
+            </mat-tab>
+            <mat-tab label="Projects">
+              <app-projects></app-projects>
+            </mat-tab>
+          </mat-tab-group>      
+        </div>
+      </div>
+
+  </div>
+</div>
+
+

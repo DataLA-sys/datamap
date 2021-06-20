@@ -9,18 +9,27 @@ import { Node } from "../../classes/node";
 })
 export class MainToolbarComponent implements OnInit {
 
-  selected: Node | undefined;
-  selectedNodeProjects: (string | undefined)[] | undefined
+  currentProject: string | undefined;
   projects: string[] = []
-  selectedProject: string = "";
 
   constructor(private eventService: EventService) { 
     eventService.nodeSelectedEvent$.subscribe(value => {
-      this.selected = value;
       this.eventService.emitGetGetSelectedNodeProjectEvent(value);
     })
-    eventService.returnSelectedNodeProjectEvent$.subscribe(value => this.selectedNodeProjects = value)
-    eventService.receiveProjectstEvent$.subscribe(value => this.projects = value)
+
+    this.eventService.projectEvent$.subscribe(value => {
+      this.currentProject = value.name;
+      if(!this.projects.includes(value.name)) {
+        this.projects.push(value.name);
+      }
+      if(this.projects.length == 6) {
+        this.projects.shift()
+      }
+    })
+
+    this.eventService.clearAllEvent$.subscribe(value => {
+      this.currentProject = undefined;
+    })
   }
 
   ngOnInit(): void {
@@ -35,6 +44,7 @@ export class MainToolbarComponent implements OnInit {
   }
 
   clear() {
+    this.projects = []
     this.eventService.emitClearAllEvent()
   }
 
@@ -43,4 +53,24 @@ export class MainToolbarComponent implements OnInit {
       this.eventService.emitProjectNameEvent(project)
     }    
   }
+
+  nextProject(): string | undefined {
+    if(this.currentProject) {
+      let selected = this.projects.indexOf(this.currentProject)
+      if(selected + 1 < this.projects.length) {
+        return this.projects[selected + 1];
+      }
+    }
+    return undefined;
+  }
+
+  prevProject(): string | undefined {
+    if(this.currentProject) {
+      let selected = this.projects.indexOf(this.currentProject)
+      if(selected > 0) {
+        return this.projects[selected - 1];
+      }
+    }
+    return undefined;
+  }  
 }

@@ -4,15 +4,18 @@
       <button mat-mini-fab color="primary" aria-label="Zoom to fit" (click)="zoomToFit()">
         <mat-icon>fit_screen</mat-icon>
       </button>
-    </div>
-    
-    <a *ngIf="selected != undefined" href="{{selected.data?.dataset?.sourceFile}}">{{selected.data?.dataset?.sourceFile}}</a>
+    </div>           
+
     <span>&nbsp;</span>
-    <span *ngFor="let project of selectedNodeProjects">{{project}}
-      <button mat-mini-fab color="primary" (click)="loadProject(project)">
-        <mat-icon>content_paste</mat-icon>
-      </button>      
+
+    <span *ngFor="let project of projects">
+      <span *ngIf="project === currentProject" style="color: mediumblue;">&nbsp;{{project}}&nbsp;</span>
+      <span *ngIf="project !== currentProject" style="color: gray;">&nbsp;{{project}}&nbsp;</span>
+      <button mat-mini-fab color="primary" (click)="loadProject(project)" [disabled]="project === currentProject">
+        <mat-icon>done</mat-icon>
+      </button>
     </span>
+
     <div class="button-container">
       <button mat-mini-fab color="primary" aria-label="Clear" (click)="clear()">
         <mat-icon>clear</mat-icon>

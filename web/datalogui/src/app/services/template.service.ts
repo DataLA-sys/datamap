@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { TemplateFile } from '../classes/tempates';
+import { EventService } from './events.service';
 
 @Injectable({
   providedIn: 'root'
