@@ -34,19 +34,14 @@ export class TopologyComponent implements OnInit {
     const doc = new jsPDF()
 
     const svgatt = document.getElementsByTagName("svg")
-    const o: Svg2pdfOptions = {x: 0, y: 0, width: 1500, height: 2500, loadExternalStyleSheets: true}
+    const o: Svg2pdfOptions = {x: 0, y: 0, width: 6500, height: 5500, loadExternalStyleSheets: true}
 
     const element = svgatt[0]
     if(element) {
-      const x = 0
-      const y = 0
-      const width = 1500
-      const height = 2500
-      doc
-      .svg(element, o)
-      .then(() => {
-        doc.save('myPDF.pdf')
-      })
+      doc.svg(element, o)
+        .then(() => {
+          doc.save('myPDF.pdf')
+        })
     }
   }
 
@@ -59,6 +54,7 @@ export class TopologyComponent implements OnInit {
   error: any;
   selected: Node | undefined;
   data: Topology | undefined;
+  showMiniMap: boolean = false;  
   codeValue: any = "<a>aa</a>"
 
   getNodeProject(node: Node): string | undefined {
@@ -74,12 +70,17 @@ export class TopologyComponent implements OnInit {
   }
 
   zoomToFit$: Subject<boolean> = new Subject();
-  
+  panToNode$: Subject<any> = new Subject();
+  center$: Subject<boolean> = new Subject();
+
+
   constructor(
     private eventService: EventService, 
     public cd: ChangeDetectorRef) { 
     eventService.zoomToFitEvent$.subscribe(value => this.zoomToFit());
+    eventService.centerTopologyEvent$.subscribe(value => this.center$.next(true));
 
+    eventService.saveTopologyEvent$.subscribe(value => this.saveGraph());
     eventService.getSelectedNodeProjectEvent$.subscribe(node => 
       eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
     
@@ -92,11 +93,12 @@ export class TopologyComponent implements OnInit {
     eventService.clearAllEvent$.subscribe(value => this.clear())
     eventService.joinDataEvent$.subscribe(value => this.addData(value))
     eventService.projectEvent$.subscribe(value => this.addData(value.data || new Topology()))
-    eventService.tableSelectedEvent$.subscribe(value => { 
+    eventService.tableSelectedEvent$.subscribe(value => {       
       let found = this.nodes.find(node => node.data?.dataset?.name === value);
       if(found) {
         this.nodeClick(found)
-      }
+        this.panToNode$.next(found?.id)
+      }      
     })
   }
 
@@ -145,7 +147,7 @@ export class TopologyComponent implements OnInit {
   }
 
   checkIfSelected(node: Node) {
-    return node == this.selected
+    return node.id == this.selected?.id
   }
 
   clear() {
@@ -216,7 +218,7 @@ export class TopologyComponent implements OnInit {
     })
       .map(d => new Node(
         tablesId.find(k => k.key == d.name)?.value || "notfoundid", d.name, 
-        new NodeData("assets/dataset.ico", "#a95963", d)
+        new NodeData("#a95963", d)
       ))
     this.links = links.filter(l => this.nodes.filter(n => n.id == l.source || n.id == l.target).length > 0)
     this.clusters = clusters;

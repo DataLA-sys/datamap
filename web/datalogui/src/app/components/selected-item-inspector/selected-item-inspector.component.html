@@ -1,6 +1,13 @@
 <mat-nav-list>
-    
+
+    <mat-list-item>        
+      <label>{{selected?.data?.dataset?.name}}</label>
+    </mat-list-item>
+    <mat-list-item>        
+      <label>{{selected?.data?.dataset?.datasetType}}</label>
+    </mat-list-item>
     <mat-list-item *ngIf="selectedNodeProject != undefined">{{selectedNodeProject}}
+      <span>&nbsp;</span>
       <button mat-mini-fab color="primary" (click)="loadProject(selectedNodeProject)">
         <mat-icon>done</mat-icon>
       </button>      

@@ -22,6 +22,12 @@ export class EventService {
     this.zoomToFitEventSource.next(true);
   }  
 
+  private saveTopologyEventSource = new Subject<boolean>();
+  saveTopologyEvent$ = this.saveTopologyEventSource.asObservable();
+  emitSaveTopologyEvent() {
+    this.saveTopologyEventSource.next(true);
+  }    
+
   private nodeSelectedEventSource = new Subject<Node>();
   nodeSelectedEvent$ = this.nodeSelectedEventSource.asObservable();
   emitNodeSelectedEvent(node: Node) {
@@ -86,5 +92,11 @@ export class EventService {
   spinnerEvent$ = this.spinnerEventSource.asObservable();
   emitSpinnerEvent(value: boolean) {
     this.spinnerEventSource.next(value);
+  }
+
+  private centerTopologyEventSource = new Subject<boolean>();
+  centerTopologyEvent$ = this.centerTopologyEventSource.asObservable();
+  emitCenterTopologyEvent() {
+    this.centerTopologyEventSource.next(true);
   }  
 }

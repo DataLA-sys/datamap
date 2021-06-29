@@ -1,10 +1,19 @@
 <mat-toolbar>
     <span>Data topology</span>
+    <span>&nbsp;</span>
     <div class="button-container">
+<!--      <button mat-mini-fab color="primary" aria-label="Save" (click)="save()">
+        <mat-icon>save</mat-icon>
+      </button>
+-->    
       <button mat-mini-fab color="primary" aria-label="Zoom to fit" (click)="zoomToFit()">
         <mat-icon>fit_screen</mat-icon>
       </button>
-    </div>           
+
+      <button mat-mini-fab color="primary" aria-label="Center" (click)="centerGraph()">
+        <mat-icon>open_with</mat-icon>
+      </button>      
+    </div>
 
     <span>&nbsp;</span>
 

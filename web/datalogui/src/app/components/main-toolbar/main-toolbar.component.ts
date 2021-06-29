@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from "../../services/events.service";
-import { Node } from "../../classes/node";
+import 'material-icons/iconfont/material-icons.css';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -35,8 +35,16 @@ export class MainToolbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  save(): void {
+    this.eventService.emitSaveTopologyEvent();    
+  }
+
   zoomToFit() {
     this.eventService.emitZoomToFitEvent();
+  }
+
+  centerGraph() {
+    this.eventService.emitCenterTopologyEvent();
   }
 
   projectSelected(project: string) {

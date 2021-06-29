@@ -4,8 +4,10 @@
   [links]="links"
   [nodes]="nodes"
   [clusters]="clusters"
-  [showMiniMap]="true"
+  [showMiniMap]="showMiniMap"
   [zoomToFit$]="zoomToFit$"
+  [panToNode$]="panToNode$"
+  [center$]="center$"  
 >
 <ng-template #nodeTemplate let-node>
     <svg:g class="node-group ng-star-inserted">

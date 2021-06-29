@@ -9,7 +9,7 @@ import akka.http.scaladsl.model.headers.{`Access-Control-Allow-Credentials`, `Ac
 import akka.http.scaladsl.server.Directives.{complete, _}
 import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
-import ru.neoflex.datalog.actors.RenderActor.RenderTemplate
+import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
 import org.json4s.DefaultFormats
 import ru.neoflex.datalog.actors.RenderActor
 import ru.neoflex.datalog.engine.TemplateFile
@@ -79,7 +79,7 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
         corsHandler(
           path("renderTemplate") {
             parameters("fileName".as[String], "params".as[String]) { (fileName, params) =>
-              val m = renderActor.ask(RenderTemplate(fileName, Some(params), _))
+              val m = renderActor.ask(RenderTemplate(fileName, Some(params), _: ActorRef[RenderedMessage]))
               val s = m.flatMap(s => {
                 s match {
                   case RenderActor.RenderedTemplate(value, _) => {

@@ -4,10 +4,26 @@ export class NodeData {
   image: string = "assets/dataset.ico";
   color: string = "#a95963";
   dataset!: Dataset
-  constructor(image: string,  color: string,  dataset: Dataset) {
-    this.image = image
+  constructor(color: string,  dataset: Dataset) {
+    this.image = this.getImage(dataset);
     this.color = color
     this.dataset = dataset
+  }
+
+  private getImage(dataset: Dataset): string {
+    if(dataset.datasetType == "Table") {
+      return "assets/dataset.ico";
+    }
+    if(dataset.datasetType == "SH") {
+      return "assets/sh.jpg";
+    }
+    if(dataset.datasetType == "project") {
+      return "assets/project.png";
+    }
+    if(dataset.datasetType == "file") {
+      return "assets/file.png";
+    }    
+    return "assets/component.png";
   }
 }
 

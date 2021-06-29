@@ -36,6 +36,7 @@ import { MainToolbarComponent } from './components/main-toolbar/main-toolbar.com
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SelectedItemInspectorComponent } from './components/selected-item-inspector/selected-item-inspector.component';
+import 'material-icons/iconfont/material-icons.css';
 
 @NgModule({
   declarations: [

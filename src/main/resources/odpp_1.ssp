@@ -7,6 +7,7 @@
 	import scala.io.Source
 	import org.json4s._
 	import org.json4s.jackson.JsonMethods._
+	import ru.neoflex.datalog.engine.Parser
 	%>
 <%@ val params: Option[String] = None%>
 <%	implicit val formats = DefaultFormats
@@ -33,9 +34,11 @@
 		project = (j \ "project").extract[String]
 		sourceFile = (j \ "sourcePrefix").extract[String]
 	})
+	//val tables = Parser.sqlTokens(joinScriptsFolder, sourceFile) //ListBuffer[DestTable]()
 	val files = getListOfFiles(joinScriptsFolder)
 	files.foreach(file => {
 		val fn = sourceFile + file.getName()
+
 		val source = fromFile(file.getAbsolutePath())
 		val lines = source.getLines()
 		var destTable = ""
@@ -43,7 +46,7 @@
 
 		lines.foreach(s => {
 			val insTokens = List("insert into", "insert overwrite")
-			val fromTokens = List("from odpp", "cross join ", "left outer join ", "join ")
+			val fromTokens = List("from odpp", " join ")
 			breakable {insTokens.foreach(insToken => {
 				if(s.contains(insToken)) {
 					destTable = s.replace(insToken, "").replace("table", "").trim.split(' ')(0)
@@ -53,13 +56,13 @@
 			)}
 			fromTokens.foreach(token => {
 				if(s.contains(token)) {
-					val source = s.trim.replace("left", "").trim.split(' ')(1)
-					if(source.contains(".")) {
-						if(!sources.exists(item => item == source)) {
-							sources += source
+					val source = s.split(" on ")(0).split(' ').find(w => w.contains('.'))
+					source.map(w =>{
+						if(!sources.exists(item => item == w)) {
+							sources += w
 						}
+					})
 
-					}
 				}
 			})
 		})

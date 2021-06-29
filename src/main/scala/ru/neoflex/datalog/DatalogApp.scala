@@ -35,7 +35,7 @@ object DatalogApp {
         val renderActor = context.spawn(RenderActor(), "RenderActor")
 
         val routes = new RenderRoutes(renderActor)(pname)(context.system)
-        startHttpServer(routes.renderRoutes)(context.system)
+        startHttpServer(routes.renderRoutes())(context.system)
 
         Behaviors.empty
     }
