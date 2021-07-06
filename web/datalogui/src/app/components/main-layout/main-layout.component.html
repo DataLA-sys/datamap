@@ -8,10 +8,10 @@
   <div class="loaded-content" [class.blurred]="showSpinner">   
     
     <div fxLayout="row">
-      <app-main-toolbar></app-main-toolbar>
+      <app-main-toolbar class="noprint"></app-main-toolbar>
     </div>
     <div fxLayout="row">
-        <div fxFlex="20%" style="overflow: auto;height: 90vh;">
+        <div fxFlex="20%" style="overflow: auto;height: 90vh;" class="noprint">
           <selected-item-inspector></selected-item-inspector>
           <mat-divider></mat-divider>
           <select-table></select-table>

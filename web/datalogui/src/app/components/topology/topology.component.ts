@@ -24,6 +24,9 @@ export class TopologyComponent implements OnInit {
 
   @ViewChild('editor') editor: any;
   text: string = "<test><order>PO001</order>\r\n<messgeID>1124</messageID></test>";
+  x: number = 1400;
+  y: number = 800;
+  dim: [number, number] = [this.x, this.y];
   
   setEditorContent(event: any) {
     // console.log(event, typeof event);

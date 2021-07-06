@@ -1,0 +1,94 @@
+<%
+	import org.json4s.DefaultFormats
+	import org.json4s.jackson.{JsonMethods, Serialization}
+	import org.json4s.jackson.JsonMethods.{compact, parse, render}
+
+	import scala.io.Source.fromFile
+	import ru.neoflex.datalog.engine.Parser
+
+	import scala.collection.mutable.ListBuffer
+	import scala.io.Source.fromFile
+	%>
+<%@ val params: Option[String] = None%>
+<%
+	implicit val formats = DefaultFormats
+	var projectFolder = "C:/projects/temp/alfabank/SBRM_LOG"
+	var project = ""
+
+	params.map(s => {
+		val j = parse(s)
+		projectFolder = (j \ "folder").extract[String]
+		project = (j \ "project").extract[String]
+	})
+
+	case class Table(name: Option[String],
+		sql: Option[String],
+		schema: Option[String],
+		xml_name: Option[String],
+		sql_block: Option[String],
+		blocks: Option[List[String]])
+
+	val confFile = projectFolder + "/oozie_workflows/reg/wf_reg_sbrm_deriveddata_daily/conf/parser_conf.json"
+	val data = parse(fromFile(confFile).getLines.mkString)
+	val tables = data \ "tables"
+	case class PTable(name: String, in: List[String] = List())
+
+	val ptables = ListBuffer[PTable]()
+
+	val list = tables.values.asInstanceOf[Map[String, Map[String, _]]]
+	var mainTable = ""
+	list.keySet.foreach(s => {
+		val tableJ = data \ "tables" \ s
+		val table = Serialization.read[Table](compact(render(tableJ)))
+		if(table.sql != Option.empty) {
+			mainTable = s
+		}
+	})
+	list.keySet.foreach(s => {
+		val tableJ = data \ "tables" \ s
+		val table = Serialization.read[Table](compact(render(tableJ)))
+
+		if(table.sql != Option.empty) {
+			val sqlFile = projectFolder + "/hdfs_home/scripts/sbrm_log/" + table.sql.get
+
+			val source = fromFile(sqlFile)
+			var inTables: Seq[String] = Seq.empty
+			try {
+				val sqlScript = source.getLines.mkString("\n")
+					.replace("{", "")
+					.replace("}", "")
+				ptables += PTable(s, Parser.getInTables(sqlScript).toList)
+			} finally {
+				source.close()
+			}
+		} else {
+			ptables += PTable(s, List(mainTable))
+		}
+	})
+%>
+{
+"datasets":
+	[
+	#for (i <- 0 to ptables.size - 1)
+		{
+			"name": "${ptables(i).name}",
+			"layer": "Hive 2",
+			"project": "${project}",
+			"sourceFile": "${confFile}",
+			"in": [
+			#for(j <- 0 to ptables(i).in.size - 1)
+				{
+					"name": "${ptables(i).in(j)}",
+					"layer": "Hive 1",
+					"project": "${project}",
+					"sourceFile": "${confFile}",
+					"in": []
+				}#if(j != ptables(i).in.size - 1) , #end
+			#end
+			],
+			"out": [
+			]
+			}#if(i != ptables.size - 1) , #end
+	#end
+	]
+}

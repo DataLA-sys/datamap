@@ -24,3 +24,9 @@
     justify-content: center;
     justify-items: center;
   }
+
+  @media print{
+    .noprint{
+        display: none;
+    }
+ }  

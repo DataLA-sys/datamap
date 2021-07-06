@@ -7,23 +7,14 @@
 	import scala.io.Source
 	import org.json4s._
 	import org.json4s.jackson.JsonMethods._
-	import ru.neoflex.datalog.engine.Parser
+	import ru.neoflex.datalog.engine.{Parser, LineProcessor, SqlScriptLineProcessor}
+	import ru.neoflex.datalog.engine.dto.DestTable
 	%>
 <%@ val params: Option[String] = None%>
 <%	implicit val formats = DefaultFormats
 
 	implicit val codec = Codec("UTF-8")
 
-	case class DestTable(name: String, sources: List[String], sourceFile: String)
-
-	def getListOfFiles(dir: String):List[File] = {
-		val d = new File(dir)
-		if (d.exists && d.isDirectory) {
-			d.listFiles.filter(_.isFile).toList
-		} else {
-			List[File]()
-		}
-	}
 	var joinScriptsFolder = ""
 	val tables = ListBuffer[DestTable]()
 	var project = ""
@@ -34,42 +25,7 @@
 		project = (j \ "project").extract[String]
 		sourceFile = (j \ "sourcePrefix").extract[String]
 	})
-	val files = getListOfFiles(joinScriptsFolder)
-	import scala.compat.Platform.EOL
-	files.foreach(file => {
-		val fn = sourceFile + file.getName()
-		val source = fromFile(file.getAbsolutePath())
-
-		val sqlScript = source.getLines.map(
-			s => {
-				var sout = s
-				if(s.indexOf("--") > -1) {
-					if(s.indexOf(';') > s.indexOf("--")) {
-						sout = s.replace(";", "")
-					}
-				}
-				sout.replace("DATE'", "'").replace("DATE '", "'")
-			}
-		) mkString "\n"
-		sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql => {
-			try {
-				val outTables = Parser.getOutTables(sql)
-				var inTables = Parser.getInTables(sql)
-				outTables.foreach(destTable => {
-					if(destTable.contains(".")) {
-						tables.find(f => f.name == destTable).map(ft => {
-							inTables = inTables ++ ft.sources;
-							tables -= ft
-						})
-						tables += DestTable(destTable, inTables.toList.filter(t => t.contains(".")).distinct, fn)
-					}
-				})
-			} finally {
-				source.close()
-			}
-		})
-
-	})
+	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'")), _.contains("."))
 %>
 {
 "datasets":

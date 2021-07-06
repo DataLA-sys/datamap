@@ -1,20 +1,45 @@
-import org.json4s._
-import org.json4s.jackson.JsonMethods._
+import org.json4s.DefaultFormats
+import org.json4s.JsonAST.{JField, JObject, JString}
+import org.json4s.jackson.{JsonMethods, Serialization}
+import org.json4s.jackson.JsonMethods.compact
+
+import scala.io.Source.fromFile
+import ru.neoflex.datalog.engine.Parser
 
 import scala.collection.mutable.ListBuffer
-import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
-import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, LogicalPlan}
+import scala.io.Source.fromFile
 
-import scala.xml.XML
+case class Table(name: Option[String],
+                 sql: String = "",
+                 schema: String = "",
+                 xml_name: String = "",
+                 sql_block: String = "",
+                 blocks: List[String] = List())
+
+val projectFolder = "C:/projects/temp/alfabank/SBRM_LOG"
+val confFile = projectFolder + "/oozie_workflows/reg/wf_reg_sbrm_deriveddata_daily/conf/parser_conf.json"
+
+val data = JsonMethods.parse(fromFile(confFile).getLines.mkString)
+
+val v = data
+val tables = v \ "tables"
+
+case class PTable(name: String, in: List[String] = List())
+
+val ptables = ListBuffer[PTable]()
+
 implicit val formats = DefaultFormats
-import org.apache.spark.sql.catalyst.analysis.UnresolvedRelation
+val list = tables.values.asInstanceOf[Map[String, Map[String, _]]]
+var mainTable = ""
+val sqlt = v \ "tables" \ "*" \ "sql"
+println(sqlt)
 
-val pathToWorkflowXml = "C:/a/workflow.xml"
+val ts = for {
+  JObject(table) <- data
+  JField("sql", JString(name)) <- table
+  //JField("age", JInt(age)) <- child
+  //if age > 4
+} yield (table)
 
-val xml = XML.loadFile(pathToWorkflowXml)
-val elist = (xml \\ "action").filter(a =>  (a \ "@name").toString().contains("wf_export_imbr_imbr_cre") )
-val etables = for {
-  a <- elist
-  p <- (a \\ "sub-workflow" \\ "configuration" \\ "property")
-  if !(p \\ "name").find(n => n.text == "table_name").isEmpty //.map(_.text) == "table_name"
-} yield ((a \ "@name").toString().replace("wf_export_imbr_", ""), (p \ "value").map(_.text))
+//ts
+table

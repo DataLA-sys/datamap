@@ -24,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -76,6 +77,7 @@ import 'material-icons/iconfont/material-icons.css';
     MatListModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule

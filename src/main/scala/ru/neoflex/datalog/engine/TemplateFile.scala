@@ -3,6 +3,7 @@ package ru.neoflex.datalog.engine
 import org.apache.spark.sql.catalyst.analysis.UnresolvedRelation
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, LogicalPlan}
+import ru.neoflex.datalog.engine.dto.DestTable
 
 import java.io.File
 import scala.collection.mutable.ListBuffer
@@ -11,9 +12,19 @@ import scala.util.control.Breaks.{break, breakable}
 
 case class TemplateFile(fileName: String, templateContent: String)
 
-case class DestTable(name: String, sources: List[String], sourceFile: String)
-
 object Parser {
+
+  def getFileText(fileName: String,
+                  lineProcessor: LineProcessor) = {
+    val source = fromFile(fileName)
+    var text = ""
+    try {
+      text = source.getLines().map(s => lineProcessor.processLine(s)).mkString("\n")
+    } finally {
+      source.close()
+    }
+    text
+  }
 
   def getListOfFiles(dir: String):List[File] = {
     val d = new File(dir)
@@ -102,4 +113,42 @@ object Parser {
     tables.toSeq
   }
 
+  def processSqlScript(sql: String,
+                       sourceFile: String,
+                       tables: ListBuffer[DestTable],
+                       testTable: String => Boolean = (s => true)
+                      ) = {
+    val outTables = Parser.getOutTables(sql)
+    var inTables = Parser.getInTables(sql)
+    outTables.foreach(destTable => {
+      if(testTable(destTable)) {
+        tables.find(f => f.name == destTable).map(ft => {
+          inTables = inTables ++ ft.sources
+          tables -= ft
+        })
+        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile)
+      }
+    })
+  }
+
+  def processSqlFolder(folder: String,
+                       sourceFilePrefix: String,
+                       tables: ListBuffer[DestTable],
+                       replacement: Seq[(String, String)] = Seq.empty,
+                       testTable: String => Boolean = (s => true)
+                      ) = {
+    object SqlScriptLineProcessor2 extends SqlScriptLineProcessor {
+      override def processLine(line: String): String = {
+        var sl = super.processLine(line)
+        replacement.foreach(value => sl = sl.replace(value._1, value._2))
+        sl
+      }
+    }
+    getListOfFiles(folder).foreach(file => {
+      val sqlScript = getFileText(file.getAbsolutePath(), SqlScriptLineProcessor2)
+      sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql => {
+        processSqlScript(sql, sourceFilePrefix + file.getName(), tables, testTable)
+      })
+    })
+  }
 }

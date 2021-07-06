@@ -1,9 +1,9 @@
-<button mat-icon-button aria-label="Render" (click)="renderTemplate()">
+<button mat-icon-button aria-label="Render" matTooltip="Render template" (click)="renderTemplate()">
   <mat-icon>cake</mat-icon>
 </button>
 <input type="text" [(ngModel)]="fileName">
 <input type="params" [(ngModel)]="params">
-<button mat-icon-button aria-label="Set data" (click)="setData()">
+<button mat-icon-button aria-label="Set data" matTooltip="Set json data to topology graph" (click)="setData()">
   <mat-icon>done</mat-icon>
 </button>
 

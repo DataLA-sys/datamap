@@ -55,5 +55,13 @@
         "template": "C:/projects/sbtprojects/datalog/src/main/resources/bki2topology_full.ssp",
         "templateParams": {},
         "dataExists": true
-    }
+    },
+    {
+        "name": "sbrm.log",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/sbrm_log.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/SBRM_LOG/", 
+            "project": "sbrm.log"},
+        "dataExists": true
+    }    
 ]
