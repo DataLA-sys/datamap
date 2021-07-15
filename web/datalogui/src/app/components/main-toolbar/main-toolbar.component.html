@@ -3,17 +3,17 @@
     <span>&nbsp;</span>
     <div class="button-container">
 
-      <button 
-        mat-mini-fab 
-        color="primary" 
-        matTooltip="Zoom to fit" 
-        (click)="zoomToFit()">
+      <button color="basic" mat-mini-fab matTooltip="Zoom to fit" (click)="zoomToFit()">
         <mat-icon>fit_screen</mat-icon>
       </button>
 
-      <button mat-mini-fab color="primary" matTooltip="Center topology" (click)="centerGraph()">
+      <button color="basic" mat-mini-fab matTooltip="Center topology" (click)="centerGraph()">
         <mat-icon>open_with</mat-icon>
-      </button>      
+      </button>
+
+      <button color="basic" mat-mini-fab matTooltip="Clusters on/off" (click)="clustersOnOff()">
+        <mat-icon>select_all</mat-icon>
+      </button>            
     </div>
 
     <span>&nbsp;</span>
@@ -21,13 +21,13 @@
     <span *ngFor="let project of projects">
       <span *ngIf="project === currentProject" style="color: mediumblue;">&nbsp;{{project}}&nbsp;</span>
       <span *ngIf="project !== currentProject" style="color: gray;">&nbsp;{{project}}&nbsp;</span>
-      <button mat-mini-fab color="primary" matTooltip="Load project" (click)="loadProject(project)" [disabled]="project === currentProject">
+      <button mat-mini-fab color="basic" matTooltip="Load project" (click)="loadProject(project)" [disabled]="project === currentProject">
         <mat-icon>done</mat-icon>
       </button>
     </span>
 
     <div class="button-container">
-      <button mat-mini-fab color="primary" matTooltip="Clear data" (click)="clear()">
+      <button color="basic" mat-mini-fab matTooltip="Clear data" (click)="clear()">
         <mat-icon>clear</mat-icon>
       </button>
     </div>

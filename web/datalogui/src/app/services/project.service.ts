@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import configProjects from '../../assets/projects.json';
-import projectsData from '../../assets/projects_data.json';
 import { Project } from '../classes/project';
 import { TemplateService } from './template.service';
 import { environment } from 'src/environments/environment';
@@ -26,23 +24,8 @@ export class ProjectService {
     })
   }
 
-  getProjects(): Observable<Project[]> {
-    
-    if(environment.singleHtml == true) {
-      let projects: Project[] = configProjects.filter((p: Project) => p.enable !== false);
-        projects.forEach(project => {
-          if(project.dataExists == true) {
-            this.getJSONData(project)
-          }
-        });        
-      return of(projects)
-    } else {
-      return this.http.get<Project[]>("/projectFile")
-    }
-  }
-
-  private getJSONData(project: Project) {
-      project.data = projectsData.find((d: any) => d.name === project.name)?.data
+  getProjects(): Observable<Project[]> {    
+    return this.http.get<Project[]>("/projectFile")  
   }
 
   private setData(project: Project, data: any) {

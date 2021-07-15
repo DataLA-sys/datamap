@@ -29,6 +29,14 @@ val tables: Tables = data.extract[Tables]
 {
 "datasets":
 	[
+	#if(project == "Oliver_Wyman")
+		{"name": "source_processing",
+		"layer": "External",
+		"project": "Oliver_Wyman",
+		"sourceFile": "${sourceFile}",
+		"out":[{"name": "ow_ow_prod_data_source_processing", "project": "Oliver_Wyman", "layer": "Raw"}]
+		},
+	#end
 	#for (i <- 0 to tables.tables.size - 1)
 		{
 			"name": "${tables.tables(i).destTable}",
@@ -48,12 +56,12 @@ val tables: Tables = data.extract[Tables]
 						"name": "ow_ow_prod_data_request_items",
 					#else
 						"name": "ow_ow_prod_data_source_processing",
+						"in": [{"name": "source_processing", "project": "Oliver_Wyman", "layer": "External", "sourceFile": "${sourceFile}"}],
 					#end
 
 					"layer": "Raw",
 					"project": "${project}",
-					"sourceFile": "${sourceFile}",
-					"in": [{"name": "source_processing","layer": "External", "project": "Oliver_Wyman", "sourceFile": "${sourceFile}"}]
+					"sourceFile": "${sourceFile}"
 				}
 			#end
 			#if(project == "Connector_data")

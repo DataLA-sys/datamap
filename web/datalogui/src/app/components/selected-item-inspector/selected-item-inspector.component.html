@@ -1,16 +1,23 @@
 <mat-nav-list>
 
-    <mat-list-item>        
+    <mat-list-item *ngIf="selected">        
       <label>{{selected?.data?.dataset?.name}}</label>
+      <span>&nbsp;</span>
+      <button mat-mini-fab color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-mini-fab color="basic" matTooltip="Clear filter" (click)="clearTableFilter()">
+        <mat-icon>clear</mat-icon>
+      </button>      
     </mat-list-item>
     <mat-list-item>        
       <label>{{selected?.data?.dataset?.datasetType}}</label>
     </mat-list-item>
     <mat-list-item *ngIf="selectedNodeProject != undefined">{{selectedNodeProject}}
       <span>&nbsp;</span>
-      <button mat-mini-fab color="primary" (click)="loadProject(selectedNodeProject)">
+      <button mat-mini-fab color="basic" (click)="loadProject(selectedNodeProject)">
         <mat-icon>done</mat-icon>
-      </button>      
+      </button>
     </mat-list-item>
 
     <mat-list-item>        

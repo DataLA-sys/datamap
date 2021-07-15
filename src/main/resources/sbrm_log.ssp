@@ -5,6 +5,7 @@
 
 	import scala.io.Source.fromFile
 	import ru.neoflex.datalog.engine.Parser
+	import ru.neoflex.datalog.engine.dto.DestTable
 
 	import scala.collection.mutable.ListBuffer
 	import scala.io.Source.fromFile
@@ -31,19 +32,16 @@
 	val confFile = projectFolder + "/oozie_workflows/reg/wf_reg_sbrm_deriveddata_daily/conf/parser_conf.json"
 	val data = parse(fromFile(confFile).getLines.mkString)
 	val tables = data \ "tables"
-	case class PTable(name: String, in: List[String] = List())
 
-	val ptables = ListBuffer[PTable]()
+	val ptables = ListBuffer[DestTable]()
 
 	val list = tables.values.asInstanceOf[Map[String, Map[String, _]]]
-	var mainTable = ""
-	list.keySet.foreach(s => {
-		val tableJ = data \ "tables" \ s
-		val table = Serialization.read[Table](compact(render(tableJ)))
-		if(table.sql != Option.empty) {
-			mainTable = s
-		}
-	})
+
+	val mainTable = (for {
+		(tname, t) <- list
+		("sql", _) <- t
+	} yield tname).head
+
 	list.keySet.foreach(s => {
 		val tableJ = data \ "tables" \ s
 		val table = Serialization.read[Table](compact(render(tableJ)))
@@ -57,14 +55,31 @@
 				val sqlScript = source.getLines.mkString("\n")
 					.replace("{", "")
 					.replace("}", "")
-				ptables += PTable(s, Parser.getInTables(sqlScript).toList)
+				ptables += DestTable(s, Parser.getInTables(sqlScript).toList, sqlFile, "Hive")
 			} finally {
 				source.close()
 			}
 		} else {
-			ptables += PTable(s, List(mainTable))
+			ptables += DestTable(s, List(mainTable), confFile, "Hive")
 		}
 	})
+
+	Parser.processSqlFolder(projectFolder + "/hdfs_home/scripts", "",
+		ptables,
+		Seq(
+			("SET hive.exec.dynamic.partition.mode=non-strict;", ""),
+			("SET hive.exec.dynamic.partition=true;", ""),
+			("SET hive.exec.max.dynamic.partitions=12288;", ""),
+			("SET hive.exec.max.dynamic.partitions.pernode=6144;", ""),
+			("SET hive.enforce.bucketing=true;", ""),
+			("SET mapreduce.map.memory.mb=6144;", ""),
+			("SET mapreduce.map.java.opts=-Xmx6144m;", ""),
+			("SET mapreduce.map.reduce.mb=6144;", ""),
+			("SET mapreduce.reduce.java.opts=-Xmx6144m;", ""),
+			("${", ""), ("}", "")
+		),
+		layer = "Hive"
+	)
 %>
 {
 "datasets":
@@ -72,18 +87,18 @@
 	#for (i <- 0 to ptables.size - 1)
 		{
 			"name": "${ptables(i).name}",
-			"layer": "Hive 2",
+			"layer": "${ptables(i).layer}",
 			"project": "${project}",
 			"sourceFile": "${confFile}",
 			"in": [
-			#for(j <- 0 to ptables(i).in.size - 1)
+			#for(j <- 0 to ptables(i).sources.size - 1)
 				{
-					"name": "${ptables(i).in(j)}",
-					"layer": "Hive 1",
+					"name": "${ptables(i).sources(j)}",
+					"layer": "Hive",
 					"project": "${project}",
-					"sourceFile": "${confFile}",
+					"sourceFile": "${ptables(i).sourceFile}",
 					"in": []
-				}#if(j != ptables(i).in.size - 1) , #end
+				}#if(j != ptables(i).sources.size - 1) , #end
 			#end
 			],
 			"out": [

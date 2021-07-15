@@ -3,7 +3,7 @@
   layout="dagreCluster"
   [links]="links"
   [nodes]="nodes"
-  [clusters]="clusters"
+  [clusters]="this.showClusters ? clusters : []"
   [showMiniMap]="showMiniMap"
   [zoomToFit$]="zoomToFit$"
   [panToNode$]="panToNode$"

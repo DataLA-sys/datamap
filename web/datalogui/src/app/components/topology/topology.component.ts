@@ -4,11 +4,6 @@ import { ProjectFileDir, Topology } from "../../classes/topology";
 import { Node, NodeData } from "../../classes/node";
 import { Dataset } from '../../classes/dataset';
 import { Subject } from 'rxjs';
-import { jsPDF } from 'jspdf'
-import 'svg2pdf.js'
-import { Svg2pdfOptions } from 'svg2pdf.js';
-
-//var saveSvgAsPng = import("save-svg-as-png")
 
 interface KeyValuePair {
   key: string;
@@ -22,43 +17,20 @@ interface KeyValuePair {
 })
 export class TopologyComponent implements OnInit {
 
-  @ViewChild('editor') editor: any;
-  text: string = "<test><order>PO001</order>\r\n<messgeID>1124</messageID></test>";
   x: number = 1400;
   y: number = 800;
   dim: [number, number] = [this.x, this.y];
+  inodes: Dataset[] = []
   
-  setEditorContent(event: any) {
-    // console.log(event, typeof event);
-    console.log("");
-  }
-
-  saveGraph() {
-    const doc = new jsPDF()
-
-    const svgatt = document.getElementsByTagName("svg")
-    const o: Svg2pdfOptions = {x: 0, y: 0, width: 6500, height: 5500, loadExternalStyleSheets: true}
-
-    const element = svgatt[0]
-    if(element) {
-      doc.svg(element, o)
-        .then(() => {
-          doc.save('myPDF.pdf')
-        })
-    }
-  }
-
   clusters: any[] = []
   nodes: Node[] = []
   links: any[] = []
-  projects: string[] = []
-  selectedProject: string = ""
   selectedTable: string = ""
   error: any;
   selected: Node | undefined;
   data: Topology | undefined;
-  showMiniMap: boolean = false;  
-  codeValue: any = "<a>aa</a>"
+  showMiniMap: boolean = false;
+  showClusters: boolean = true;
 
   getNodeProject(node: Node): string | undefined {
     return node.data?.dataset.project;
@@ -76,22 +48,14 @@ export class TopologyComponent implements OnInit {
   panToNode$: Subject<any> = new Subject();
   center$: Subject<boolean> = new Subject();
 
-
   constructor(
     private eventService: EventService, 
     public cd: ChangeDetectorRef) { 
     eventService.zoomToFitEvent$.subscribe(value => this.zoomToFit());
     eventService.centerTopologyEvent$.subscribe(value => this.center$.next(true));
 
-    eventService.saveTopologyEvent$.subscribe(value => this.saveGraph());
     eventService.getSelectedNodeProjectEvent$.subscribe(node => 
       eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
-    
-    eventService.projectSelectedEvent$.subscribe(value => {
-      if(this.data) {
-        this.getData(this.data, value)          
-      }
-    })
 
     eventService.clearAllEvent$.subscribe(value => this.clear())
     eventService.joinDataEvent$.subscribe(value => this.addData(value))
@@ -101,7 +65,20 @@ export class TopologyComponent implements OnInit {
       if(found) {
         this.nodeClick(found)
         this.panToNode$.next(found?.id)
-      }      
+      }
+    })
+    eventService.filterByTableInEvent$.subscribe(value => {
+      if(this.data) {
+        this.getData(this.data, value)
+      }
+    })
+    eventService.clearTableFilterEvent$.subscribe(value => {
+      if(this.data) {
+        this.getData(this.data)
+      }
+    })
+    eventService.toggleClustersEvent$.subscribe(value => {
+      this.showClusters = !this.showClusters
     })
   }
 
@@ -165,24 +142,64 @@ export class TopologyComponent implements OnInit {
     this.getData(t)
   }
 
-  getData(data: Topology, project: any = null) {
+  getInDatasets(tableName: String, tables: Dataset[]): string[] {
+    let intables: string[] = tables.find(d => d.name == tableName)?.in?.map(d => d.name) || []
+    let res: string[]  = []
+    intables.forEach(t => res = res.concat(this.getInDatasets(t, tables) || []))
+    return res.concat(intables)
+  }
+
+  normalizeDataset(normalised: Dataset[], dataset: Dataset) {
+    dataset.out.forEach(out => {
+      let mainDs = normalised.find(d => d.name == out.name);
+      if(mainDs) {
+        if(!mainDs.in.find(i => i.name == dataset.name)) {
+          mainDs.in.push(dataset);
+        }
+      }
+    })
+  }
+
+  concatDasetsList(datasets1: Dataset[], datasets2: Dataset[]): Dataset[] {
+    datasets2.forEach(d2 => {
+      if(datasets1.find(d1  => d1.name == d2.name) == undefined) {
+        datasets1.push(d2);
+      }
+    })
+    return datasets1;
+  }
+
+  normaizeTree(normalised: Dataset[],  datasets: Dataset[]) {
+    datasets.forEach(dd => {
+      let found: Dataset | undefined = normalised.find(n => n.name == dd.name);      
+      if(found == undefined) {
+        normalised.push(dd);
+        this.normaizeTree(normalised, dd.in.concat(dd.out));
+      } else {
+        let prev = found.in.length + found.out.length
+        found.in = this.concatDasetsList(found.in, dd.in);
+        found.out = this.concatDasetsList(found.out, dd.out);
+        if(prev != found.in.length + found.out.length) {
+          this.normaizeTree(normalised, dd.in.concat(dd.out));
+        }          
+      }            
+    })
+  }
+
+  getData(data: Topology, filterByTableIn: string | undefined = undefined) {
     this.data = data;
     this.selected = undefined;
-    console.log(data);
     
-    let inodes: Dataset[] = []
-    inodes = inodes.concat(data.datasets)
-    data.datasets.forEach(dd => {
-      dd.in.concat(dd.out).forEach(i => {
-        if(inodes.filter(n => n.name == i.name).length == 0) {
-          inodes.push(i);
-        }
-      })
-    })
-    let p: string[] = inodes.map(n=>n.project ? n.project : "Empty")
-    this.projects = ["", ...new Set(p)];
-    this.eventService.emitReceiveProjectsEvent(this.projects)
-    this.selectedProject = this.projects.length > 0 ? this.projects[0] : ""
+    let inodes: Dataset[] = [];
+    this.normaizeTree(inodes, data.datasets);
+    inodes.forEach(d => this.normalizeDataset(inodes, d));
+
+    let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : []
+    if(filterByTableIn) {
+      if(filteredTables.indexOf(filterByTableIn) == -1) {
+        filteredTables.push(filterByTableIn)
+      }
+    }
 
     let did: number = 0
     let tablesId: KeyValuePair[] = inodes.map(d =>  {return { key: d.name, value: "" + ++did }} )
@@ -190,55 +207,27 @@ export class TopologyComponent implements OnInit {
     let linkid: number = 0
     let links: any[] = []
     let clusters: any[] = []
-    data.datasets.forEach(d => {
-      if(project == null || project == "" || project == d.project) {
-        this.checkCluster(d.layer, d.name, clusters, tablesId)
-      }
-      
+
+    inodes.forEach(d => {
+      this.checkCluster(d.layer, d.name, clusters, tablesId)            
       let inlinks = d.in.map(l => { 
-        if(project == null || project == "" || project == l.project) {
-          this.checkCluster(l.layer, l.name, clusters, tablesId);
-        }
+        this.checkCluster(l.layer, l.name, clusters, tablesId);
         return {"id": ""+ ++linkid,"source": tablesId.find(k => k.key == l.name)?.value, "target": tablesId.find(k => k.key == d.name)?.value}
       });
       links = links.concat(inlinks);
-      let outlinks = d.out.map(l => { 
-        if(project == null || project == "" || project == l.project) {
-          this.checkCluster(l.layer, l.name, clusters, tablesId);
-        }
-        return {"id": ""+ ++linkid, "source": tablesId.find(k => k.key == d.name)?.value, "target": tablesId.find(k => k.key == l.name)?.value}
-      });
-      links = links.concat(outlinks);      
     })
 
-    this.nodes = inodes.filter(d => {
-      return (project == null || project == "") 
-      || d.project == project 
-      || data.datasets.find(fd => fd.name == d.name && fd.project == project) != null
-      || (data.datasets.find(f => f.in.filter(td => td.name == d.name && td.project == project).length > 0) != null) 
-      || (data.datasets.find(f => f.out.filter(td => td.name == d.name && td.project == project).length > 0) != null)
-      || this.checkIfLinkInProject(d, links, data, tablesId, project);
-    })
+    this.nodes = inodes
+      .filter(d => filteredTables.length == 0 || filteredTables.indexOf(d.name) > -1)
       .map(d => new Node(
         tablesId.find(k => k.key == d.name)?.value || "notfoundid", d.name, 
         new NodeData("#a95963", d)
-      ))
-    this.links = links.filter(l => this.nodes.filter(n => n.id == l.source || n.id == l.target).length > 0)
+      )
+    )
+
+    this.links = links.filter(l => this.nodes.filter(n => n.id == l.source).length > 0 && this.nodes.filter(n => n.id == l.target).length > 0)
     this.clusters = clusters;
     this.eventService.emitTableListEvent(this.getTables())
-  }
-
-  checkIfLinkInProject(dataset: Dataset, links: any[], data: Topology, tablesId: any[], project: string) {
-    let did = tablesId.find(t => t.key == dataset.name).value
-    let dlinks = links.filter(l => l.source == did || l.target == did)
-    return dlinks.filter(link => {
-      let sname = tablesId.find(k => k.value == link.source)?.key;
-      let tname = tablesId.find(k => k.value == link.target)?.key;
-      let s = data.datasets.filter(d => d.name == sname && d.project == project);
-      let t = data.datasets.filter(d => d.name == tname && d.project == project);
-      return s.length > 0 || t.length > 0;
-    }).length > 0
-
   }
 
   ngOnInit(): void {

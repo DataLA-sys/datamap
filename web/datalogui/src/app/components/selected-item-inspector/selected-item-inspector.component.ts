@@ -30,7 +30,17 @@ export class SelectedItemInspectorComponent implements OnInit {
     if(project) {
       this.eventService.emitProjectNameEvent(project)
     }    
-  }  
+  }
+
+  filterByTableIn(tableName: string | undefined) {
+    if(tableName) {
+      this.eventService.emitFilterByTableInEvent(tableName);
+    }    
+  }
+
+  clearTableFilter() {
+    this.eventService.emitClearTableFilterEvent();
+  }
 
   ngOnInit(): void {
   }

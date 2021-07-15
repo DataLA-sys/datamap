@@ -25,7 +25,7 @@
 		project = (j \ "project").extract[String]
 		sourceFile = (j \ "sourcePrefix").extract[String]
 	})
-	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'")), _.contains("."))
+	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'")), _.contains("."), layer = "Odpp")
 %>
 {
 "datasets":

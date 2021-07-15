@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Node, NodeData } from "../classes/node";
 import { Project } from '../classes/project';
-import { Topology } from "../classes/topology";
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +21,6 @@ export class EventService {
     this.zoomToFitEventSource.next(true);
   }  
 
-  private saveTopologyEventSource = new Subject<boolean>();
-  saveTopologyEvent$ = this.saveTopologyEventSource.asObservable();
-  emitSaveTopologyEvent() {
-    this.saveTopologyEventSource.next(true);
-  }    
-
   private nodeSelectedEventSource = new Subject<Node>();
   nodeSelectedEvent$ = this.nodeSelectedEventSource.asObservable();
   emitNodeSelectedEvent(node: Node) {
@@ -44,18 +37,6 @@ export class EventService {
   returnSelectedNodeProjectEvent$ = this.returnSelectedNodeProjectEventSource.asObservable();
   emitReturnSelectedNodeProjectEvent(projects: string | undefined) {
     this.returnSelectedNodeProjectEventSource.next(projects);
-  }
-
-  private receiveProjectsEventSource = new Subject<string[]>();
-  receiveProjectstEvent$ = this.receiveProjectsEventSource.asObservable();
-  emitReceiveProjectsEvent(projects: string[]) {
-    this.receiveProjectsEventSource.next(projects);
-  }
-
-  private projectSelectedEventSource = new Subject<string>();
-  projectSelectedEvent$ = this.projectSelectedEventSource.asObservable();
-  emitProjectSelectedEvent(project: string) {
-    this.projectSelectedEventSource.next(project);
   }
 
   private joinDataEventSource = new Subject<any>();
@@ -98,5 +79,24 @@ export class EventService {
   centerTopologyEvent$ = this.centerTopologyEventSource.asObservable();
   emitCenterTopologyEvent() {
     this.centerTopologyEventSource.next(true);
+  }
+
+  private toggleClustersEventSource = new Subject<boolean>();
+  toggleClustersEvent$ = this.toggleClustersEventSource.asObservable();
+  emitToggleClustersEvent() {
+    this.toggleClustersEventSource.next(true);
   }  
+
+  private filterByTableInEventSource = new Subject<string>();
+  filterByTableInEvent$ = this.filterByTableInEventSource.asObservable();
+  emitFilterByTableInEvent(tableName: string) {
+    this.filterByTableInEventSource.next(tableName);
+  }
+  
+  private clearTableFilterEventSource = new Subject<boolean>();
+  clearTableFilterEvent$ = this.clearTableFilterEventSource.asObservable();
+  emitClearTableFilterEvent() {
+    this.clearTableFilterEventSource.next(true);
+  }
+
 }

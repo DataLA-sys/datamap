@@ -6,13 +6,17 @@ import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, Logical
 import ru.neoflex.datalog.engine.dto.DestTable
 
 import java.io.File
+import java.nio.file.{FileSystems, PathMatcher}
 import scala.collection.mutable.ListBuffer
+import scala.io.Codec
 import scala.io.Source.fromFile
 import scala.util.control.Breaks.{break, breakable}
 
 case class TemplateFile(fileName: String, templateContent: String)
 
 object Parser {
+
+  implicit val codec = Codec("UTF-8")
 
   def getFileText(fileName: String,
                   lineProcessor: LineProcessor) = {
@@ -35,7 +39,7 @@ object Parser {
     }
   }
 
-  def sqlTokens(dir: String, sourcePrefix: String): List[DestTable] = {
+  def sqlTokens(dir: String, sourcePrefix: String, layer: String): List[DestTable] = {
     val files = getListOfFiles(dir)
     val tables = ListBuffer[DestTable]()
     files.foreach(file => {
@@ -71,7 +75,7 @@ object Parser {
           sources ++= ft.sources;
           tables -= ft
         })
-        tables += DestTable(destTable, sources.toList.distinct, fn)
+        tables += DestTable(destTable, sources.toList.distinct, fn, layer)
       }
       source.close()
     })
@@ -116,7 +120,8 @@ object Parser {
   def processSqlScript(sql: String,
                        sourceFile: String,
                        tables: ListBuffer[DestTable],
-                       testTable: String => Boolean = (s => true)
+                       testTable: String => Boolean = (s => true),
+                       layer: String = ""
                       ) = {
     val outTables = Parser.getOutTables(sql)
     var inTables = Parser.getInTables(sql)
@@ -126,7 +131,7 @@ object Parser {
           inTables = inTables ++ ft.sources
           tables -= ft
         })
-        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile)
+        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer)
       }
     })
   }
@@ -135,7 +140,9 @@ object Parser {
                        sourceFilePrefix: String,
                        tables: ListBuffer[DestTable],
                        replacement: Seq[(String, String)] = Seq.empty,
-                       testTable: String => Boolean = (s => true)
+                       testTable: String => Boolean = (s => true),
+                       layer: String = "",
+                       filesFilter: String = "*.*"
                       ) = {
     object SqlScriptLineProcessor2 extends SqlScriptLineProcessor {
       override def processLine(line: String): String = {
@@ -144,10 +151,15 @@ object Parser {
         sl
       }
     }
-    getListOfFiles(folder).foreach(file => {
+
+    val matcher = FileSystems.getDefault().getPathMatcher("glob:*" + filesFilter);
+
+    getListOfFiles(folder)
+      .filter(file => matcher.matches(file.toPath))
+      .foreach(file => {
       val sqlScript = getFileText(file.getAbsolutePath(), SqlScriptLineProcessor2)
       sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql => {
-        processSqlScript(sql, sourceFilePrefix + file.getName(), tables, testTable)
+        processSqlScript(sql, sourceFilePrefix + file.getName(), tables, testTable, layer)
       })
     })
   }

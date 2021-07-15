@@ -34,11 +34,6 @@ export class MainToolbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  save(): void {
-    this.eventService.emitSaveTopologyEvent();    
-  }
-
   zoomToFit() {
     this.eventService.emitZoomToFitEvent();
   }
@@ -47,9 +42,9 @@ export class MainToolbarComponent implements OnInit {
     this.eventService.emitCenterTopologyEvent();
   }
 
-  projectSelected(project: string) {
-    this.eventService.emitProjectSelectedEvent(project)
-  }
+  clustersOnOff() {
+    this.eventService.emitToggleClustersEvent();
+  }  
 
   clear() {
     this.projects = []
