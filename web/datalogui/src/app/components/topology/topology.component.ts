@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { EventService } from "../../services/events.service";
 import { ProjectFileDir, Topology } from "../../classes/topology";
 import { Node, NodeData } from "../../classes/node";
-import { Dataset } from '../../classes/dataset';
+import { Dataset, TopologyNode } from '../../classes/dataset';
 import { Subject } from 'rxjs';
 
 interface KeyValuePair {
@@ -31,6 +31,7 @@ export class TopologyComponent implements OnInit {
   data: Topology | undefined;
   showMiniMap: boolean = false;
   showClusters: boolean = true;
+  showActions: boolean = false;
 
   getNodeProject(node: Node): string | undefined {
     return node.data?.dataset.project;
@@ -80,6 +81,12 @@ export class TopologyComponent implements OnInit {
     eventService.toggleClustersEvent$.subscribe(value => {
       this.showClusters = !this.showClusters
     })
+    eventService.toggleActionsEvent$.subscribe(value => {
+      this.showActions = !this.showActions
+      if(this.data) {
+        this.getData(this.data)
+      }      
+    })    
   }
 
   zoomToFit() {
@@ -139,10 +146,11 @@ export class TopologyComponent implements OnInit {
   addData(data: Topology) {
     let t = new Topology()
     t.datasets = (this.data?.datasets || []).concat(data.datasets || [])
+    t.actions = (this.data?.actions || []).concat(data.actions || [])
     this.getData(t)
   }
 
-  getInDatasets(tableName: String, tables: Dataset[]): string[] {
+  getInDatasets(tableName: String, tables: TopologyNode[]): string[] {
     let intables: string[] = tables.find(d => d.name == tableName)?.in?.map(d => d.name) || []
     let res: string[]  = []
     intables.forEach(t => res = res.concat(this.getInDatasets(t, tables) || []))
@@ -169,7 +177,7 @@ export class TopologyComponent implements OnInit {
     return datasets1;
   }
 
-  normaizeTree(normalised: Dataset[],  datasets: Dataset[]) {
+  normaizeTree(normalised: TopologyNode[],  datasets: TopologyNode[]) {
     datasets.forEach(dd => {
       let found: Dataset | undefined = normalised.find(n => n.name == dd.name);      
       if(found == undefined) {
@@ -190,8 +198,8 @@ export class TopologyComponent implements OnInit {
     this.data = data;
     this.selected = undefined;
     
-    let inodes: Dataset[] = [];
-    this.normaizeTree(inodes, data.datasets);
+    let inodes: TopologyNode[] = [];
+    this.normaizeTree(inodes, this.showActions ? data.actions : data.datasets);
     inodes.forEach(d => this.normalizeDataset(inodes, d));
 
     let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : []

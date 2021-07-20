@@ -11,8 +11,13 @@
       </button>      
     </mat-list-item>
     <mat-list-item>        
-      <label>{{selected?.data?.dataset?.datasetType}}</label>
+      <label>Type:</label>
+      <label>{{getType()}}</label>
     </mat-list-item>
+    <mat-list-item *ngIf="getAction() != undefined">
+      <label>Action:</label>
+      <label>{{getAction()}}</label>
+    </mat-list-item>    
     <mat-list-item *ngIf="selectedNodeProject != undefined">{{selectedNodeProject}}
       <span>&nbsp;</span>
       <button mat-mini-fab color="basic" (click)="loadProject(selectedNodeProject)">
@@ -21,7 +26,7 @@
     </mat-list-item>
 
     <mat-list-item>        
-        <textarea *ngIf="selected" disabled>{{selected?.data?.dataset?.sourceFile}}</textarea>
+        <textarea *ngIf="selected" disabled>{{getSource()}}</textarea>
     </mat-list-item>
 
 </mat-nav-list>

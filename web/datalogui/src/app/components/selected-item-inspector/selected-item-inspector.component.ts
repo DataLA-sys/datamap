@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Dataset } from 'src/app/classes/dataset';
 import { EventService } from 'src/app/services/events.service';
 import { Node } from "../../classes/node";
 
@@ -9,7 +10,7 @@ import { Node } from "../../classes/node";
 })
 export class SelectedItemInspectorComponent implements OnInit {
 
-  selected: Node | undefined;
+  selected: any;
   selectedNodeProject: string | undefined;  
 
   constructor(private eventService: EventService) {
@@ -41,6 +42,18 @@ export class SelectedItemInspectorComponent implements OnInit {
   clearTableFilter() {
     this.eventService.emitClearTableFilterEvent();
   }
+
+  getType() {
+      return this.selected?.data?.dataset?.datasetType;
+  }
+
+  getSource() {
+    return this.selected?.data?.dataset?.sourceFile;    
+  }
+
+  getAction() {
+    return this.selected?.data?.dataset?.action;    
+  }  
 
   ngOnInit(): void {
   }

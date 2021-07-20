@@ -63,5 +63,14 @@
             "folder": "C:/projects/temp/alfabank/SBRM_LOG/", 
             "project": "sbrm.log"},
         "dataExists": true
-    }    
+    },
+    {
+        "name": "OW and CR parsers QA",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/cr_ow_qa.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/cr_ow_qa/", 
+            "project": "OW and CR parsers QA",
+            "sourcePrefix": "C:/projects/temp/alfabank/cr_ow_qa/"},
+        "dataExists": true
+    }
 ]
