@@ -46,6 +46,10 @@ export class MainToolbarComponent implements OnInit {
     this.eventService.emitToggleClustersEvent();
   }  
 
+  actionsOnOff() {
+    this.eventService.emitToggleActionsEvent();
+  }
+
   clear() {
     this.projects = []
     this.eventService.emitClearAllEvent()

@@ -87,7 +87,13 @@ export class EventService {
     this.toggleClustersEventSource.next(true);
   }  
 
-  private filterByTableInEventSource = new Subject<string>();
+  private toggleActionsEventSource = new Subject<boolean>();
+  toggleActionsEvent$ = this.toggleActionsEventSource.asObservable();
+  emitToggleActionsEvent() {
+    this.toggleActionsEventSource.next(true);
+  }  
+
+    private filterByTableInEventSource = new Subject<string>();
   filterByTableInEvent$ = this.filterByTableInEventSource.asObservable();
   emitFilterByTableInEvent(tableName: string) {
     this.filterByTableInEventSource.next(tableName);

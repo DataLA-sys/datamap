@@ -1,4 +1,5 @@
 import { Dataset } from "./dataset"
+import { Tool, ToolAction } from "./toolAction"
 
 export class ProjectFileDir {
   project: string = ""
@@ -9,8 +10,8 @@ export class ProjectFileDir {
 }
 
 export class Topology {
-  tools!: any[]
-  actions!: any[]
+  tools!: Tool[]
+  actions: ToolAction[] = []
   datasets!: Dataset[]
   projectFiles?: ProjectFileDir[]
 }

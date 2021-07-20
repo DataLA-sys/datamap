@@ -1,16 +1,16 @@
-import { Dataset } from './dataset'
+import { Dataset, TopologyNode } from './dataset'
 
 export class NodeData {
   image: string = "assets/dataset.ico";
   color: string = "#a95963";
-  dataset!: Dataset
-  constructor(color: string,  dataset: Dataset) {
+  dataset!: TopologyNode
+  constructor(color: string,  dataset: TopologyNode) {
     this.image = this.getImage(dataset);
     this.color = color
     this.dataset = dataset
   }
 
-  private getImage(dataset: Dataset): string {
+  private getImage(dataset: any): string {
     if(dataset.datasetType == "Table") {
       return "assets/dataset.ico";
     }
