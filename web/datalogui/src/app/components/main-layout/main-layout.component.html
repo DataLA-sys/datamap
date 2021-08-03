@@ -11,25 +11,28 @@
       <app-main-toolbar class="noprint"></app-main-toolbar>
     </div>
     <div fxLayout="row">
-        <div fxFlex="20%" style="overflow: auto;height: 90vh;" class="noprint">
+        <div fxFlex="{{leftArea}}" style="overflow: auto;height: 90vh;" class="noprint">
           <selected-item-inspector></selected-item-inspector>
           <mat-divider></mat-divider>
           <select-table></select-table>
         </div>
         <div fxFlex="5px" style="background-color: gray;">
         </div>
-        <div fxFlex="80%" style="overflow: auto;height: 90vh;">
+        <div fxFlex="75%" style="overflow: auto;height: 90vh;">          
           <mat-tab-group>
             <mat-tab label="Topology">  
               <app-topology></app-topology>      
-            </mat-tab>      
+            </mat-tab>
+            <mat-tab label="Data">  
+              <topology-grid-view></topology-grid-view>
+            </mat-tab>            
             <mat-tab label="Templates">
               <tepmlate-editor></tepmlate-editor>
             </mat-tab>
             <mat-tab label="Projects">
               <app-projects></app-projects>
             </mat-tab>
-          </mat-tab-group>      
+          </mat-tab-group>
         </div>
       </div>
 

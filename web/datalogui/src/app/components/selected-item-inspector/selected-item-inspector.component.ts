@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Dataset } from 'src/app/classes/dataset';
+import { Field } from 'src/app/classes/dataset';
 import { EventService } from 'src/app/services/events.service';
-import { Node } from "../../classes/node";
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 
 @Component({
   selector: 'selected-item-inspector',
@@ -11,11 +12,16 @@ import { Node } from "../../classes/node";
 export class SelectedItemInspectorComponent implements OnInit {
 
   selected: any;
-  selectedNodeProject: string | undefined;  
+  selectedNodeProject: string | undefined;   
+
+  treeControl = new NestedTreeControl<Field>(node => node.sources);
+
+  dataSource = new MatTreeNestedDataSource<Field>();
 
   constructor(private eventService: EventService) {
     eventService.nodeSelectedEvent$.subscribe(value => {
       this.selected = value;
+      this.dataSource.data = this.selected?.data?.dataset?.fields;
       this.eventService.emitGetGetSelectedNodeProjectEvent(value);
     })
     eventService.returnSelectedNodeProjectEvent$.subscribe(value => {
@@ -26,6 +32,8 @@ export class SelectedItemInspectorComponent implements OnInit {
       this.selectedNodeProject = undefined;
     })
   }
+
+  hasChild = (_: number, node: Field) => !!node.sources && node.sources.length > 0;
 
   loadProject(project: string | undefined) {
     if(project) {

@@ -15,8 +15,8 @@ export class SelectTableComponent implements OnInit {
   tables: string[] = [];
   constructor(private eventService: EventService) { 
     eventService.tableListEvent$.subscribe(value => {
-      this.tables = value.sort()
-    } )
+      this.tables = value.map(d => (d?.name)||"").sort()
+    })
   }
 
   selectTable(value: string|undefined) {

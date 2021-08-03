@@ -50,6 +50,14 @@ export class MainToolbarComponent implements OnInit {
     this.eventService.emitToggleActionsEvent();
   }
 
+  wideLayout() {
+    this.eventService.emitWideLayoutEvent(true);
+  }
+
+  narrowLayout() {
+    this.eventService.emitNarrowLayoutEvent(true);
+  }  
+
   clear() {
     this.projects = []
     this.eventService.emitClearAllEvent()

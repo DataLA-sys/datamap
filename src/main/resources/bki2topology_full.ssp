@@ -10,6 +10,7 @@ import org.json4s.jackson.Serialization.{read}
 import scala.collection.mutable.ListBuffer
 import scala.io.Source.fromFile
 import scala.xml._
+import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 
 import ru.neoflex.datalog.engine.Parser
 
@@ -62,10 +63,11 @@ list.keySet.foreach(s => {
 
 	Option(table.sql).flatMap(sql => {
 
-		linkBuffer ++= Parser.getInTables(fromFile(pathToSql + "\\" + sql)
-			.getLines.mkString("\r\n")
-			.replace("{", "")
-			.replace("}", ""))
+		linkBuffer ++= Parser.getInTables(
+			CatalystSqlParser.parsePlan(
+				fromFile(pathToSql + "\\" + sql).getLines.mkString("\r\n")
+					.replace("{", "").replace("}", ""))
+		)
 		.filter(w => w.contains(".") || list.keySet.contains(w))
 		.flatMap(w => {
 			if(w == "source_db.imbr_table") {

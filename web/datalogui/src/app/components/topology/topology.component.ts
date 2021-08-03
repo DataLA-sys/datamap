@@ -235,7 +235,7 @@ export class TopologyComponent implements OnInit {
 
     this.links = links.filter(l => this.nodes.filter(n => n.id == l.source).length > 0 && this.nodes.filter(n => n.id == l.target).length > 0)
     this.clusters = clusters;
-    this.eventService.emitTableListEvent(this.getTables())
+    this.eventService.emitTableListEvent(this.nodes.map(n => n.data?.dataset));
   }
 
   ngOnInit(): void {

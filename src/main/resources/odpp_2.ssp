@@ -1,3 +1,4 @@
+<% escapeMarkup = false %>
 <%
 	import java.io.File
 	import scala.collection.mutable.ListBuffer
@@ -7,8 +8,9 @@
 	import scala.io.Source
 	import org.json4s._
 	import org.json4s.jackson.JsonMethods._
+	import org.json4s.jackson.Serialization
 	import ru.neoflex.datalog.engine.{Parser, LineProcessor, SqlScriptLineProcessor}
-	import ru.neoflex.datalog.engine.dto.DestTable
+	import ru.neoflex.datalog.engine.dto.{DestTable, Field}
 	%>
 <%@ val params: Option[String] = None%>
 <%	implicit val formats = DefaultFormats
@@ -25,7 +27,16 @@
 		project = (j \ "project").extract[String]
 		sourceFile = (j \ "sourcePrefix").extract[String]
 	})
-	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'")), _.contains("."), layer = "Odpp")
+	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'"),
+	("${", ""),
+	("}", ""),
+	("SET hive.exec.dynamic.partition=true", ""),
+	("SET hive.exec.dynamic.partition.mode=nonstrict", ""),
+	("$$", "DD"),
+	("/*", "-- /*"),
+	("*/", "*/ \r\n"),
+	("listagg( tk ,',') within group (order by tk) tk", "tk")
+	), _.contains("."), layer = "Odpp")
 %>
 {
 "datasets":
@@ -48,7 +59,9 @@
 			#end
 			],
 			"out": [
-			]
+			],
+			<%val fields = Serialization.write(tables(i).fields) %>
+			"fields": ${fields}
 			}#if(i != tables.size - 1) , #end
 	#end
 	]

@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
     "@swimlane/ngx-graph": "^7.2.0",
+    "ag-grid-angular": "^25.3.0",
+    "ag-grid-community": "^25.3.0",
     "d3-drag": "^2.0.0",
     "jspdf": "^2.3.1",
     "material-icons": "^0.7.4",

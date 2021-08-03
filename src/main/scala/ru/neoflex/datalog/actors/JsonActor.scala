@@ -5,11 +5,9 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.util.Timeout
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
-import ru.neoflex.datalog.domain
-import ru.neoflex.datalog.domain.{Table, Topology}
+import ru.neoflex.datalog.domain.{ Topology}
 import java.io.File
 import java.nio.file.Paths
-import scala.collection.mutable.ListBuffer
 import scala.concurrent.duration.DurationInt
 import scala.io.Source._
 
@@ -50,7 +48,7 @@ object JsonActor {
   }
 
   val render: Behavior[ParseItCommand] = Behaviors.receive { (context, message) => {
-      implicit val timeout: Timeout = 33.seconds
+      implicit val timeout: Timeout = 90.seconds
       message match {
         case ParseTopology(json: JValue, replyTo) => {
           replyTo ! ParsedTopology(deserializeJson(json), context.self)

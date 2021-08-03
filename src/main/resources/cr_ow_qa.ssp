@@ -9,6 +9,7 @@
 	import org.json4s.jackson.JsonMethods._
 	import ru.neoflex.datalog.engine.Parser
 	import scala.xml._
+	import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 	%>
 <%@ val params: Option[String] = None%>
 <%
@@ -50,11 +51,12 @@ Seq(
 		.find(x => x.text == "--query")
 		.flatMap(x => {
 			Some(
-				Parser.getInTables(sqoopArgs(sqoopArgs.indexOf(x) + 1)
+				Parser.getInTables(CatalystSqlParser.parsePlan(
+				sqoopArgs(sqoopArgs.indexOf(x) + 1)
 				.text.replace("\"", "")
 				.replace("$CONDITIONS", "1=1")
 				.replace("${", "")
-				.replace("}", "")))
+				.replace("}", ""))))
 			}).toList.flatten
 
 	val targetFolder = sqoopArgs.find(x => x.text == "--target-dir")
@@ -62,11 +64,12 @@ Seq(
 
 	val hive2script = (xml \\ "hive2" \ "script").text
 
-	val outTables = Parser.getOutTables(getText(folder + hive2script)
+	val outTables = Parser.getOutTables(CatalystSqlParser.parsePlan(
+	getText(folder + hive2script)
 		.replace("$CONDITIONS", "1=1")
 		.replace("${", "")
 		.replace("}", "")
-		.replace("SET ", "--SET "))
+		.replace("SET ", "--SET ")))
 
 	targetFolder.map(x => {
 		qatables += QaTable(outTables.head, x, inTables, folder + "/workflow.xml", hive2script)
