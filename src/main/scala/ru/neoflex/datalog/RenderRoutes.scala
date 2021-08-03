@@ -58,7 +58,7 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
                   (implicit val system: ActorSystem[_]) extends CORSHandler  {
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  implicit val timeout: Timeout = 33.seconds
+  private implicit val timeout = Timeout.create(system.settings.config.getDuration("my-app.routes.ask-timeout"))
   implicit val ec = system.executionContext
   implicit val jobFormat = jsonFormat2(TemplateFile)
   implicit val formats = DefaultFormats

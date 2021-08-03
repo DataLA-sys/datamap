@@ -25,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -37,6 +38,8 @@ import { MainToolbarComponent } from './components/main-toolbar/main-toolbar.com
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SelectedItemInspectorComponent } from './components/selected-item-inspector/selected-item-inspector.component';
+import { TopologyGridViewComponent } from './components/topology-grid-view/topology-grid-view.component';
+import { AgGridModule } from 'ag-grid-angular';
 import 'material-icons/iconfont/material-icons.css';
 
 @NgModule({
@@ -50,7 +53,8 @@ import 'material-icons/iconfont/material-icons.css';
     MainToolbarComponent,
     MainLayoutComponent,
     ProjectsComponent,
-    SelectedItemInspectorComponent
+    SelectedItemInspectorComponent,
+    TopologyGridViewComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -78,9 +82,11 @@ import 'material-icons/iconfont/material-icons.css';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatCheckboxModule,
     ScrollingModule,
     AceEditorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AgGridModule.withComponents([])
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

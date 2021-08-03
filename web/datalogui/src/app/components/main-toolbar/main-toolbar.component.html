@@ -1,8 +1,10 @@
 <mat-toolbar>
-    <span>Data topology</span>
-    <span>&nbsp;</span>
-    <div class="button-container">
+    <section>
+      <span>Data topology</span>
+      <span>&nbsp;</span>
+    </section>
 
+    <section>          
       <button color="basic" mat-mini-fab matTooltip="Zoom to fit" (click)="zoomToFit()">
         <mat-icon>fit_screen</mat-icon>
       </button>
@@ -17,8 +19,17 @@
 
       <button color="basic" mat-mini-fab matTooltip="Actions on/off" (click)="actionsOnOff()">
         <mat-icon>compare_arrows</mat-icon>
+      </button>
+
+      <button color="basic" mat-mini-fab matTooltip="Narrow layout" (click)="narrowLayout()">
+        <mat-icon>arrow_back</mat-icon>
       </button>      
-    </div>
+
+      <button color="basic" mat-mini-fab matTooltip="Wide layout" (click)="wideLayout()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>            
+    
+  </section>
 
     <span>&nbsp;</span>
 

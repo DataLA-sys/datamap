@@ -1,4 +1,4 @@
-import { Dataset } from "./dataset"
+import { Dataset, Field } from "./dataset"
 import { Tool, ToolAction } from "./toolAction"
 
 export class ProjectFileDir {
@@ -14,4 +14,5 @@ export class Topology {
   actions: ToolAction[] = []
   datasets!: Dataset[]
   projectFiles?: ProjectFileDir[]
+  fields?: Field[] 
 }

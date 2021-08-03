@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Dataset } from '../classes/dataset';
 import { Node, NodeData } from "../classes/node";
 import { Project } from '../classes/project';
 
@@ -57,9 +58,9 @@ export class EventService {
     this.projectNameEventSource.next(data);
   }  
 
-  private tableListEventSource = new Subject<string[]>();
+  private tableListEventSource = new Subject<any[]>();
   tableListEvent$ = this.tableListEventSource.asObservable();
-  emitTableListEvent(list: string[]) {
+  emitTableListEvent(list: any[]) {
     this.tableListEventSource.next(list);
   }
 
@@ -74,6 +75,18 @@ export class EventService {
   emitSpinnerEvent(value: boolean) {
     this.spinnerEventSource.next(value);
   }
+
+  private wideLayoutEventSource = new Subject<boolean>();
+  wideLayoutEvent$ = this.wideLayoutEventSource.asObservable();
+  emitWideLayoutEvent(value: boolean) {
+    this.wideLayoutEventSource.next(value);
+  }
+
+  private narrowLayoutEventSource = new Subject<boolean>();
+  narrowLayoutEvent$ = this.narrowLayoutEventSource.asObservable();
+  emitNarrowLayoutEvent(value: boolean) {
+    this.narrowLayoutEventSource.next(value);
+  }  
 
   private centerTopologyEventSource = new Subject<boolean>();
   centerTopologyEvent$ = this.centerTopologyEventSource.asObservable();

@@ -9,6 +9,7 @@
 
 	import scala.collection.mutable.ListBuffer
 	import scala.io.Source.fromFile
+	import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 	%>
 <%@ val params: Option[String] = None%>
 <%
@@ -55,7 +56,7 @@
 				val sqlScript = source.getLines.mkString("\n")
 					.replace("{", "")
 					.replace("}", "")
-				ptables += DestTable(s, Parser.getInTables(sqlScript).toList, sqlFile, "Hive")
+				ptables += DestTable(s, Parser.getInTables(CatalystSqlParser.parsePlan(sqlScript)).toList, sqlFile, "Hive")
 			} finally {
 				source.close()
 			}
