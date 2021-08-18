@@ -1,5 +1,8 @@
-export class TopologyNode {  
+export class Named {
   name!: string;
+}
+
+export class TopologyNode extends Named {  
   nodeType?: string;
   in!: Dataset[];
   out!: Dataset[];
@@ -7,8 +10,9 @@ export class TopologyNode {
   project?: string;  
 }
 
-export class Field {
+export class Field  extends Named {
   name!: string;
+  tableName?: string;
   sources?: Field[];
   fieldPlanType: String = "Empty";
 }

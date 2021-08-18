@@ -12,6 +12,7 @@ import { EventService } from './events.service';
 })
 export class ProjectService { 
 
+  currentProject?: Project = undefined;
   
   constructor(private http: HttpClient, private templateService: TemplateService, private eventService: EventService) { 
     eventService.projectNameEvent$.subscribe(value => {
@@ -28,10 +29,6 @@ export class ProjectService {
     return this.http.get<Project[]>("/projectFile")  
   }
 
-  private setData(project: Project, data: any) {
-    project.data = data;
-  }
-
   getProject(name: string): Observable<Project | undefined> {
     let p: Observable<Project | undefined> = this.getProjects()
       .pipe(map((projects: Project[]) => projects.find(project => project.name === name)));
@@ -39,9 +36,10 @@ export class ProjectService {
   }
 
   loadProject(project: Project, clearAll: boolean = true) {
+    this.currentProject = project;
     if(clearAll === true) {
       this.eventService.emitClearAllEvent()
-    }    
+    }
     if(!project.data && !environment.singleHtml) {
       this.eventService.emitSpinnerEvent(true)
       this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))

@@ -92,11 +92,11 @@
         "dataExists": false
     },
     {
-        "name": "wf_deriveddata_default_deal_v5",
+        "name": "l_deriveddata_default_deal_v1",
         "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/catalog/wf_deriveddata_default_deal_v5/hive", 
-            "project": "wf_deriveddata_default_deal_v5", 
+            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.default_deal_v1/Hive", 
+            "project": "l_deriveddata.default_deal_v1", 
             "sourcePrefix": ""},
         "dataExists": false
     },
@@ -106,6 +106,16 @@
         "templateParams": {
             "folder": "C:/projects/temp/alfabank/groupOf/sql", 
             "project": "GroupOf", 
+            "sourcePrefix": ""},
+        "dataExists": false
+    }
+    ,
+    {
+        "name": "s_dmrb.cardtransaction_stran",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/catalog/s_dmrb.cardtransaction_stran/hive",
+            "project": "s_dmrb.cardtransaction_stran", 
             "sourcePrefix": ""},
         "dataExists": false
     }

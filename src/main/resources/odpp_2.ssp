@@ -31,10 +31,11 @@
 	("${", ""),
 	("}", ""),
 	("SET hive.exec.dynamic.partition=true", ""),
+	("set hive.exec.dynamic.partition=true", ""),
+	("set hive.optimize.sort.dynamic.partition=true", ""),
 	("SET hive.exec.dynamic.partition.mode=nonstrict", ""),
+	("set hive.exec.dynamic.partition.mode=nonstrict", ""),
 	("$$", "DD"),
-	("/*", "-- /*"),
-	("*/", "*/ \r\n"),
 	("listagg( tk ,',') within group (order by tk) tk", "tk")
 	), _.contains("."), layer = "Odpp")
 %>

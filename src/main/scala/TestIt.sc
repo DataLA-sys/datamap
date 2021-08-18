@@ -12,127 +12,6 @@ implicit val formats = DefaultFormats
 
 implicit val codec = Codec("UTF-8")
 
-object help {
-  def buildFieldsFromSources(fields: Seq[String], sources: List[Field], fieldType: String): List[Field] = {
-    val newInsertCols = ListBuffer[Field]()
-    fields.zipWithIndex.foreach(y => {
-        val projectField = sources(y._2)
-        newInsertCols += Field(y._1, List(projectField), fieldPlanType = fieldType)
-      }
-    )
-    newInsertCols.toList
-  }
-
-  def getF(l: LogicalPlan, fieldType: String): ListBuffer[Field] = {
-    val fields = ListBuffer[Field]()
-    l.foreach {
-      case pp: Project => fields ++= getProjectFields(pp, fieldType)
-      case t: SubqueryAlias => fields ++= help.getF(t.child, "SubqueryAlias").
-          toList.map(f => Field(f.name, f.sources, f.fieldPlanType))
-      case pp: Join => fields ++= getF(pp.right, "Join") ++= getF(pp.left, "Join")
-      case p => println("unsupported in getF -> " + p.toJSON)
-
-    }
-    fields
-  }
-
-  def namePartsToName(nameParts: Seq[String]): String = {
-    if(nameParts.size == 2) {
-      findTableNameFromAlias(nameParts(0)) + "." + nameParts(1)
-    } else {
-      nameParts.mkString(".")
-    }
-  }
-
-  def getSourcesFromAlias(alias: Alias): List[Field] = {
-    val fieldSources = new ListBuffer[Field]()
-    alias.foreach {
-      case cc: UnresolvedAttribute => fieldSources += Field(namePartsToName(cc.nameParts), fieldPlanType = "Alias")
-      case cc: ScalarSubquery => fieldSources ++= getF(l = cc.plan, fieldType = "ScalarSubquery").toList
-      //case cc: Alias => fieldSources ++= getSourcesFromAlias(cc)
-      case cc => println("unresolved in getSourcesFromAlias: " + cc.toJSON)
-    }
-    fieldSources.toList
-  }
-  def getProjectFields(project: Project, fieldType: String): ListBuffer[Field] = {
-
-    val fields = ListBuffer[Field]()
-    project.projectList.foreach(f = {
-      case pp: UnresolvedAttribute => fields += Field(namePartsToName(pp.nameParts), fieldPlanType = fieldType)
-      case pp: Alias => {
-        val fieldSources = getSourcesFromAlias(pp)
-        if (fieldSources.nonEmpty) {
-          fields += Field(pp.name, fieldSources.toList, fieldType)
-        }
-      }
-      case pp: CaseWhen =>
-        val fieldSources = new ListBuffer[Field]();
-        pp.children.foreach {
-          case cc: UnresolvedAttribute => fieldSources += Field(cc.nameParts.mkString("."), fieldPlanType = "CaseWhen")
-          case _ =>
-        }
-        fields += Field("CASE" + pp.name, fieldSources.toList, "CaseWhen")
-      case pp: ScalarSubquery => fields ++= getF(pp.plan, "ScalarSubquery")
-      case p => println("unsupported in getProjectFields -> " + p.toJSON)
-    })
-    fields
-  }
-
-  def findTableNameFromAlias(alias: String): String = {
-    var res = alias
-    plan.foreach(f => f match {
-      case s: SubqueryAlias => {
-        if (s.alias.toUpperCase == alias.toUpperCase) {
-          res = findTableNames(s).mkString(".")
-        }
-      }
-      case _ =>
-    })
-    res
-  }
-
-  var plan: LogicalPlan = null
-  def getFields(logical: LogicalPlan): List[Field] = {
-    plan = logical
-    var i: Int = 0
-    val allFields: ListBuffer[Field] = ListBuffer()
-    while(logical(i) != null) {
-      val lg = logical(i)
-      lg match {
-        case t: With => t.cteRelations.foreach(f => {
-          val subQueryCols =
-            f._2.find(a => a.isInstanceOf[UnresolvedSubqueryColumnAliases])
-              .getOrElse(UnresolvedSubqueryColumnAliases(Seq("NotFound"), t))
-              .asInstanceOf[UnresolvedSubqueryColumnAliases].outputColumnNames
-          allFields ++=
-            help.buildFieldsFromSources(subQueryCols.map(f._1 + "." + _), help.getF(f._2, "Attribute").toList, "With")
-        })
-        case t: SubqueryAlias => allFields ++= help.getF(t.child, "SubqueryAlias").
-            toList.map(f => Field(f.name, f.sources, f.fieldPlanType))
-        case t: InsertIntoStatement =>  {
-          val tn = findTableNames(t.table).mkString(".")
-          allFields ++= help.buildFieldsFromSources(t.userSpecifiedCols.map(tn + "." + _), help.getF(t, "Attribute").toList, "InsertIntoStatement")
-        }
-        case t: Project => allFields ++= help.getProjectFields(t, "MainProject").toList
-        case t: Join => allFields ++= help.getF(t, "Join").toList
-        case _ => println("unsupported in getFields -> " + lg.toJSON)
-      }
-      i += 1
-    }
-    allFields.toList
-  }
-
-  def findTableNames(logical: LogicalPlan): List[String] = {
-    val tableNames = ListBuffer[String]()
-    logical.foreach {
-      case ll: UnresolvedRelation => tableNames += ll.multipartIdentifier.mkString(".")
-      case _ =>
-    }
-    tableNames.toList
-  }
-}
-
-
 var joinScriptsFolder = "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts"
 var project = ""
 var sourceFile = ""
@@ -162,6 +41,10 @@ val alpha1 =
     |""".stripMargin
 val alpha2 =
   """
+    |/*
+    |d
+    |f
+    |*/
     |insert into MART_TMP_DATABASE.RECOVERYWOIFRS_D2A2_TMP
     |SELECT
     | Q2.DEAL_UK,
@@ -175,6 +58,12 @@ val alpha2 =
     | Q2.ACCOUNT_COVER_UK,
     | MAX (NVL (PC.BLOCK_UK, 0)) as BLOCK_UK,
     | MAX (NVL (P2P.PRODUCTGROUP_UK, 0)) as PRODUCTGROUP_UK
+    | /*
+    | j
+    | k
+    | l
+    | p
+    | */
     |FROM (  SELECT DEAL_UK,
     |		   PROFITCENTER_UK,
     |		   PRODUCT_UK,
@@ -226,7 +115,7 @@ val alpha2 =
     |		 Q2.ACCOUNT_LOAN_UK,
     |		 Q2.ACCOUNT_COVER_UK;
     |
-    |""".stripMargin
+    |"""//.stripMargin
 val alpha3 = """insert into ${MART_TMP_DATABASE}.RECOVERYWOIFRS_BSVN_TMP
                |SELECT a.*
                |FROM ( SELECT
@@ -303,11 +192,3 @@ val logical: LogicalPlan = s.parsePlan(alpha2
 
 logical
 println(logical.toJSON)
-val fields = help.getFields(logical)
-
-fields.foreach(ff => {
-      println(ff.name + "->" + ff.fieldPlanType)
-      ff.sources.foreach(s => println("    ->" + s.name + " " + s.fieldPlanType))
-    }
-)
-fields

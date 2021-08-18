@@ -2,7 +2,7 @@
   <mat-tab label="Props">
     <mat-nav-list>
 
-        <mat-list-item *ngIf="selected">        
+        <mat-list-item *ngIf="selected">
           <label>{{selected?.data?.dataset?.name}}</label>
           <span>&nbsp;</span>
           <button mat-mini-fab color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
@@ -29,6 +29,11 @@
 
         <mat-list-item>        
             <textarea *ngIf="selected" disabled>{{getSource()}}</textarea>
+<!--            
+            <button mat-mini-fab color="basic" (click)="getSourceFile()" *ngIf="selected">
+              <mat-icon>text_snippet</mat-icon>
+            </button>
+-->            
         </mat-list-item>
 
     </mat-nav-list>

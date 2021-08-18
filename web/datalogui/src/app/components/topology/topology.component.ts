@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { EventService } from "../../services/events.service";
 import { ProjectFileDir, Topology } from "../../classes/topology";
 import { Node, NodeData } from "../../classes/node";
-import { Dataset, TopologyNode } from '../../classes/dataset';
+import { Dataset, TopologyNode, Named } from '../../classes/dataset';
 import { Subject } from 'rxjs';
 
 interface KeyValuePair {
@@ -168,27 +168,30 @@ export class TopologyComponent implements OnInit {
     })
   }
 
-  concatDasetsList(datasets1: Dataset[], datasets2: Dataset[]): Dataset[] {
-    datasets2.forEach(d2 => {
-      if(datasets1.find(d1  => d1.name == d2.name) == undefined) {
-        datasets1.push(d2);
+  concatNamed<T extends Named>(list1: T[], list2: T[]): T[] {
+    list2.forEach(d2 => {
+      if(list1.find(d1  => d1.name == d2.name) == undefined) {
+        list1.push(d2);
       }
     })
-    return datasets1;
+    return list1;
   }
 
-  normaizeTree(normalised: TopologyNode[],  datasets: TopologyNode[]) {
+  normaizeTree(normalised: TopologyNode[],  datasets: TopologyNode[], level: number) {
     datasets.forEach(dd => {
       let found: Dataset | undefined = normalised.find(n => n.name == dd.name);      
       if(found == undefined) {
         normalised.push(dd);
-        this.normaizeTree(normalised, dd.in.concat(dd.out));
+        this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
       } else {
         let prev = found.in.length + found.out.length
-        found.in = this.concatDasetsList(found.in, dd.in);
-        found.out = this.concatDasetsList(found.out, dd.out);
-        if(prev != found.in.length + found.out.length) {
-          this.normaizeTree(normalised, dd.in.concat(dd.out));
+        found.in = this.concatNamed(found.in, dd.in);
+        found.out = this.concatNamed(found.out, dd.out);
+        if(dd instanceof Dataset) {
+          found.fields = this.concatNamed(found.fields || [], (dd as Dataset).fields || []);
+        }        
+        if((prev != found.in.length + found.out.length) || level === 0) {
+          this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
         }          
       }            
     })
@@ -198,8 +201,8 @@ export class TopologyComponent implements OnInit {
     this.data = data;
     this.selected = undefined;
     
-    let inodes: TopologyNode[] = [];
-    this.normaizeTree(inodes, this.showActions ? data.actions : data.datasets);
+    let inodes: TopologyNode[] = this.showActions ? data.actions : data.datasets;
+    this.normaizeTree(inodes, this.showActions ? data.actions : data.datasets, 0);
     inodes.forEach(d => this.normalizeDataset(inodes, d));
 
     let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : []

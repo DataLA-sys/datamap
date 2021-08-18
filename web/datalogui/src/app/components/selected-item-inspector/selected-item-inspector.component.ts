@@ -3,6 +3,7 @@ import { Field } from 'src/app/classes/dataset';
 import { EventService } from 'src/app/services/events.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { SourceFilesService } from 'src/app/services/files.service';
 
 @Component({
   selector: 'selected-item-inspector',
@@ -18,7 +19,7 @@ export class SelectedItemInspectorComponent implements OnInit {
 
   dataSource = new MatTreeNestedDataSource<Field>();
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private sourceFilesService: SourceFilesService) {
     eventService.nodeSelectedEvent$.subscribe(value => {
       this.selected = value;
       this.dataSource.data = this.selected?.data?.dataset?.fields;
@@ -61,7 +62,17 @@ export class SelectedItemInspectorComponent implements OnInit {
 
   getAction() {
     return this.selected?.data?.dataset?.action;    
-  }  
+  }
+
+  getSourceFile() {
+    this.sourceFilesService.getSourceFileContent(this.selected.data?.dataset?.sourceFile)    
+      .subscribe(
+        fileContent => {
+          alert(fileContent)
+        },
+        error => alert(error.message)
+      )
+  }
 
   ngOnInit(): void {
   }
