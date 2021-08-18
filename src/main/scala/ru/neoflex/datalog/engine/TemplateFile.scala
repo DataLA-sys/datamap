@@ -7,7 +7,7 @@ import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, Join, L
 import ru.neoflex.datalog.engine.dto.{DestTable, Field}
 
 import java.io.File
-import java.nio.file.{FileSystems, PathMatcher}
+import java.nio.file.FileSystems
 import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.io.Source.fromFile
@@ -17,10 +17,10 @@ case class TemplateFile(fileName: String, templateContent: String)
 
 object Parser {
 
-  implicit val codec = Codec("UTF-8")
+  implicit val codec: Codec = Codec("UTF-8")
 
   def getFileText(fileName: String,
-                  lineProcessor: LineProcessor) = {
+                  lineProcessor: LineProcessor): String = {
     val source = fromFile(fileName)
     var text = ""
     try {
@@ -44,8 +44,8 @@ object Parser {
     val files = getListOfFiles(dir)
     val tables = ListBuffer[DestTable]()
     files.foreach(file => {
-      val fn = sourcePrefix + file.getName()
-      val source = fromFile(file.getAbsolutePath())
+      val fn = sourcePrefix + file.getName
+      val source = fromFile(file.getAbsolutePath)
       val lines = source.getLines()
       var destTable = ""
       val sources = ListBuffer[String]()
@@ -64,7 +64,7 @@ object Parser {
           if(s.contains(token)) {
             val source = s.split(" on ")(0).split(' ').find(w => w.contains('.'))
             source.map(w => {
-              if(!sources.exists(item => item == w)) {
+              if(!sources.contains(w)) {
                 sources += w
               }
             })
@@ -73,7 +73,7 @@ object Parser {
       })
       if(destTable.contains(".")) {
         tables.find(f => f.name == destTable).map(ft => {
-          sources ++= ft.sources;
+          sources ++= ft.sources
           tables -= ft
         })
         tables += DestTable(destTable, sources.toList.distinct, fn, layer)
@@ -117,31 +117,46 @@ object Parser {
     try {
       getFields(logical)
     } catch {
-      case e: Exception => {
+      case e: Exception =>
         e.printStackTrace()
-        List[Field](Field(name ="Error While Processing", fieldPlanType = "error"))
-      }
+        List[Field](Field(name ="Error While Processing", tableName = "", fieldPlanType = "error"))
     }
   }
 
   def processSqlScript(sql: String,
                        sourceFile: String,
                        tables: ListBuffer[DestTable],
-                       testTable: String => Boolean = (s => true),
+                       testTable: String => Boolean = _ => true,
                        layer: String = "",
                        defaultOut: Seq[String] = Seq()
                       ): Unit = {
     val logical: LogicalPlan = CatalystSqlParser.parsePlan(sql)
     val outTables = Parser.getOutTables(logical) ++ defaultOut
     var inTables = Parser.getInTables(logical)
+    def distinctFields(tableFields: List[Field]): List[Field] = {
+      val distinctTableFields = new ListBuffer[Field]()
+      tableFields.foreach(field => {
+        val found = distinctTableFields.find(f => f.name.toUpperCase() == field.name.toUpperCase()).getOrElse(null)
+        if(found == null) {
+          distinctTableFields += field
+        } else {
+          val newField = Field(field.name, field.tableName, (field.sources ++ found.sources).distinct, field.fieldPlanType)
+          distinctTableFields -= found
+          distinctTableFields += newField
+        }
+      })
+      distinctTableFields.toList
+    }
     outTables.foreach(destTable => {
       if(testTable(destTable)) {
+        var tableFields = getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
         tables.find(f => f.name == destTable).map(ft => {
           inTables = inTables ++ ft.sources
+          tableFields = tableFields ++ ft.fields
           tables -= ft
         })
-        val tableFields = getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
-        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer, fields = tableFields)
+        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer,
+          fields = distinctFields(tableFields))
       }
     })
   }
@@ -150,10 +165,9 @@ object Parser {
                        sourceFilePrefix: String,
                        tables: ListBuffer[DestTable],
                        replacement: Seq[(String, String)] = Seq.empty,
-                       testTable: String => Boolean = (s => true),
+                       testTable: String => Boolean = _ => true,
                        layer: String = "",
-                       filesFilter: String = "*.*",
-                       fields: ListBuffer[Field] = null
+                       filesFilter: String = "*.*"
                       ): Unit = {
     object SqlScriptLineProcessor2 extends SqlScriptLineProcessor {
       override def processLine(line: String): String = {
@@ -163,13 +177,13 @@ object Parser {
       }
     }
 
-    val matcher = FileSystems.getDefault.getPathMatcher("glob:*" + filesFilter);
+    val matcher = FileSystems.getDefault.getPathMatcher("glob:*" + filesFilter)
 
     getListOfFiles(folder)
       .filter(file => matcher.matches(file.toPath))
       .foreach(file => {
-      val sqlScript = getFileText(file.getAbsolutePath, SqlScriptLineProcessor2)
-      sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql =>
+        val sqlScript = getFileText(file.getAbsolutePath, SqlScriptLineProcessor2)
+        sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql =>
         {
           if(!(sql.toUpperCase().contains("INSERT") || sql.toUpperCase().contains("CREATE")) && sql.toUpperCase().contains("SELECT")) {
             val defaultOut = Seq("db." + file.getName.replaceFirst("[.][^.]+$", ""))
@@ -188,7 +202,7 @@ object Parser {
     fields.zipWithIndex.foreach(y => {
         if(sources.size > y._2) {
           val projectField = sources(y._2)
-          newInsertCols += Field(y._1, List(projectField), fieldPlanType = fieldType)
+          newInsertCols += Field(y._1, "", List(projectField), fieldPlanType = fieldType)
         }
       }
     )
@@ -200,10 +214,9 @@ object Parser {
     l.foreach {
       case pp: Project => fields ++= getProjectFields(pp, fieldType)
       case t: SubqueryAlias => fields ++= getF(t.child, "SubqueryAlias").
-        toList.map(f => Field(f.name, f.sources, f.fieldPlanType))
+        toList.map(f => Field(f.name, t.alias, f.sources, f.fieldPlanType))
       case pp: Join => fields ++= getF(pp.right, "Join") ++= getF(pp.left, "Join")
-      case p => //println("unsupported in getF -> " + p.toJSON)
-
+      case _ =>
     }
     fields
   }
@@ -216,13 +229,28 @@ object Parser {
     }
   }
 
-  private def getSourcesFromAlias(alias: Alias): List[Field] = {
+  private def getSourcesFromAlias(alias: Alias, project: Project): List[Field] = {
     val fieldSources = new ListBuffer[Field]()
     alias.foreach {
-      case cc: UnresolvedAttribute => fieldSources += Field(namePartsToName(cc.nameParts), fieldPlanType = "Alias")
+      case cc: UnresolvedAttribute => fieldSources += {
+        var tableAlias = ""
+        var tableName = ""
+        val aliases = ListBuffer[(String, String)]()
+        project.foreach {
+          case s: SubqueryAlias =>
+            tableAlias = s.alias
+          case s: UnresolvedRelation =>
+            tableName = namePartsToName(s.multipartIdentifier)
+            aliases += ((tableName, tableAlias))
+          case _ =>
+        }
+        val firstItem = aliases.find(a => a._2 == cc.nameParts.head).getOrElse((cc.nameParts.head, cc.nameParts.head))._1
+        val nameParts = Seq(firstItem) ++ cc.nameParts.tail
+        Field(namePartsToName(nameParts), alias.name, fieldPlanType = "Alias")
+      }
       case cc: ScalarSubquery => fieldSources ++= getF(l = cc.plan, fieldType = "ScalarSubquery").toList
       //case cc: Alias => fieldSources ++= getSourcesFromAlias(cc)
-      case cc => //println("unresolved in getSourcesFromAlias: " + cc.toJSON)
+      case _ =>
     }
     fieldSources.toList
   }
@@ -231,22 +259,21 @@ object Parser {
 
     val fields = ListBuffer[Field]()
     project.projectList.foreach(f = {
-      case pp: UnresolvedAttribute => fields += Field(namePartsToName(pp.nameParts), fieldPlanType = fieldType)
-      case pp: Alias => {
-        val fieldSources = getSourcesFromAlias(pp)
+      case pp: UnresolvedAttribute => fields += Field(namePartsToName(pp.nameParts), findTableNames(project).mkString("."), fieldPlanType = fieldType)
+      case pp: Alias =>
+        val fieldSources = getSourcesFromAlias(pp, project)
         if (fieldSources.nonEmpty) {
-          fields += Field(pp.name, fieldSources.toList, fieldType)
+          fields += Field(pp.name, pp.name, fieldSources, fieldType)
         }
-      }
       case pp: CaseWhen =>
-        val fieldSources = new ListBuffer[Field]();
+        val fieldSources = new ListBuffer[Field]()
         pp.children.foreach {
-          case cc: UnresolvedAttribute => fieldSources += Field(cc.nameParts.mkString("."), fieldPlanType = "CaseWhen")
+          case cc: UnresolvedAttribute => fieldSources += Field(cc.nameParts.mkString("."), pp.name, fieldPlanType = "CaseWhen")
           case _ =>
         }
-        fields += Field("CASE" + pp.name, fieldSources.toList, "CaseWhen")
+        fields += Field("CASE" + pp.name, pp.name, fieldSources.toList, "CaseWhen")
       case pp: ScalarSubquery => fields ++= getF(pp.plan, "ScalarSubquery")
-      case p => //println("unsupported in getProjectFields -> " + p.toJSON)
+      case _ =>
     })
     fields
   }
@@ -265,6 +292,18 @@ object Parser {
 
   var plan: LogicalPlan = null
   def getFields(logical: LogicalPlan): List[Field] = {
+    def addFields(allFields: ListBuffer[Field], newFields: List[Field]): Unit = {
+      newFields.foreach(newField => {
+        val found = allFields.find(f => f.name == newField.name).orNull
+        if(found != null) {
+          val toAdd = Field(found.name, found.tableName, (found.sources ++ newField.sources).distinct, found.fieldPlanType)
+          allFields -= found
+          allFields += toAdd
+        } else {
+          allFields += newField
+        }
+      })
+    }
     plan = logical
     var i: Int = 0
     val allFields: ListBuffer[Field] = ListBuffer()
@@ -277,19 +316,18 @@ object Parser {
               .getOrElse(UnresolvedSubqueryColumnAliases(Seq("NotFound"), t))
               .asInstanceOf[UnresolvedSubqueryColumnAliases].outputColumnNames
           if(subQueryCols.nonEmpty) {
-            allFields ++=
-              buildFieldsFromSources(subQueryCols.map(f._1 + "." + _), getF(f._2, "Attribute").toList, "With")
+            addFields(allFields,
+              buildFieldsFromSources(subQueryCols.map(f._1 + "." + _), getF(f._2, "Attribute").toList, "With"))
           }
         })
-        case t: SubqueryAlias => allFields ++= getF(t.child, "SubqueryAlias").
-          toList.map(f => Field(f.name, f.sources, f.fieldPlanType))
-        case t: InsertIntoStatement =>  {
+        case t: SubqueryAlias => addFields(allFields, getF(t.child, "SubqueryAlias").
+          toList.map(f => Field(f.name, t.alias, f.sources, f.fieldPlanType)))
+        case t: InsertIntoStatement =>
           val tn = findTableNames(t.table).mkString(".")
-          allFields ++= buildFieldsFromSources(t.userSpecifiedCols.map(tn + "." + _), getF(t, "Attribute").toList, "InsertIntoStatement")
-        }
-        case t: Project => allFields ++= getProjectFields(t, "MainProject").toList
-        case t: Join => allFields ++= getF(t, "Join").toList
-        case _ => //println("unsupported in getFields -> " + lg.toJSON)
+          addFields(allFields, buildFieldsFromSources(t.userSpecifiedCols.map(tn + "." + _), getF(t, "Attribute").toList, "InsertIntoStatement"))
+        case t: Project => addFields(allFields, getProjectFields(t, "MainProject").toList)
+        case t: Join => addFields(allFields, getF(t, "Join").toList)
+        case _ =>
       }
       i += 1
     }

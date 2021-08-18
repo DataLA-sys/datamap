@@ -10,13 +10,15 @@ import akka.http.scaladsl.server.Directives.{complete, _}
 import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
+import ru.neoflex.datalog.actors.SourceFilesActor
 import org.json4s.DefaultFormats
 import ru.neoflex.datalog.actors.RenderActor
+import ru.neoflex.datalog.actors.SourceFilesActor.{CompleteFileCommandMessage, FileContentMessage, GetFileContentCommand}
 import ru.neoflex.datalog.engine.TemplateFile
 
-import scala.concurrent.Future
-import scala.concurrent.duration.DurationInt
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import spray.json.DefaultJsonProtocol._
+import spray.json.RootJsonFormat
 
 import java.nio.file.{Files, Paths}
 import scala.io.Source.fromFile
@@ -53,17 +55,17 @@ trait CORSHandler{
 
 }
 
-class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
+class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand], sourceFilesActor: ActorRef[SourceFilesActor.FileCommand])
                   (projectFile: String)
                   (implicit val system: ActorSystem[_]) extends CORSHandler  {
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  private implicit val timeout = Timeout.create(system.settings.config.getDuration("my-app.routes.ask-timeout"))
-  implicit val ec = system.executionContext
-  implicit val jobFormat = jsonFormat2(TemplateFile)
-  implicit val formats = DefaultFormats
+  private implicit val timeout: Timeout = Timeout.create(system.settings.config.getDuration("my-app.routes.ask-timeout"))
+  implicit val ec: ExecutionContextExecutor = system.executionContext
+  implicit val jobFormat: RootJsonFormat[TemplateFile] = jsonFormat2(TemplateFile)
+  implicit val formats: DefaultFormats.type = DefaultFormats
 
-  def assets = {
+  def assets: Route = {
     def redirectSingleSlash =
       pathSingleSlash {
         get {
@@ -80,13 +82,10 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
           path("renderTemplate") {
             parameters("fileName".as[String], "params".as[String]) { (fileName, params) =>
               val m = renderActor.ask(RenderTemplate(fileName, Some(params), _: ActorRef[RenderedMessage]))
-              val s = m.flatMap(s => {
-                s match {
-                  case RenderActor.RenderedTemplate(value, _) => {
-                    Future(value)
-                  }
-                }
-              })
+              val s = m.flatMap {
+                case RenderActor.RenderedTemplate(value, _) =>
+                  Future(value)
+              }
               complete(s)
             }
           }
@@ -102,6 +101,19 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand])
           } else {
             println(s"Not found $projectFile")
             complete(s"""{"message": "project file $projectFile not found"}""")
+          }
+        }
+      },
+      get {
+        path("sourceFileContent") {
+          parameters("fileName".as[String]) { (fileName) =>
+            complete(
+              sourceFilesActor
+                .ask(GetFileContentCommand(fileName, _: ActorRef[CompleteFileCommandMessage]))
+                .map{
+                  case FileContentMessage(value, _) =>
+                    Future(value)
+                })
           }
         }
       },

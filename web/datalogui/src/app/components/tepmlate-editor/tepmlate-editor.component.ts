@@ -25,15 +25,17 @@ export class TepmlateEditorComponent implements OnInit {
   }
 
   setData() {
+    this.eventService.emitClearAllEvent()
     this.eventService.emitJoinDataEvent(JSON.parse(this.fileContent))
   }
 
   renderTemplate() {
     if(this.fileName) {
       this.eventService.emitSpinnerEvent(true);
+      this.eventService.emitClearAllEvent()
       this.teplateService.renderTemplate(this.fileName, this.params)
         .subscribe(s => {
-          this.fileContent = JSON.stringify(s, null, 4)
+          this.fileContent = JSON.stringify(s, null, 4)          
           this.eventService.emitJoinDataEvent(s)
           this.eventService.emitSpinnerEvent(false);
         }, error => {        
