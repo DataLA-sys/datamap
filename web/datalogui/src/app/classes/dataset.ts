@@ -7,7 +7,7 @@ export class TopologyNode extends Named {
   in!: Dataset[];
   out!: Dataset[];
   layer!: string;
-  project?: string;  
+  project?: string;
 }
 
 export class Field  extends Named {

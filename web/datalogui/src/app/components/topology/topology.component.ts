@@ -4,6 +4,7 @@ import { ProjectFileDir, Topology } from "../../classes/topology";
 import { Node, NodeData } from "../../classes/node";
 import { Dataset, TopologyNode, Named } from '../../classes/dataset';
 import { Subject } from 'rxjs';
+import { ProjectService } from 'src/app/services/project.service';
 
 interface KeyValuePair {
   key: string;
@@ -31,7 +32,8 @@ export class TopologyComponent implements OnInit {
   data: Topology | undefined;
   showMiniMap: boolean = false;
   showClusters: boolean = true;
-  showActions: boolean = false;
+  viewMode: string = "datasets";
+  inOut: TopologyNode[] = []
 
   getNodeProject(node: Node): string | undefined {
     return node.data?.dataset.project;
@@ -48,9 +50,11 @@ export class TopologyComponent implements OnInit {
   zoomToFit$: Subject<boolean> = new Subject();
   panToNode$: Subject<any> = new Subject();
   center$: Subject<boolean> = new Subject();
+  currentProject = "";
 
   constructor(
     private eventService: EventService, 
+    private projectService: ProjectService, 
     public cd: ChangeDetectorRef) { 
     eventService.zoomToFitEvent$.subscribe(value => this.zoomToFit());
     eventService.centerTopologyEvent$.subscribe(value => this.center$.next(true));
@@ -60,7 +64,11 @@ export class TopologyComponent implements OnInit {
 
     eventService.clearAllEvent$.subscribe(value => this.clear())
     eventService.joinDataEvent$.subscribe(value => this.addData(value))
-    eventService.projectEvent$.subscribe(value => this.addData(value.data || new Topology()))
+    eventService.projectEvent$.subscribe(value => {
+      this.currentProject = value.name
+      this.addData(value.data || new Topology())
+      this.calculateInOut(value.name, value.data || new Topology())
+    })
     eventService.tableSelectedEvent$.subscribe(value => {       
       let found = this.nodes.find(node => node.data?.dataset?.name === value);
       if(found) {
@@ -81,8 +89,8 @@ export class TopologyComponent implements OnInit {
     eventService.toggleClustersEvent$.subscribe(value => {
       this.showClusters = !this.showClusters
     })
-    eventService.toggleActionsEvent$.subscribe(value => {
-      this.showActions = !this.showActions
+    eventService.toggleViewEvent$.subscribe(value => {
+      this.viewMode = value
       if(this.data) {
         this.getData(this.data)
       }      
@@ -138,8 +146,10 @@ export class TopologyComponent implements OnInit {
   }
 
   clear() {
+    this.currentProject = ""
     let t = new Topology()
     t.datasets = []
+    this.inOut = []
     this.getData(t)
   }
 
@@ -179,7 +189,7 @@ export class TopologyComponent implements OnInit {
 
   normaizeTree(normalised: TopologyNode[],  datasets: TopologyNode[], level: number) {
     datasets.forEach(dd => {
-      let found: Dataset | undefined = normalised.find(n => n.name == dd.name);      
+      let found: TopologyNode | undefined = normalised.find(n => n.name == dd.name);      
       if(found == undefined) {
         normalised.push(dd);
         this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
@@ -187,7 +197,7 @@ export class TopologyComponent implements OnInit {
         let prev = found.in.length + found.out.length
         found.in = this.concatNamed(found.in, dd.in);
         found.out = this.concatNamed(found.out, dd.out);
-        if(dd instanceof Dataset) {
+        if(dd instanceof Dataset && found instanceof Dataset ) {
           found.fields = this.concatNamed(found.fields || [], (dd as Dataset).fields || []);
         }        
         if((prev != found.in.length + found.out.length) || level === 0) {
@@ -197,14 +207,38 @@ export class TopologyComponent implements OnInit {
     })
   }
 
+  private getNodes(): TopologyNode[] {
+    if(this.viewMode === "actions") {
+      return this.data?.actions || []
+    }
+    if(this.viewMode === "inout" && this.inOut) {
+      return this.inOut
+    }
+    return this.data?.datasets || []
+  }
+
+  private calculateInOut(project: string, data: Topology) {
+    this.inOut = []
+    let inodes: TopologyNode[] = data.datasets || [];
+    this.normaizeTree(inodes, data.datasets || [], 0);
+    inodes.forEach(d => this.normalizeDataset(inodes, d));    
+    if(project !== "") {
+      let io = this.projectService.getProjectsInputOutput(inodes, project)
+      this.inOut.push(io)
+      this.normaizeTree(this.inOut, this.inOut, 0);
+      this.inOut.forEach(d => this.normalizeDataset(this.inOut, d));
+      this.eventService.emitProjectStatEvent(io)
+    }
+  }
+
   getData(data: Topology, filterByTableIn: string | undefined = undefined) {
     this.data = data;
     this.selected = undefined;
     
-    let inodes: TopologyNode[] = this.showActions ? data.actions : data.datasets;
-    this.normaizeTree(inodes, this.showActions ? data.actions : data.datasets, 0);
+    let inodes: TopologyNode[] = this.getNodes();
+    this.normaizeTree(inodes, this.getNodes(), 0);
     inodes.forEach(d => this.normalizeDataset(inodes, d));
-
+    
     let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : []
     if(filterByTableIn) {
       if(filteredTables.indexOf(filterByTableIn) == -1) {

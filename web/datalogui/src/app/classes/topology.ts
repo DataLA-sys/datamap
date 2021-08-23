@@ -1,4 +1,4 @@
-import { Dataset, Field } from "./dataset"
+import { Dataset, Field, TopologyNode } from "./dataset"
 import { Tool, ToolAction } from "./toolAction"
 
 export class ProjectFileDir {

@@ -4,7 +4,7 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
-import ru.neoflex.datalog.actors.{RenderActor, SourceFilesActor}
+import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor}
 
 import scala.util.Failure
 import scala.util.Success
@@ -36,8 +36,9 @@ object DatalogApp {
         }
         val renderActor = context.spawn(RenderActor(), "RenderActor")
         val filesActor = context.spawn(SourceFilesActor(), "SourceFilesActor")
+        val projectDataActor = context.spawn(ProjectDataActor(), "ProjectDataActor")
 
-        val routes = new RenderRoutes(renderActor, filesActor)(pname)(context.system)
+        val routes = new RenderRoutes(renderActor, filesActor, projectDataActor)(pname)(context.system)
         startHttpServer(routes.renderRoutes())(context.system)
 
         Behaviors.empty

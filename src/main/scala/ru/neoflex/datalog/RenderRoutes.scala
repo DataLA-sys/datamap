@@ -10,9 +10,9 @@ import akka.http.scaladsl.server.Directives.{complete, _}
 import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
-import ru.neoflex.datalog.actors.SourceFilesActor
+import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor}
 import org.json4s.DefaultFormats
-import ru.neoflex.datalog.actors.RenderActor
+import ru.neoflex.datalog.actors.ProjectDataActor.{CompleteDataCommandMessage, GetProjectStatCommand, ProjectStatMessage, SaveProjectStatCommand}
 import ru.neoflex.datalog.actors.SourceFilesActor.{CompleteFileCommandMessage, FileContentMessage, GetFileContentCommand}
 import ru.neoflex.datalog.engine.TemplateFile
 
@@ -55,7 +55,10 @@ trait CORSHandler{
 
 }
 
-class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand], sourceFilesActor: ActorRef[SourceFilesActor.FileCommand])
+class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
+                   sourceFilesActor: ActorRef[SourceFilesActor.FileCommand],
+                   projectDataActor: ActorRef[ProjectDataActor.DataCommand]
+                  )
                   (projectFile: String)
                   (implicit val system: ActorSystem[_]) extends CORSHandler  {
 
@@ -114,6 +117,34 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand], sourceFiles
                   case FileContentMessage(value, _) =>
                     Future(value)
                 })
+          }
+        }
+      },
+      post {
+        path("projectStat") {
+          parameters("project".as[String]) { project =>
+            entity(as[String]) { ent =>
+              complete(
+                projectDataActor
+                  .ask(SaveProjectStatCommand(project, ent, _: ActorRef[CompleteDataCommandMessage]))
+                  .map{
+                    case ProjectStatMessage(value, _) =>
+                      Future(value)
+                  })
+            }
+          }
+        }
+      },
+      get {
+        path("projectStat") {
+          parameters("project".as[String]) { project =>
+              complete(
+                projectDataActor
+                  .ask(GetProjectStatCommand(project, _: ActorRef[CompleteDataCommandMessage]))
+                  .map{
+                    case ProjectStatMessage(value, _) =>
+                      Future(value)
+                  })
           }
         }
       },

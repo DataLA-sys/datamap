@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { EventService } from "../../services/events.service";
 import 'material-icons/iconfont/material-icons.css';
 
@@ -7,10 +7,11 @@ import 'material-icons/iconfont/material-icons.css';
   templateUrl: './main-toolbar.component.html',
   styleUrls: ['./main-toolbar.component.css']
 })
-export class MainToolbarComponent implements OnInit {
+export class MainToolbarComponent implements OnInit   {
 
   currentProject: string | undefined;
   projects: string[] = []
+  viewMode = "datasets"
 
   constructor(private eventService: EventService) { 
     eventService.nodeSelectedEvent$.subscribe(value => {
@@ -34,6 +35,11 @@ export class MainToolbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  viewModeChanged() {
+    this.eventService.emitToggleViewEvent(this.viewMode)
+  }
+
   zoomToFit() {
     this.eventService.emitZoomToFitEvent();
   }
@@ -45,10 +51,6 @@ export class MainToolbarComponent implements OnInit {
   clustersOnOff() {
     this.eventService.emitToggleClustersEvent();
   }  
-
-  actionsOnOff() {
-    this.eventService.emitToggleActionsEvent();
-  }
 
   wideLayout() {
     this.eventService.emitWideLayoutEvent(true);
