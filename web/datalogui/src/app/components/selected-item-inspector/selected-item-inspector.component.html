@@ -38,7 +38,7 @@
 
     </mat-nav-list>
   </mat-tab>
-  <mat-tab label="Fields ({{selected?.data?.dataset?.fields.length}})">
+  <mat-tab label="Fields ({{selected?.data?.dataset?.fields?.length}})">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>          
           <button mat-icon-button matTreeNodeToggle>
@@ -64,5 +64,20 @@
         </div>
       </mat-nested-tree-node>
     </mat-tree>
+  </mat-tab>
+  <mat-tab label="Project ({{currentProject}})">
+    <label>in</label>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let table of currentProjectStat?.in || []" (click)="selectTable(table.name)">
+        {{table?.name}}
+      </mat-list-item>
+    </mat-nav-list>
+    <mat-divider></mat-divider>    
+    <label>out</label>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let table of currentProjectStat?.out || []" (click)="selectTable(table.name)">
+        {{table?.name}}
+      </mat-list-item>      
+    </mat-nav-list>    
   </mat-tab>
 </mat-tab-group>

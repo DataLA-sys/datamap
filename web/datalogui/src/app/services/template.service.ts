@@ -17,7 +17,7 @@ export class TemplateService {
   renderTemplate(fileName: string, templateParams?: string) {
     let params = new HttpParams()
       .set('fileName', fileName).set('params', templateParams || "{}")
-    params.append("fileName", fileName)    
+    params.append("fileName", fileName)
     if(templateParams) {
       //params.set('params', templateParams)
       params.append("params", templateParams)

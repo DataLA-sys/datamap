@@ -17,9 +17,19 @@
         <mat-icon>select_all</mat-icon>
       </button>
 
-      <button color="basic" mat-mini-fab matTooltip="Actions on/off" (click)="actionsOnOff()">
-        <mat-icon>compare_arrows</mat-icon>
-      </button>
+      <mat-button-toggle-group [(ngModel)]="viewMode" (change)="viewModeChanged()">
+        <mat-button-toggle mat-mini-fab matTooltip="View datasets" value="datasets">
+          <mat-icon>mediation</mat-icon>
+        </mat-button-toggle>
+
+        <mat-button-toggle mat-mini-fab matTooltip="View actions" value="actions">
+          <mat-icon>compare_arrows</mat-icon>
+        </mat-button-toggle>        
+
+        <mat-button-toggle mat-mini-fab matTooltip="View in-out" value="inout">
+          <mat-icon>moving</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
 
       <button color="basic" mat-mini-fab matTooltip="Narrow layout" (click)="narrowLayout()">
         <mat-icon>arrow_back</mat-icon>

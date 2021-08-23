@@ -14,6 +14,7 @@ import { AceEditorModule } from 'ngx-ace-editor-wrapper';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -71,6 +72,7 @@ import 'material-icons/iconfont/material-icons.css';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatIconModule,
     MatSelectModule,
     MatTabsModule,

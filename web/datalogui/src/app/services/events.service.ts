@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Dataset } from '../classes/dataset';
+import { Dataset, TopologyNode } from '../classes/dataset';
 import { Node, NodeData } from "../classes/node";
 import { Project } from '../classes/project';
 
@@ -100,13 +100,13 @@ export class EventService {
     this.toggleClustersEventSource.next(true);
   }  
 
-  private toggleActionsEventSource = new Subject<boolean>();
-  toggleActionsEvent$ = this.toggleActionsEventSource.asObservable();
-  emitToggleActionsEvent() {
-    this.toggleActionsEventSource.next(true);
+  private toggleViewEventSource = new Subject<string>();
+  toggleViewEvent$ = this.toggleViewEventSource.asObservable();
+  emitToggleViewEvent(value: string) {
+    this.toggleViewEventSource.next(value);
   }  
 
-    private filterByTableInEventSource = new Subject<string>();
+  private filterByTableInEventSource = new Subject<string>();
   filterByTableInEvent$ = this.filterByTableInEventSource.asObservable();
   emitFilterByTableInEvent(tableName: string) {
     this.filterByTableInEventSource.next(tableName);
@@ -117,5 +117,11 @@ export class EventService {
   emitClearTableFilterEvent() {
     this.clearTableFilterEventSource.next(true);
   }
+
+  private projectStatEventSource = new Subject<TopologyNode>();
+  projectStatEvent$ = this.projectStatEventSource.asObservable();
+  emitProjectStatEvent(value: TopologyNode) {
+    this.projectStatEventSource.next(value);
+  }  
 
 }
