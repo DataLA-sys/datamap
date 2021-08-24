@@ -42,6 +42,7 @@ object ProjectDataActor {
         val dataFolder = context.system.settings.config.getString("my-app.system.dataFolder")
         val fileName = dataFolder + message.project + ".projectStat.json"
         new PrintWriter(fileName) { write(message.data); close }
+        message.replyTo ! ProjectStatMessage(message.data, context.self)
         Behaviors.same
       case _ => Behaviors.same
     }

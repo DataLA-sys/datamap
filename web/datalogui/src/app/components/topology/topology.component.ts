@@ -63,7 +63,10 @@ export class TopologyComponent implements OnInit {
       eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
 
     eventService.clearAllEvent$.subscribe(value => this.clear())
-    eventService.joinDataEvent$.subscribe(value => this.addData(value))
+    eventService.joinDataEvent$.subscribe(value => {
+      this.calculateInOut(value.name, value.data || new Topology())
+      this.addData(value)
+    })
     eventService.projectEvent$.subscribe(value => {
       this.currentProject = value.name
       this.addData(value.data || new Topology())
@@ -218,7 +221,7 @@ export class TopologyComponent implements OnInit {
   }
 
   private calculateInOut(project: string, data: Topology) {
-    this.inOut = []
+    //this.inOut = []
     let inodes: TopologyNode[] = data.datasets || [];
     this.normaizeTree(inodes, data.datasets || [], 0);
     inodes.forEach(d => this.normalizeDataset(inodes, d));    
