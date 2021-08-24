@@ -468,7 +468,10 @@ class TopologyComponent {
         eventService.centerTopologyEvent$.subscribe(value => this.center$.next(true));
         eventService.getSelectedNodeProjectEvent$.subscribe(node => eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
         eventService.clearAllEvent$.subscribe(value => this.clear());
-        eventService.joinDataEvent$.subscribe(value => this.addData(value));
+        eventService.joinDataEvent$.subscribe(value => {
+            this.calculateInOut(value.name, value.data || new _classes_topology__WEBPACK_IMPORTED_MODULE_0__["Topology"]());
+            this.addData(value);
+        });
         eventService.projectEvent$.subscribe(value => {
             this.currentProject = value.name;
             this.addData(value.data || new _classes_topology__WEBPACK_IMPORTED_MODULE_0__["Topology"]());
@@ -627,7 +630,7 @@ class TopologyComponent {
         return ((_b = this.data) === null || _b === void 0 ? void 0 : _b.datasets) || [];
     }
     calculateInOut(project, data) {
-        this.inOut = [];
+        //this.inOut = []
         let inodes = data.datasets || [];
         this.normaizeTree(inodes, data.datasets || [], 0);
         inodes.forEach(d => this.normalizeDataset(inodes, d));
