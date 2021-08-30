@@ -1,3 +1,13 @@
+insert into odpp_autoqa.AutoQa_ExpInfo select inner_table.* ,'784' as `test_case_id`,  cast('2021-07-26 18:44:39.193' as TIMESTAMP)  as `test_case_datetime`,  cast('2021-07-23' as DATE) as `bdate`, 'R62' as `branch`, 'ifrs9' as `batch_id`, 'pwc_R62_2021-07-23_920ae4ba-05e7-4bc4-9a45-fbfa84c25edc' as `test_suite_uuid` from (select ex.expid, ex.clientid, ex.productid, ex.departmentid
+from odpp_pwc.expinfo ex 
+inner join odpp.deal_tmp0 d 
+        on ex.expid = d.sourcedealid
+        and ex.bdate = d.bdate
+        and ex.branch = d.branch
+where ex.bdate = '2021-07-23' and ex.branch = 'R62' 
+and d.sourceid = 'ABS'
+and d.srcmodule in ('ACCRED', 'GUAR')  
+and (ex.nir != 0 or ex.nir is null) ) inner_table
 <%
 	import java.io.File
 	import scala.collection.mutable.ListBuffer
