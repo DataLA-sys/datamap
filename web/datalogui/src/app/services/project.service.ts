@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from '../classes/project';
@@ -14,6 +14,16 @@ import { Dataset, TopologyNode } from '../classes/dataset';
 export class ProjectService { 
 
   currentProject?: Project = undefined;
+  allDatasetProjectNames = {
+    "selector": {
+       "datasets": {
+          "$elemMatch": {
+             "name": "datasetName"
+          }
+       }
+    },
+    "fields": ["name"]
+ }
   
   constructor(private http: HttpClient, private templateService: TemplateService, private eventService: EventService) { 
     eventService.projectNameEvent$.subscribe(value => {
@@ -85,24 +95,38 @@ export class ProjectService {
     })
     result.in = inNodes
     result.out = outNodes
-    this.saveProjectStat(result, project)
+    this.saveProjectStat(result, project, "inout")
     return result
   }
 
-  saveProjectStat(projectStat: TopologyNode, project: string) {    
+  saveProjectStat(projectStat: any, project: string, propsName: string) {
     let params = new HttpParams()
       .set('project', project)
+      .set('propsName', propsName)
 
-    this.http.post<TopologyNode>("/projectStat", projectStat, {params})
+    this.http.post<any>("/projectStat", projectStat, {params})
       .subscribe(s => console.log(s));
-    //.pipe(
-      //catchError(this.handleError('addHero', projectStat))
-    //);
   }
 
-  loadProjectStat(project: string) {
+  loadProjectStat(project: string, propsName: string) {
     let params = new HttpParams()
       .set('project', project)
+      .set('propsName', propsName)
     return this.http.get("/projectStat", { params })    
   }
+
+  getAllDatasetProjects(datasetName: string) {
+    let q = JSON.parse(JSON.stringify(this.allDatasetProjectNames))
+    q.selector.datasets.$elemMatch.name = datasetName
+    return this.search(q)
+  }
+
+  search(query: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };    
+    return this.http.post("/find", query, httpOptions)
+  }  
 }

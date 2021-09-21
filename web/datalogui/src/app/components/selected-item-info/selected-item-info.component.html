@@ -1,0 +1,23 @@
+<mat-nav-list *ngIf="selected">
+    <mat-list-item>
+      <label>{{selected?.data?.dataset?.name}}</label>
+      <span>&nbsp;</span>
+      <button mat-mini-fab color="basic" matTooltip="Get projects" (click)="getProjects()">
+        <mat-icon>link</mat-icon>
+      </button>
+      
+    </mat-list-item>    
+</mat-nav-list>
+<ng-template [ngIf]="data?.useInProjects">
+  <mat-divider></mat-divider>
+  <label>Dataset: {{selected?.data?.dataset?.name}} is used in projects:</label>
+  <mat-nav-list *ngIf="data?.useInProjects">
+    <mat-list-item *ngFor="let project of data?.useInProjects">
+      <label>{{project.name}}</label>
+      <span>&nbsp;</span>
+      <button mat-mini-fab color="basic" (click)="loadProject(project.name)">
+        <mat-icon>done</mat-icon>
+      </button>          
+    </mat-list-item>
+  </mat-nav-list>
+</ng-template>

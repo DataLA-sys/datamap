@@ -12,7 +12,7 @@ import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
 import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor}
 import org.json4s.DefaultFormats
-import ru.neoflex.datalog.actors.ProjectDataActor.{CompleteDataCommandMessage, GetProjectStatCommand, ProjectStatMessage, SaveProjectStatCommand}
+import ru.neoflex.datalog.actors.ProjectDataActor.{CompleteDataCommandMessage, FindProjectStatCommand, GetProjectStatCommand, ProjectStatMessage, SaveProjectStatCommand}
 import ru.neoflex.datalog.actors.SourceFilesActor.{CompleteFileCommandMessage, FileContentMessage, GetFileContentCommand}
 import ru.neoflex.datalog.engine.TemplateFile
 
@@ -122,11 +122,11 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
       },
       post {
         path("projectStat") {
-          parameters("project".as[String]) { project =>
+          parameters("project".as[String], "propsName".as[String]) { (project, propsName) =>
             entity(as[String]) { ent =>
               complete(
                 projectDataActor
-                  .ask(SaveProjectStatCommand(project, ent, _: ActorRef[CompleteDataCommandMessage]))
+                  .ask(SaveProjectStatCommand(project, propsName, ent, _: ActorRef[CompleteDataCommandMessage]))
                   .map{
                     case ProjectStatMessage(value, _) =>
                       Future(value)
@@ -137,14 +137,25 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
       },
       get {
         path("projectStat") {
-          parameters("project".as[String]) { project =>
-              complete(
-                projectDataActor
-                  .ask(GetProjectStatCommand(project, _: ActorRef[CompleteDataCommandMessage]))
-                  .map{
-                    case ProjectStatMessage(value, _) =>
-                      Future(value)
-                  })
+          parameters("project".as[String], "propsName".as[String]) { (project, propsName) =>
+            complete(
+              projectDataActor
+                .ask(GetProjectStatCommand(project, propsName, _: ActorRef[CompleteDataCommandMessage]))
+                .map {
+                  case ProjectStatMessage(value, _) => Future(value)
+                })
+          }
+        }
+      },
+      post {
+        path("find") {
+          entity(as[String]) { query =>
+            complete(
+              projectDataActor
+                .ask(FindProjectStatCommand(query, _: ActorRef[CompleteDataCommandMessage]))
+                .map {
+                  case ProjectStatMessage(value, _) => Future(value)
+                })
           }
         }
       },

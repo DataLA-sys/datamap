@@ -39,6 +39,7 @@ import { MainToolbarComponent } from './components/main-toolbar/main-toolbar.com
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SelectedItemInspectorComponent } from './components/selected-item-inspector/selected-item-inspector.component';
+import { SelectedItemInfoComponent } from './components/selected-item-info/selected-item-info.component';
 import { TopologyGridViewComponent } from './components/topology-grid-view/topology-grid-view.component';
 import { AgGridModule } from 'ag-grid-angular';
 import 'material-icons/iconfont/material-icons.css';
@@ -55,6 +56,7 @@ import 'material-icons/iconfont/material-icons.css';
     MainLayoutComponent,
     ProjectsComponent,
     SelectedItemInspectorComponent,
+    SelectedItemInfoComponent,
     TopologyGridViewComponent
   ],
   schemas: [

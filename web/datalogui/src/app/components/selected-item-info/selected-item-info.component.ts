@@ -7,13 +7,15 @@ import { SourceFilesService } from 'src/app/services/files.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
-  selector: 'selected-item-inspector',
-  templateUrl: './selected-item-inspector.component.html',
-  styleUrls: ['./selected-item-inspector.component.css']
+  selector: 'selected-item-info',
+  templateUrl: './selected-item-info.component.html',
+  styleUrls: ['./selected-item-info.component.css']
 })
-export class SelectedItemInspectorComponent implements OnInit {
+export class SelectedItemInfoComponent implements OnInit {
 
   selected: any;
+  data: any = {};
+
   selectedNodeProject: string | undefined;
   currentProject: string | undefined;  
   currentProjectStat: TopologyNode | undefined;
@@ -35,6 +37,7 @@ export class SelectedItemInspectorComponent implements OnInit {
     this.eventService.clearAllEvent$.subscribe(value => {
       this.selected = undefined;
       this.selectedNodeProject = undefined;
+      this.data = {};
     })
     this.eventService.projectEvent$.subscribe(value => {
       this.currentProject = value.name;
@@ -88,6 +91,15 @@ export class SelectedItemInspectorComponent implements OnInit {
         error => alert(error.message)
       )
   }
+
+  getProjects() {
+    return this.projectService.getAllDatasetProjects(this.selected?.data?.dataset?.name)
+    .subscribe(      
+      (projects: any) => {
+        this.data.useInProjects = projects.docs
+      }
+    )
+  }  
 
   ngOnInit(): void {
   }

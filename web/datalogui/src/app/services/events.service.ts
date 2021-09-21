@@ -111,6 +111,12 @@ export class EventService {
   emitFilterByTableInEvent(tableName: string) {
     this.filterByTableInEventSource.next(tableName);
   }
+
+  private filterByTableUsageEventSource = new Subject<string>();
+  filterByTableUsageEvent$ = this.filterByTableUsageEventSource.asObservable();
+  emitFilterByTableUsageEvent(tableName: string) {
+    this.filterByTableUsageEventSource.next(tableName);
+  }  
   
   private clearTableFilterEventSource = new Subject<boolean>();
   clearTableFilterEvent$ = this.clearTableFilterEventSource.asObservable();

@@ -71,6 +71,7 @@ export class TopologyComponent implements OnInit {
       this.currentProject = value.name
       this.addData(value.data || new Topology())
       this.calculateInOut(value.name, value.data || new Topology())
+
     })
     eventService.tableSelectedEvent$.subscribe(value => {       
       let found = this.nodes.find(node => node.data?.dataset?.name === value);
@@ -84,6 +85,11 @@ export class TopologyComponent implements OnInit {
         this.getData(this.data, value)
       }
     })
+    eventService.filterByTableUsageEvent$.subscribe(value => {
+      if(this.data) {
+        this.getData(this.data, undefined, value)
+      }
+    })    
     eventService.clearTableFilterEvent$.subscribe(value => {
       if(this.data) {
         this.getData(this.data)
@@ -170,12 +176,18 @@ export class TopologyComponent implements OnInit {
     return res.concat(intables)
   }
 
+  getUsageDatasets(tableName: string, tables: TopologyNode[]): string[] {
+    let usageTables: string[] = tables.filter(d => (d.in || []).map(i => i.name).concat((d.out || []).map(i => i.name)).includes(tableName)).map(i => i.name)
+    return usageTables
+  }  
+
   normalizeDataset(normalised: Dataset[], dataset: Dataset) {
     dataset.out.forEach(out => {
       let mainDs = normalised.find(d => d.name == out.name);
       if(mainDs) {
         if(!mainDs.in.find(i => i.name == dataset.name)) {
-          mainDs.in.push(dataset);
+          //mainDs.in.push(dataset);
+          mainDs.in.push(JSON.parse(JSON.stringify(dataset)))
         }
       }
     })
@@ -194,7 +206,8 @@ export class TopologyComponent implements OnInit {
     datasets.forEach(dd => {
       let found: TopologyNode | undefined = normalised.find(n => n.name == dd.name);      
       if(found == undefined) {
-        normalised.push(dd);
+        //normalised.push(dd);
+        normalised.push(JSON.parse(JSON.stringify(dd)));
         this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
       } else {
         let prev = found.in.length + found.out.length
@@ -234,7 +247,7 @@ export class TopologyComponent implements OnInit {
     }
   }
 
-  getData(data: Topology, filterByTableIn: string | undefined = undefined) {
+  getData(data: Topology, filterByTableIn: string | undefined = undefined, filterByTableUsage: string | undefined = undefined) {
     this.data = data;
     this.selected = undefined;
     
@@ -242,11 +255,22 @@ export class TopologyComponent implements OnInit {
     this.normaizeTree(inodes, this.getNodes(), 0);
     inodes.forEach(d => this.normalizeDataset(inodes, d));
     
-    let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : []
+    if(this.currentProject !== "") {
+      this.projectService.saveProjectStat({"name": this.currentProject, "datasets": inodes}, this.currentProject, "normalizedTree")
+    }
+
+    let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : (filterByTableUsage ? this.getUsageDatasets(filterByTableUsage, inodes) : [])
+
     if(filterByTableIn) {
       if(filteredTables.indexOf(filterByTableIn) == -1) {
         filteredTables.push(filterByTableIn)
       }
+    } else {
+      if(filterByTableUsage) {
+        if(filteredTables.indexOf(filterByTableUsage) == -1) {
+          filteredTables.push(filterByTableUsage)
+        }
+      }      
     }
 
     let did: number = 0
