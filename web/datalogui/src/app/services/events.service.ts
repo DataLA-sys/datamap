@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Dataset, TopologyNode } from '../classes/dataset';
 import { Node, NodeData } from "../classes/node";
 import { Project } from '../classes/project';
 
@@ -48,7 +47,7 @@ export class EventService {
 
   private projectEventSource = new Subject<Project>();
   projectEvent$ = this.projectEventSource.asObservable();
-  emitProjectEvent(data: any) {
+  emitProjectEvent(data: Project) {
     this.projectEventSource.next(data);
   }
 
@@ -116,6 +115,18 @@ export class EventService {
   filterByTableUsageEvent$ = this.filterByTableUsageEventSource.asObservable();
   emitFilterByTableUsageEvent(tableName: string) {
     this.filterByTableUsageEventSource.next(tableName);
+  }
+
+  private filterByProjectEventSource = new Subject<string>();
+  filterByProjectEvent$ = this.filterByProjectEventSource.asObservable();
+  emitFilterByProjectEvent(project: string) {
+    this.filterByProjectEventSource.next(project);
+  }  
+
+  private clearProjectFilterEventSource = new Subject<boolean>();
+  clearProjectFilterEvent$ = this.clearProjectFilterEventSource.asObservable();
+  emitClearProjectFilterEvent() {
+    this.clearProjectFilterEventSource.next(true);
   }  
   
   private clearTableFilterEventSource = new Subject<boolean>();
@@ -124,10 +135,11 @@ export class EventService {
     this.clearTableFilterEventSource.next(true);
   }
 
-  private projectStatEventSource = new Subject<TopologyNode>();
-  projectStatEvent$ = this.projectStatEventSource.asObservable();
-  emitProjectStatEvent(value: TopologyNode) {
-    this.projectStatEventSource.next(value);
-  }  
+  private domainListEventSource = new Subject<Project[]>();
+  domainListEvent$ = this.domainListEventSource.asObservable();
+  emitDomainListEvent(list: Project[]) {
+    this.domainListEventSource.next(list);
+  }
+
 
 }

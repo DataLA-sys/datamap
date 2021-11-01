@@ -1,9 +1,11 @@
+import { NodeType } from "./node";
+
 export class Named {
   name!: string;
 }
 
 export class TopologyNode extends Named {  
-  nodeType?: string;
+  nodeType?: NodeType;
   in!: Dataset[];
   out!: Dataset[];
   layer!: string;
@@ -18,7 +20,7 @@ export class Field  extends Named {
 }
 
 export class Dataset extends TopologyNode {  
-  datasetType?: string;
+  datasetType?: NodeType;
   pathToData?: string;
   sourceFile?: string;
   action?: string;

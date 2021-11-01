@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Field, TopologyNode } from 'src/app/classes/dataset';
+import { Named, Field, TopologyNode } from 'src/app/classes/dataset';
 import { EventService } from 'src/app/services/events.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { SourceFilesService } from 'src/app/services/files.service';
 import { ProjectService } from 'src/app/services/project.service';
+
+class Data {
+  useInProjects: Named[] | undefined = undefined
+}
 
 @Component({
   selector: 'selected-item-info',
@@ -14,11 +18,10 @@ import { ProjectService } from 'src/app/services/project.service';
 export class SelectedItemInfoComponent implements OnInit {
 
   selected: any;
-  data: any = {};
+  data: Data = new Data();
 
   selectedNodeProject: string | undefined;
-  currentProject: string | undefined;  
-  currentProjectStat: TopologyNode | undefined;
+  currentProject: string | undefined;
 
   treeControl = new NestedTreeControl<Field>(node => node.sources);
 
@@ -28,6 +31,7 @@ export class SelectedItemInfoComponent implements OnInit {
     private projectService: ProjectService) {
     eventService.nodeSelectedEvent$.subscribe(value => {
       this.selected = value;
+      this.getProjects();
       this.dataSource.data = this.selected?.data?.dataset?.fields;
       this.eventService.emitGetGetSelectedNodeProjectEvent(value);
     })
@@ -37,14 +41,11 @@ export class SelectedItemInfoComponent implements OnInit {
     this.eventService.clearAllEvent$.subscribe(value => {
       this.selected = undefined;
       this.selectedNodeProject = undefined;
-      this.data = {};
+      this.currentProject = undefined;
     })
     this.eventService.projectEvent$.subscribe(value => {
       this.currentProject = value.name;
     })
-    this.eventService.projectStatEvent$.subscribe(value => {
-      this.currentProjectStat = value || [];      
-    })    
   }
 
   hasChild = (_: number, node: Field) => !!node.sources && node.sources.length > 0;
@@ -52,7 +53,13 @@ export class SelectedItemInfoComponent implements OnInit {
   loadProject(project: string | undefined) {
     if(project) {
       this.eventService.emitProjectNameEvent(project)
-    }    
+    }
+  }
+
+  loadDatasetVirtualProject(datasetName: string | undefined) {
+    if(datasetName) {
+      this.projectService.buildDatasetVirtualProject(datasetName)
+    }
   }
 
   filterByTableIn(tableName: string | undefined) {
@@ -60,6 +67,7 @@ export class SelectedItemInfoComponent implements OnInit {
       this.eventService.emitFilterByTableInEvent(tableName);
     }    
   }
+  
   filterByTableUsage(tableName: string | undefined) {
     if(tableName) {
       this.eventService.emitFilterByTableUsageEvent(tableName);

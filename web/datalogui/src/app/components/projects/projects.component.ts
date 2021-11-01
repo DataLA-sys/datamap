@@ -20,9 +20,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   loadProject(project: Project, clearAll: boolean = true) {
-    this.eventService.emitSpinnerEvent(true);
     this.projectService.loadProject(project, clearAll);
-    this.eventService.emitSpinnerEvent(false);
   }
 
   object2str(value: any): string {

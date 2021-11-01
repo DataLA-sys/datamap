@@ -16,7 +16,6 @@ export class SelectedItemInspectorComponent implements OnInit {
   selected: any;
   selectedNodeProject: string | undefined;
   currentProject: string | undefined;  
-  currentProjectStat: TopologyNode | undefined;
 
   treeControl = new NestedTreeControl<Field>(node => node.sources);
 
@@ -39,9 +38,6 @@ export class SelectedItemInspectorComponent implements OnInit {
     this.eventService.projectEvent$.subscribe(value => {
       this.currentProject = value.name;
     })
-    this.eventService.projectStatEvent$.subscribe(value => {
-      this.currentProjectStat = value || [];      
-    })    
   }
 
   hasChild = (_: number, node: Field) => !!node.sources && node.sources.length > 0;
@@ -62,6 +58,14 @@ export class SelectedItemInspectorComponent implements OnInit {
       this.eventService.emitFilterByTableUsageEvent(tableName);
     }    
   }
+  filterByProject(project: string | undefined) {
+    if(project) {
+      this.eventService.emitFilterByProjectEvent(project);
+    }    
+  }  
+  clearProjectFilter() {
+    this.eventService.emitClearProjectFilterEvent();
+  }  
 
   clearTableFilter() {
     this.eventService.emitClearTableFilterEvent();

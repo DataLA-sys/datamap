@@ -13,9 +13,13 @@ import { EventService } from 'src/app/services/events.service';
 export class SelectTableComponent implements OnInit {
 
   tables: string[] = [];
+  selectedTable: string |  undefined;
   constructor(private eventService: EventService) { 
     eventService.tableListEvent$.subscribe(value => {
       this.tables = value.map(d => (d?.name)||"").sort()
+    })
+    eventService.nodeSelectedEvent$.subscribe(value => {
+      this.selectedTable = value.data?.dataset.name;
     })
   }
 

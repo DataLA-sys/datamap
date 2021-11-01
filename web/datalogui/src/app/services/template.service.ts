@@ -19,7 +19,6 @@ export class TemplateService {
       .set('fileName', fileName).set('params', templateParams || "{}")
     params.append("fileName", fileName)
     if(templateParams) {
-      //params.set('params', templateParams)
       params.append("params", templateParams)
     }    
     return this.http.get("/renderTemplate", { params })

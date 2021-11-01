@@ -2,22 +2,29 @@
     <mat-list-item>
       <label>{{selected?.data?.dataset?.name}}</label>
       <span>&nbsp;</span>
-      <button mat-mini-fab color="basic" matTooltip="Get projects" (click)="getProjects()">
-        <mat-icon>link</mat-icon>
+      <button mat-mini-fab color="basic" (click)="loadDatasetVirtualProject(selected?.data?.dataset?.name)">
+        <mat-icon>done</mat-icon>
       </button>
-      
     </mat-list-item>    
 </mat-nav-list>
-<ng-template [ngIf]="data?.useInProjects">
-  <mat-divider></mat-divider>
-  <label>Dataset: {{selected?.data?.dataset?.name}} is used in projects:</label>
-  <mat-nav-list *ngIf="data?.useInProjects">
-    <mat-list-item *ngFor="let project of data?.useInProjects">
-      <label>{{project.name}}</label>
-      <span>&nbsp;</span>
-      <button mat-mini-fab color="basic" (click)="loadProject(project.name)">
-        <mat-icon>done</mat-icon>
-      </button>          
-    </mat-list-item>
-  </mat-nav-list>
-</ng-template>
+
+<mat-tab-group>
+  <mat-tab label="Item info">
+    <ng-template [ngIf]="data?.useInProjects">
+      <mat-divider></mat-divider>
+      <label>Dataset: {{selected?.data?.dataset?.name}} is used in projects:</label>
+      <mat-nav-list *ngIf="data?.useInProjects">
+        <mat-list-item *ngFor="let project of data?.useInProjects">
+          <label>{{project.name}}</label>
+          <span>&nbsp;</span>
+          <button mat-mini-fab color="basic" (click)="loadProject(project.name)">
+            <mat-icon>done</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+    </ng-template>    
+  </mat-tab>
+  <mat-tab label="Project info">
+    <domain-link-component [currentProject]="currentProject" [currentItem]="selected?.data?.dataset?.name"></domain-link-component>
+  </mat-tab>  
+</mat-tab-group>

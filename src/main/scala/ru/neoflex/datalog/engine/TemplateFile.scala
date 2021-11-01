@@ -6,12 +6,12 @@ import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, Join, LogicalPlan, Project, SubqueryAlias, With}
 import ru.neoflex.datalog.engine.dto.{DestTable, Field}
 
-import java.io.File
-import java.nio.file.FileSystems
 import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.io.Source.fromFile
 import scala.util.control.Breaks.{break, breakable}
+import reflect.io._
+import Path._
 
 case class TemplateFile(fileName: String, templateContent: String)
 
@@ -24,28 +24,18 @@ object Parser {
     val source = fromFile(fileName)
     var text = ""
     try {
-      text = source.getLines().map(s => lineProcessor.processLine(s)).mkString("\n")
+      text = source.getLines().map(s => lineProcessor.processLine(s)).filter(!_.trim.startsWith("--")).mkString("\n")
     } finally {
       source.close()
     }
     text
   }
 
-  def getListOfFiles(dir: String):List[File] = {
-    val d = new File(dir)
-    if (d.exists && d.isDirectory) {
-      d.listFiles.filter(_.isFile).toList
-    } else {
-      List[File]()
-    }
-  }
-
   def sqlTokens(dir: String, sourcePrefix: String, layer: String): List[DestTable] = {
-    val files = getListOfFiles(dir)
     val tables = ListBuffer[DestTable]()
-    files.foreach(file => {
-      val fn = sourcePrefix + file.getName
-      val source = fromFile(file.getAbsolutePath)
+    dir.toDirectory.files.foreach(file => {
+      val fn = sourcePrefix + file.name
+      val source = fromFile(file.path)
       val lines = source.getLines()
       var destTable = ""
       val sources = ListBuffer[String]()
@@ -149,7 +139,7 @@ object Parser {
     }
     outTables.foreach(destTable => {
       if(testTable(destTable)) {
-        var tableFields = getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
+        var tableFields = List[Field]()// getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
         tables.find(f => f.name == destTable).map(ft => {
           inTables = inTables ++ ft.sources
           tableFields = tableFields ++ ft.fields
@@ -167,33 +157,36 @@ object Parser {
                        replacement: Seq[(String, String)] = Seq.empty,
                        testTable: String => Boolean = _ => true,
                        layer: String = "",
-                       filesFilter: String = "*.*"
+                       filesFilter: String = """.*\.*""",
+                       deep: Int = 1
                       ): Unit = {
     object SqlScriptLineProcessor2 extends SqlScriptLineProcessor {
       override def processLine(line: String): String = {
         var sl = super.processLine(line)
-        replacement.foreach(value => sl = sl.replace(value._1, value._2))
+        replacement.foreach(value => sl = sl.replaceAll(value._1, value._2))
         sl
       }
     }
 
-    val matcher = FileSystems.getDefault.getPathMatcher("glob:*" + filesFilter)
-
-    getListOfFiles(folder)
-      .filter(file => matcher.matches(file.toPath))
+    println(folder)
+    println(filesFilter)
+    folder.toDirectory.deepList(deep).filter(_.isFile).filter(p=>p.path matches filesFilter)
       .foreach(file => {
-        val sqlScript = getFileText(file.getAbsolutePath, SqlScriptLineProcessor2)
-        sqlScript.split(';').filter(_.trim.nonEmpty).foreach(sql =>
-        {
-          if(!(sql.toUpperCase().contains("INSERT") || sql.toUpperCase().contains("CREATE")) && sql.toUpperCase().contains("SELECT")) {
-            val defaultOut = Seq("db." + file.getName.replaceFirst("[.][^.]+$", ""))
-            processSqlScript(sql, sourceFilePrefix + file.getName, tables, testTable, layer, defaultOut = defaultOut)
-          } else {
-            processSqlScript(sql, sourceFilePrefix + file.getName, tables, testTable, layer)
-          }
-
+        try {
+          println(file.path)
+          val sqlScript = getFileText(file.path, SqlScriptLineProcessor2)
+          sqlScript.split(';').filter(_.trim.nonEmpty).filter(!_.toUpperCase().contains("ALTER ")).foreach(sql =>
+          {
+            if(!(sql.toUpperCase().contains("INSERT") || sql.toUpperCase().contains("CREATE")) && sql.toUpperCase().contains("SELECT")) {
+              val defaultOut = Seq("db." + file.name.replaceFirst("[.][^.]+$", ""))
+              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer, defaultOut = defaultOut)
+            } else {
+              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer)
+            }
+          })
+        } catch {
+          case e:  Throwable => e.printStackTrace()
         }
-      )
     })
   }
 

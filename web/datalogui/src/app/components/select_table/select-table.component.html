@@ -1,5 +1,5 @@
-  <mat-nav-list>
-    <mat-list-item *ngFor="let table of tables" (click)="selectTable(table)">
-       {{table}}
-    </mat-list-item>
-  </mat-nav-list>
+  <mat-selection-list #tableList [multiple]="false">
+    <mat-list-option *ngFor="let table of tables" (click)="selectTable(table)" [value]="table" selected="{{table == selectedTable}}">
+      {{table}}
+    </mat-list-option>
+  </mat-selection-list>

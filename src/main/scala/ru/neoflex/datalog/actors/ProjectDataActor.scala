@@ -17,6 +17,7 @@ import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
+import ru.neoflex.datalog.engine.JsonProcessor
 
 object ProjectDataActor {
   def apply(): Behavior[DataCommand] = Behaviors.supervise(process).onFailure(SupervisorStrategy.restart)
@@ -126,7 +127,9 @@ object ProjectDataActor {
         }
       )
     } else {
-      Future.failed(new Exception("Database unavailable!"))
+      val q = JsonProcessor.parseMangoQuery(query)
+      val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
+      Future(JsonProcessor.matchDir(dataFolder, q))
     }
   }
 
@@ -142,7 +145,7 @@ object ProjectDataActor {
         })
     } else {
       val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
-      val fileName = dataFolder + project + ".projectStat.json"
+      val fileName = dataFolder + project + "." + propsName + ".json"
       Future(getFileText(fileName))
     }
   }
@@ -188,7 +191,7 @@ object ProjectDataActor {
         }
     } else {
       val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
-      val fileName = dataFolder + project + ".projectStat.json"
+      val fileName = dataFolder + project + "." + propsName + ".json"
       new PrintWriter(fileName) { write(data); close() }
     }
   }

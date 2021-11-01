@@ -27,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -43,6 +44,7 @@ import { SelectedItemInfoComponent } from './components/selected-item-info/selec
 import { TopologyGridViewComponent } from './components/topology-grid-view/topology-grid-view.component';
 import { AgGridModule } from 'ag-grid-angular';
 import 'material-icons/iconfont/material-icons.css';
+import { DomainLinkComponentComponent } from './components/domain-link-component/domain-link-component.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import 'material-icons/iconfont/material-icons.css';
     ProjectsComponent,
     SelectedItemInspectorComponent,
     SelectedItemInfoComponent,
-    TopologyGridViewComponent
+    TopologyGridViewComponent,
+    DomainLinkComponentComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -87,6 +90,7 @@ import 'material-icons/iconfont/material-icons.css';
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatExpansionModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule,

@@ -1,5 +1,17 @@
 [
     {
+        "name": "Ingest Data",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/IngestData.ssp",
+        "templateParams": {},
+        "domain": true
+    },
+    {
+        "name": "Client Products",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/ClientData.ssp",
+        "templateParams": {},
+        "domain": true
+    },    
+    {
         "name": "odpp projects",
         "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_projects.ssp",
         "templateParams": {},
@@ -136,5 +148,47 @@
             "project": "sample.project2", 
             "sourcePrefix": "C:/projects/temp/sample/project2/sql/"},
         "dataExists": false
-    }
+    },
+    {
+        "name": "l_deriveddata@bda11",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/etl/etl/hive_scripts/l_deriveddata@bda11", 
+            "project": "l_deriveddata@bda11", 
+            "sourcePrefix": "hive_scripts/l_deriveddata@bda11"},
+        "dataExists": false
+    },
+    {
+        "name": "etl_full",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/etl/etl/atom", 
+            "project": "etl_full", 
+            "sourcePrefix": "C:/projects/temp/alfabank/etl/etl/atom",
+            "deep": -1,
+            "filesFilter": ".*\\.hql"},
+        "dataExists": false
+    },
+    {
+        "name": "derivedData",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/alfabank/etl/etl/atom", 
+            "project": "dd", 
+            "sourcePrefix": "dd",
+            "deep": -1,
+            "filesFilter": ".*wf_deriveddata.*\\.hql"},
+        "dataExists": false
+    },
+    {
+        "name": "vtb",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/vtb.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/vtb", 
+            "project": "vtb", 
+            "sourcePrefix": "C:/projects/temp/vtb",
+            "deep": -1,
+            "filesFilter": ".*\\.sql"},
+        "dataExists": false
+    }    
 ]

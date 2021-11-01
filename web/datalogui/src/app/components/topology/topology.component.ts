@@ -19,7 +19,7 @@ interface KeyValuePair {
 export class TopologyComponent implements OnInit {
 
   x: number = 1400;
-  y: number = 800;
+  y: number = 1200;
   dim: [number, number] = [this.x, this.y];
   inodes: Dataset[] = []
   
@@ -71,7 +71,6 @@ export class TopologyComponent implements OnInit {
       this.currentProject = value.name
       this.addData(value.data || new Topology())
       this.calculateInOut(value.name, value.data || new Topology())
-
     })
     eventService.tableSelectedEvent$.subscribe(value => {       
       let found = this.nodes.find(node => node.data?.dataset?.name === value);
@@ -89,8 +88,18 @@ export class TopologyComponent implements OnInit {
       if(this.data) {
         this.getData(this.data, undefined, value)
       }
-    })    
+    })
+    eventService.filterByProjectEvent$.subscribe(value => {
+      if(this.data) {
+        this.getData(this.data, undefined, undefined, value)
+      }
+    })        
     eventService.clearTableFilterEvent$.subscribe(value => {
+      if(this.data) {
+        this.getData(this.data)
+      }
+    })
+    eventService.clearProjectFilterEvent$.subscribe(value => {
       if(this.data) {
         this.getData(this.data)
       }
@@ -113,7 +122,7 @@ export class TopologyComponent implements OnInit {
   checkCluster(layer: string, nodeName: string, clusters: any[], tablesId: KeyValuePair[]) {
     let cluster: any = clusters.find((c: any) => c.label == layer)
     if(!cluster) {
-      cluster = {id: layer, label: layer, childNodeIds: []}
+      cluster = {id: layer, label: layer, childNodeIds: new Set()}
       if(cluster.label == "Hive"){
         cluster.data = {image: "assets/Apache_Hive_logo.svg"}
       }
@@ -125,7 +134,7 @@ export class TopologyComponent implements OnInit {
       }      
       clusters.push(cluster)
     }
-    cluster.childNodeIds.push(tablesId.find(k => k.key == nodeName)?.value)
+    cluster.childNodeIds.add(tablesId.find(k => k.key == nodeName)?.value)
   }
   
   findFileContent(dirs: ProjectFileDir[] | undefined, project: string | undefined, fileName: string | undefined): ProjectFileDir | undefined {
@@ -169,60 +178,6 @@ export class TopologyComponent implements OnInit {
     this.getData(t)
   }
 
-  getInDatasets(tableName: String, tables: TopologyNode[]): string[] {
-    let intables: string[] = tables.find(d => d.name == tableName)?.in?.map(d => d.name) || []
-    let res: string[]  = []
-    intables.forEach(t => res = res.concat(this.getInDatasets(t, tables) || []))
-    return res.concat(intables)
-  }
-
-  getUsageDatasets(tableName: string, tables: TopologyNode[]): string[] {
-    let usageTables: string[] = tables.filter(d => (d.in || []).map(i => i.name).concat((d.out || []).map(i => i.name)).includes(tableName)).map(i => i.name)
-    return usageTables
-  }  
-
-  normalizeDataset(normalised: Dataset[], dataset: Dataset) {
-    dataset.out.forEach(out => {
-      let mainDs = normalised.find(d => d.name == out.name);
-      if(mainDs) {
-        if(!mainDs.in.find(i => i.name == dataset.name)) {
-          //mainDs.in.push(dataset);
-          mainDs.in.push(JSON.parse(JSON.stringify(dataset)))
-        }
-      }
-    })
-  }
-
-  concatNamed<T extends Named>(list1: T[], list2: T[]): T[] {
-    list2.forEach(d2 => {
-      if(list1.find(d1  => d1.name == d2.name) == undefined) {
-        list1.push(d2);
-      }
-    })
-    return list1;
-  }
-
-  normaizeTree(normalised: TopologyNode[],  datasets: TopologyNode[], level: number) {
-    datasets.forEach(dd => {
-      let found: TopologyNode | undefined = normalised.find(n => n.name == dd.name);      
-      if(found == undefined) {
-        //normalised.push(dd);
-        normalised.push(JSON.parse(JSON.stringify(dd)));
-        this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
-      } else {
-        let prev = found.in.length + found.out.length
-        found.in = this.concatNamed(found.in, dd.in);
-        found.out = this.concatNamed(found.out, dd.out);
-        if(dd instanceof Dataset && found instanceof Dataset ) {
-          found.fields = this.concatNamed(found.fields || [], (dd as Dataset).fields || []);
-        }        
-        if((prev != found.in.length + found.out.length) || level === 0) {
-          this.normaizeTree(normalised, dd.in.concat(dd.out), level + 1);
-        }          
-      }            
-    })
-  }
-
   private getNodes(): TopologyNode[] {
     if(this.viewMode === "actions") {
       return this.data?.actions || []
@@ -236,30 +191,32 @@ export class TopologyComponent implements OnInit {
   private calculateInOut(project: string, data: Topology) {
     //this.inOut = []
     let inodes: TopologyNode[] = data.datasets || [];
-    this.normaizeTree(inodes, data.datasets || [], 0);
-    inodes.forEach(d => this.normalizeDataset(inodes, d));    
+    this.projectService.normaizeTree(inodes, data.datasets || [], 0);
+    inodes.forEach(d => this.projectService.normalizeDataset(inodes, d));    
     if(project !== "") {
       let io = this.projectService.getProjectsInputOutput(inodes, project)
       this.inOut.push(io)
-      this.normaizeTree(this.inOut, this.inOut, 0);
-      this.inOut.forEach(d => this.normalizeDataset(this.inOut, d));
-      this.eventService.emitProjectStatEvent(io)
+      this.projectService.normaizeTree(this.inOut, this.inOut, 0);
+      this.inOut.forEach(d => this.projectService.normalizeDataset(this.inOut, d));
     }
   }
 
-  getData(data: Topology, filterByTableIn: string | undefined = undefined, filterByTableUsage: string | undefined = undefined) {
+  getData(data: Topology, filterByTableIn: string | undefined = undefined, filterByTableUsage: string | undefined = undefined, filterByProject: string | undefined = undefined) {
+    this.eventService.emitSpinnerEvent(true)
+    this.cd.detectChanges();
     this.data = data;
     this.selected = undefined;
     
     let inodes: TopologyNode[] = this.getNodes();
-    this.normaizeTree(inodes, this.getNodes(), 0);
-    inodes.forEach(d => this.normalizeDataset(inodes, d));
+    this.projectService.normaizeTree(inodes, this.getNodes(), 0);
+    inodes.forEach(d => this.projectService.normalizeDataset(inodes, d));
+    inodes = inodes.filter(d => (filterByProject == undefined) || d.project == filterByProject)
     
     if(this.currentProject !== "") {
       this.projectService.saveProjectStat({"name": this.currentProject, "datasets": inodes}, this.currentProject, "normalizedTree")
     }
 
-    let filteredTables = filterByTableIn ? this.getInDatasets(filterByTableIn, inodes) : (filterByTableUsage ? this.getUsageDatasets(filterByTableUsage, inodes) : [])
+    let filteredTables = filterByTableIn ? this.projectService.getInDatasets(filterByTableIn, inodes) : (filterByTableUsage ? this.projectService.getUsageDatasets(filterByTableUsage, inodes) : [])
 
     if(filterByTableIn) {
       if(filteredTables.indexOf(filterByTableIn) == -1) {
@@ -281,9 +238,7 @@ export class TopologyComponent implements OnInit {
     let clusters: any[] = []
 
     inodes.forEach(d => {
-      this.checkCluster(d.layer, d.name, clusters, tablesId)            
-      let inlinks = d.in.map(l => { 
-        this.checkCluster(l.layer, l.name, clusters, tablesId);
+      let inlinks = d.in.map(l => {
         return {"id": ""+ ++linkid,"source": tablesId.find(k => k.key == l.name)?.value, "target": tablesId.find(k => k.key == d.name)?.value}
       });
       links = links.concat(inlinks);
@@ -291,15 +246,20 @@ export class TopologyComponent implements OnInit {
 
     this.nodes = inodes
       .filter(d => filteredTables.length == 0 || filteredTables.indexOf(d.name) > -1)
-      .map(d => new Node(
-        tablesId.find(k => k.key == d.name)?.value || "notfoundid", d.name, 
-        new NodeData("#a95963", d)
-      )
+      .map(d => {
+        this.checkCluster(d.layer, d.name, clusters, tablesId)
+        d.in.forEach(l => this.checkCluster(l.layer, l.name, clusters, tablesId))
+        return new Node(
+          tablesId.find(k => k.key == d.name)?.value || "notfoundid", d.name, 
+          new NodeData("#a95963", d)
+        )
+      }
     )
 
     this.links = links.filter(l => this.nodes.filter(n => n.id == l.source).length > 0 && this.nodes.filter(n => n.id == l.target).length > 0)
-    this.clusters = clusters;
+    this.clusters = clusters.filter(c => this.nodes.find(n=>n.data?.dataset.layer === c.label));
     this.eventService.emitTableListEvent(this.nodes.map(n => n.data?.dataset));
+    this.eventService.emitSpinnerEvent(false)
   }
 
   ngOnInit(): void {

@@ -6,5 +6,5 @@ export class Project {
   templateParams?: string;
   data?: Topology;
   enable?: boolean = true;
-  dataExists?: boolean;
+  domain?: boolean = false;
 }

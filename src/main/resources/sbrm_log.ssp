@@ -78,7 +78,7 @@
 			("SET mapreduce.map.reduce.mb=6144;", ""),
 			("SET mapreduce.reduce.java.opts=-Xmx6144m;", ""),
 			("${", ""), ("}", "")
-		),
+		).map(t=>("\\Q" + t._1 + "\\E", t._2)),
 		layer = "Hive"
 	)
 %>

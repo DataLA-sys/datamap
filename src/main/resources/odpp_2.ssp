@@ -21,23 +21,29 @@
 	val tables = ListBuffer[DestTable]()
 	var project = ""
 	var sourceFile = ""
+	var deep = 1
+	var filesFilter = """.*\.*"""
 	params.map(s => {
 		val j = parse(s)
 		joinScriptsFolder = (j \ "folder").extract[String]
 		project = (j \ "project").extract[String]
 		sourceFile = (j \ "sourcePrefix").extract[String]
+		(j \ "deep").toOption.map(v=> deep = v.extract[Int])
+		(j \ "filesFilter").toOption.map(v=> filesFilter = v.extract[String])
 	})
-	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(("DATE'", "'"), ("DATE '", "'"),
+	Parser.processSqlFolder(joinScriptsFolder, sourceFile, tables, Seq(
+	("DATE'", "'"), ("DATE '", "'"),
+	("${DATE_PART}", "'DATE_PART'"),
 	("${", ""),
 	("}", ""),
-	("SET hive.exec.dynamic.partition=true", ""),
-	("set hive.exec.dynamic.partition=true", ""),
-	("set hive.optimize.sort.dynamic.partition=true", ""),
-	("SET hive.exec.dynamic.partition.mode=nonstrict", ""),
-	("set hive.exec.dynamic.partition.mode=nonstrict", ""),
+	("SET hive", "--SET hive"),
+	("set hive", "--set hive"),
 	("$$", "DD"),
-	("listagg( tk ,',') within group (order by tk) tk", "tk")
-	), _.contains("."), layer = "Odpp")
+	("listagg( tk ,',') within group (order by tk) tk", "tk"),
+	("distribute by", "/*distribute by"),
+	("sort by", "*/ sort by"),
+	("\\;", "\\*"),
+	).map(t=>("\\Q" + t._1 + "\\E", t._2)), _.contains("."), layer = "Odpp", filesFilter = filesFilter, deep = deep)
 %>
 {
 "datasets":

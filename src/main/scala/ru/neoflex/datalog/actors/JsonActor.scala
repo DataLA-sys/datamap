@@ -48,7 +48,7 @@ object JsonActor {
   }
 
   val render: Behavior[ParseItCommand] = Behaviors.receive { (context, message) => {
-      implicit val timeout: Timeout = 90.seconds
+      implicit val timeout: Timeout = 190.seconds
       message match {
         case ParseTopology(json: JValue, replyTo) => {
           replyTo ! ParsedTopology(deserializeJson(json), context.self)

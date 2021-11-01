@@ -25,9 +25,15 @@
         </mat-list-item>    
         <mat-list-item *ngIf="selectedNodeProject != undefined">{{selectedNodeProject}}
           <span>&nbsp;</span>
-          <button mat-mini-fab color="basic" (click)="loadProject(selectedNodeProject)">
+          <button mat-mini-fab color="basic"  matTooltip="Load this project" (click)="loadProject(selectedNodeProject)">
             <mat-icon>done</mat-icon>
           </button>
+          <button mat-mini-fab color="basic" matTooltip="Filter diagram by this project" (click)="filterByProject(selectedNodeProject)">
+            <mat-icon>filter_alt</mat-icon>
+          </button>                    
+          <button mat-mini-fab color="basic" matTooltip="Clear filter" (click)="clearProjectFilter()">
+            <mat-icon>clear</mat-icon>
+          </button>          
         </mat-list-item>
 
         <mat-list-item>        
@@ -67,20 +73,5 @@
         </div>
       </mat-nested-tree-node>
     </mat-tree>
-  </mat-tab>
-  <mat-tab label="Project ({{currentProject}})">
-    <label>in</label>
-    <mat-nav-list>
-      <mat-list-item *ngFor="let table of currentProjectStat?.in || []" (click)="selectTable(table.name)">
-        {{table?.name}}
-      </mat-list-item>
-    </mat-nav-list>
-    <mat-divider></mat-divider>    
-    <label>out</label>
-    <mat-nav-list>
-      <mat-list-item *ngFor="let table of currentProjectStat?.out || []" (click)="selectTable(table.name)">
-        {{table?.name}}
-      </mat-list-item>      
-    </mat-nav-list>    
   </mat-tab>
 </mat-tab-group>

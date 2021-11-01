@@ -1,60 +1,50 @@
-<mat-toolbar>
-    <section>
-      <span>Data Topology</span>
+<div fxLayout="row">
+  <div fxFlex="30%">
+    <section layout="row">
+        <label>Data Topology</label>
+        
+        <button mat-button color="basic" matTooltip="Zoom to fit" (click)="zoomToFit()">
+          <mat-icon>fit_screen</mat-icon>
+        </button>
+
+        <button mat-button color="basic"  matTooltip="Center topology" (click)="centerGraph()">
+          <mat-icon>open_with</mat-icon>
+        </button>
+
+        <button mat-button color="basic" matTooltip="Clusters on/off" (click)="clustersOnOff()">
+          <mat-icon>select_all</mat-icon>
+        </button> 
+
+        <mat-button-toggle-group [(ngModel)]="viewMode" (change)="viewModeChanged()">
+          <mat-button-toggle matTooltip="View datasets" value="datasets">
+            <mat-icon>mediation</mat-icon>
+          </mat-button-toggle>
+
+          <mat-button-toggle matTooltip="View actions" value="actions">
+            <mat-icon>compare_arrows</mat-icon>
+          </mat-button-toggle>        
+
+          <mat-button-toggle matTooltip="View in-out" value="inout">
+            <mat-icon>moving</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </section>
+  </div>
+  <div fxFlex="65%" fxLayoutAlign="start center">
+    <section layout="row">
       <span>&nbsp;</span>
-    </section>
-
-    <section>          
-      <button color="basic" mat-mini-fab matTooltip="Zoom to fit" (click)="zoomToFit()">
-        <mat-icon>fit_screen</mat-icon>
-      </button>
-
-      <button color="basic" mat-mini-fab matTooltip="Center topology" (click)="centerGraph()">
-        <mat-icon>open_with</mat-icon>
-      </button>
-
-      <button color="basic" mat-mini-fab matTooltip="Clusters on/off" (click)="clustersOnOff()">
-        <mat-icon>select_all</mat-icon>
-      </button>
-
-      <mat-button-toggle-group [(ngModel)]="viewMode" (change)="viewModeChanged()">
-        <mat-button-toggle mat-mini-fab matTooltip="View datasets" value="datasets">
-          <mat-icon>mediation</mat-icon>
-        </mat-button-toggle>
-
-        <mat-button-toggle mat-mini-fab matTooltip="View actions" value="actions">
-          <mat-icon>compare_arrows</mat-icon>
-        </mat-button-toggle>        
-
-        <mat-button-toggle mat-mini-fab matTooltip="View in-out" value="inout">
-          <mat-icon>moving</mat-icon>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-
-      <button color="basic" mat-mini-fab matTooltip="Narrow layout" (click)="narrowLayout()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>      
-
-      <button color="basic" mat-mini-fab matTooltip="Wide layout" (click)="wideLayout()">
-        <mat-icon>arrow_forward</mat-icon>
-      </button>            
-    
-  </section>
-
-    <span>&nbsp;</span>
-
-    <span *ngFor="let project of projects">
-      <span *ngIf="project === currentProject" style="color: mediumblue;">&nbsp;{{project}}&nbsp;</span>
-      <span *ngIf="project !== currentProject" style="color: gray;">&nbsp;{{project}}&nbsp;</span>
-      <button mat-mini-fab color="basic" matTooltip="Load project" (click)="loadProject(project)" [disabled]="project === currentProject">
-        <mat-icon>done</mat-icon>
-      </button>
-    </span>
-
-    <div class="button-container">
-      <button color="basic" mat-mini-fab matTooltip="Clear data" (click)="clear()">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
-
-</mat-toolbar>
+      <ng-container *ngFor="let project of projects">
+        <span *ngIf="project === currentProject" style="color: mediumblue;">&nbsp;{{project}}&nbsp;</span>
+        <span *ngIf="project !== currentProject" style="color: gray;">&nbsp;{{project}}&nbsp;</span>
+        <button mat-button color="basic" matTooltip="Load project" (click)="loadProject(project)" [disabled]="project === currentProject">
+          <mat-icon>done</mat-icon>
+        </button>
+      </ng-container>          
+      </section>
+  </div>
+  <div fxFlex="5%" fxLayoutAlign="end center space-around">
+    <button mat-button color="basic" matTooltip="Clear data" (click)="clear()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>

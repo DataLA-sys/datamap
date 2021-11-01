@@ -1,5 +1,14 @@
 import { Dataset, TopologyNode } from './dataset'
 
+export enum NodeType {
+  Table = "Table",
+  SH = "SH",
+  project = "project",
+  file = "file",
+  component = "component",
+  linked = "Linked"
+}
+
 export class NodeData {
   image: string = "assets/dataset.ico";
   color: string = "#a95963";
@@ -22,7 +31,10 @@ export class NodeData {
     }
     if(dataset.datasetType == "file") {
       return "assets/file.png";
-    }    
+    }
+    if(dataset.datasetType == NodeType.linked) {
+      return "assets/linkedTable.png";
+    }        
     return "assets/component.png";
   }
 }

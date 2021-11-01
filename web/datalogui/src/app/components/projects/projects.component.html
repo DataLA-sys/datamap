@@ -1,27 +1,28 @@
-<mat-list>
-        <mat-list-item *ngFor="let project of projects">
-        <p matLine>
-            <b>{{project.name}}</b>
-        </p>
-        <p matLine>
-            {{project.template}}
-        </p>
-        <p matLine>
-            {{object2str(project.templateParams || {})}}
-        </p>
-        
-
-            <div class="button-container">
-                <button mat-mini-fab color="basic" (click)="loadProject(project)" matTooltip="Load project data">
-                    <mat-icon>content_paste</mat-icon>
-                </button>
-            </div>
-            <div class="button-container">
-                <button mat-mini-fab color="basic" (click)="loadProject(project, false)" matTooltip="Add project data to current">
-                    <mat-icon>add_circle_outline</mat-icon>
-                </button>
-            </div>
-            <mat-divider></mat-divider>
-        </mat-list-item>
-        
-  </mat-list>
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let project of projects">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{project.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+            <mat-icon *ngIf="project.domain == true">class</mat-icon>
+            <mat-icon *ngIf="project.domain != true">article</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p matLine>
+        {{project.template}}
+      </p>
+      <p matLine>
+        {{object2str(project.templateParams || {})}}
+      </p>
+      <mat-action-row>
+        <button mat-button color="basic" (click)="loadProject(project)" matTooltip="Load project data">
+            Clear current and load
+            <mat-icon>content_paste</mat-icon>
+        </button>
+        <button mat-button color="basic" (click)="loadProject(project, false)" matTooltip="Add project data to current">
+            Add to current<mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </mat-action-row>      
+    </mat-expansion-panel>
+<mat-accordion>    
