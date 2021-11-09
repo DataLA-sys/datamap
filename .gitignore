@@ -4,3 +4,5 @@ target
 !target/scala-2.13/datalog-assembly-0.1.0-SNAPSHOT.jar
 !target/scala-2.12/datalog-assembly-0.1.0-SNAPSHOT.zip
 !target/scala-2.12/datalog-assembly-0.1.0-SNAPSHOT.z01
+!target/scala-2.12/datalog-assembly-0.1.0-SNAPSHOT.z02
+!target/scala-2.12/datalog-assembly-0.1.0-SNAPSHOT.z03

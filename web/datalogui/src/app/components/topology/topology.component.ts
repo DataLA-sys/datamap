@@ -19,7 +19,7 @@ interface KeyValuePair {
 export class TopologyComponent implements OnInit {
 
   x: number = 1400;
-  y: number = 1200;
+  y: number = 1000;
   dim: [number, number] = [this.x, this.y];
   inodes: Dataset[] = []
   
@@ -56,8 +56,6 @@ export class TopologyComponent implements OnInit {
     private eventService: EventService, 
     private projectService: ProjectService, 
     public cd: ChangeDetectorRef) { 
-    eventService.zoomToFitEvent$.subscribe(value => this.zoomToFit());
-    eventService.centerTopologyEvent$.subscribe(value => this.center$.next(true));
 
     eventService.getSelectedNodeProjectEvent$.subscribe(node => 
       eventService.emitReturnSelectedNodeProjectEvent(this.getNodeProject(node)));
@@ -104,20 +102,32 @@ export class TopologyComponent implements OnInit {
         this.getData(this.data)
       }
     })
-    eventService.toggleClustersEvent$.subscribe(value => {
-      this.showClusters = !this.showClusters
-    })
-    eventService.toggleViewEvent$.subscribe(value => {
-      this.viewMode = value
-      if(this.data) {
-        this.getData(this.data)
-      }      
-    })    
+  }
+
+  viewModeChanged() {
+    if(this.data) {
+      this.getData(this.data)
+    }
+  }  
+
+  setViewMode(value: string) {
+    this.viewMode = value
+    if(this.data) {
+      this.getData(this.data)
+    }
   }
 
   zoomToFit() {
     this.zoomToFit$.next(true)
-  }  
+  }
+  
+  centerGraph() {
+    this.center$.next(true);
+  }
+
+  clustersOnOff() {
+    this.showClusters = !this.showClusters
+  }
 
   checkCluster(layer: string, nodeName: string, clusters: any[], tablesId: KeyValuePair[]) {
     let cluster: any = clusters.find((c: any) => c.label == layer)

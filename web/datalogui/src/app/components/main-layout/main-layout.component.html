@@ -1,54 +1,73 @@
-<div class="wrapper">
-  <div class="overlay" *ngIf="showSpinner === true">
-    <div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%">
-      <mat-spinner></mat-spinner>
-    </div>    
-  </div>
+<mat-drawer-container>
+  <mat-drawer #drawer mode="over">
+    <app-projects (onDrawerToggle)="drawer.toggle()"></app-projects>
+  </mat-drawer>
+  <mat-drawer-content>
 
-  <div class="loaded-content" [class.blurred]="showSpinner">   
-        
-    <app-main-toolbar class="noprint"></app-main-toolbar>
-    
-    <div fxLayout="row">
-        <div fxFlex="{{leftArea}}" style="overflow: auto;height: 93vh;" class="noprint">
-          <div style="overflow: auto;height: 32vh;"><selected-item-inspector></selected-item-inspector></div>
-          <mat-divider></mat-divider>
-          <div style="overflow: auto;height: 60.5vh;"><select-table></select-table></div>
-        </div>
-        <div fxFlex="5px" style="background-color: gray;">
-        </div>
-        <div fxFlex="75%" style="overflow: auto;height: 93vh;">          
-          <mat-tab-group>
-            <mat-tab label="Topology">  
-              <div style="overflow: auto;height: 86vh;">
-                <app-topology></app-topology>      
-              </div>
-            </mat-tab>
-            <mat-tab label="Data">
-              <div style="overflow: auto;height: 86vh;">
-                <topology-grid-view></topology-grid-view>
-              </div>              
-            </mat-tab>            
-            <mat-tab label="Templates">
-              <div style="overflow: auto;height: 86vh;">
-                <tepmlate-editor></tepmlate-editor>
-              </div>
-            </mat-tab>
-            <mat-tab label="Projects">
-              <div style="overflow: auto;height: 86vh;">
-                <app-projects></app-projects>
-              </div>
-            </mat-tab>
-            <mat-tab label="Item info">
-              <div style="overflow: auto;height: 86vh;">                
-                <selected-item-info></selected-item-info>
-              </div>
-            </mat-tab>            
-          </mat-tab-group>
-        </div>
+    <div class="wrapper">
+      <div class="overlay" *ngIf="showSpinner === true">
+        <div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%">
+          <mat-spinner></mat-spinner>
+        </div>    
       </div>
 
-  </div>
-</div>
+      <div class="loaded-content" [class.blurred]="showSpinner">   
+        <app-main-toolbar (onDrawerToggle)="drawer.toggle()" class="noprint"></app-main-toolbar>
+        
+        <div fxLayout="row">
+            <div fxFlex="{{leftArea}}" style="overflow: auto;height: 95vh;" class="noprint">
+
+              <mat-accordion multi="true">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Selected
+                    </mat-panel-title>                    
+                  </mat-expansion-panel-header>
+                  <selected-item-inspector></selected-item-inspector>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Tables
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <select-table></select-table>
+                </mat-expansion-panel>                
+              </mat-accordion>
 
 
+            </div>
+            <div fxFlex="5px" style="background-color: gray;">
+            </div>
+            <div fxFlex="75%" style="overflow: auto;height: 95vh;">          
+              <mat-tab-group>
+                <mat-tab label="Topology">
+
+                  <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">leaderboard</mat-icon>
+                    Topology
+                  </ng-template>              
+
+                  <div style="overflow: auto;height: 88vh;">
+                    <app-topology></app-topology>      
+                  </div>
+                </mat-tab>
+                <mat-tab label="Data">
+                  <div style="overflow: auto;height: 88vh;">
+                    <topology-grid-view></topology-grid-view>
+                  </div>              
+                </mat-tab>            
+                <mat-tab label="Templates">
+                  <div style="overflow: auto;height: 88vh;">
+                    <tepmlate-editor></tepmlate-editor>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,3 +1,27 @@
+<mat-button-toggle-group  [(ngModel)]="viewMode" (change)="viewModeChanged()">
+  <mat-button-toggle value="datasets" matTooltip="View datasets" ngDefaultControl>
+    <mat-icon>table_view</mat-icon>      
+  </mat-button-toggle>
+  <mat-button-toggle value="actions" matTooltip="View actions" ngDefaultControl>
+    <mat-icon>bolt</mat-icon>
+  </mat-button-toggle>
+  <mat-button-toggle value="inout" matTooltip="View as In Out Mode" ngDefaultControl>    
+    <mat-icon>mediation</mat-icon>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<button mat-button color="basic" matTooltip="Zoom to fit" (click)="zoomToFit()">
+  <mat-icon>fit_screen</mat-icon>
+</button>
+
+<button mat-button color="basic" matTooltip="Center topology" (click)="centerGraph()">
+  <mat-icon>open_with</mat-icon>
+</button>
+
+<mat-button-toggle matTooltip="Clusters on/off" [checked]="showClusters" (change)="clustersOnOff()">
+  <mat-icon>select_all</mat-icon>
+</mat-button-toggle>
+
 <ngx-graph
   [view]="dim"
   layout="dagreCluster"

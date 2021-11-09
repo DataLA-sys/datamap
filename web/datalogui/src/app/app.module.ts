@@ -28,6 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -91,12 +95,20 @@ import { DomainLinkComponentComponent } from './components/domain-link-component
     MatTooltipModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatChipsModule,
+    MatBottomSheetModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule,
     AgGridModule.withComponents([])
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+    { provide: MatBottomSheetRef, useValue: {} },    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

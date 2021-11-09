@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventService } from "../../services/events.service";
 import 'material-icons/iconfont/material-icons.css';
 
@@ -12,6 +12,13 @@ export class MainToolbarComponent implements OnInit   {
   currentProject: string | undefined;
   projects: string[] = []
   viewMode = "datasets"
+  
+  @Output()
+  onDrawerToggle = new EventEmitter<boolean>();
+  
+  toggleDrawer() {
+      this.onDrawerToggle.emit(true);
+  };
 
   constructor(private eventService: EventService) { 
     eventService.nodeSelectedEvent$.subscribe(value => {
@@ -35,22 +42,6 @@ export class MainToolbarComponent implements OnInit   {
 
   ngOnInit(): void {
   }
-
-  viewModeChanged() {
-    this.eventService.emitToggleViewEvent(this.viewMode)
-  }
-
-  zoomToFit() {
-    this.eventService.emitZoomToFitEvent();
-  }
-
-  centerGraph() {
-    this.eventService.emitCenterTopologyEvent();
-  }
-
-  clustersOnOff() {
-    this.eventService.emitToggleClustersEvent();
-  }  
 
   wideLayout() {
     this.eventService.emitWideLayoutEvent(true);

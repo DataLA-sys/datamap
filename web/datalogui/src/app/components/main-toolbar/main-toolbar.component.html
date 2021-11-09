@@ -1,48 +1,19 @@
 <div fxLayout="row">
-  <div fxFlex="30%">
+  <div fxFlex="97%" fxLayoutAlign="space-between center">
     <section layout="row">
-        <label>Data Topology</label>
-        
-        <button mat-button color="basic" matTooltip="Zoom to fit" (click)="zoomToFit()">
-          <mat-icon>fit_screen</mat-icon>
-        </button>
-
-        <button mat-button color="basic"  matTooltip="Center topology" (click)="centerGraph()">
-          <mat-icon>open_with</mat-icon>
-        </button>
-
-        <button mat-button color="basic" matTooltip="Clusters on/off" (click)="clustersOnOff()">
-          <mat-icon>select_all</mat-icon>
-        </button> 
-
-        <mat-button-toggle-group [(ngModel)]="viewMode" (change)="viewModeChanged()">
-          <mat-button-toggle matTooltip="View datasets" value="datasets">
-            <mat-icon>mediation</mat-icon>
-          </mat-button-toggle>
-
-          <mat-button-toggle matTooltip="View actions" value="actions">
-            <mat-icon>compare_arrows</mat-icon>
-          </mat-button-toggle>        
-
-          <mat-button-toggle matTooltip="View in-out" value="inout">
-            <mat-icon>moving</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </section>
-  </div>
-  <div fxFlex="65%" fxLayoutAlign="start center">
-    <section layout="row">
+      <button mat-button matTooltip="Open project" (click)="toggleDrawer()">
+        <mat-icon>folder_open</mat-icon>
+      </button>
       <span>&nbsp;</span>
       <ng-container *ngFor="let project of projects">
-        <span *ngIf="project === currentProject" style="color: mediumblue;">&nbsp;{{project}}&nbsp;</span>
-        <span *ngIf="project !== currentProject" style="color: gray;">&nbsp;{{project}}&nbsp;</span>
-        <button mat-button color="basic" matTooltip="Load project" (click)="loadProject(project)" [disabled]="project === currentProject">
-          <mat-icon>done</mat-icon>
+        <button mat-button color="basic" matTooltip="Load project {{project}}" (click)="loadProject(project)" [disabled]="project === currentProject">
+          {{project}}
+          <mat-icon>content_paste</mat-icon>
         </button>
       </ng-container>          
       </section>
   </div>
-  <div fxFlex="5%" fxLayoutAlign="end center space-around">
+  <div fxFlex="3%" fxLayoutAlign="end center space-around">
     <button mat-button color="basic" matTooltip="Clear data" (click)="clear()">
       <mat-icon>clear</mat-icon>
     </button>

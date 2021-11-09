@@ -15,12 +15,6 @@ export class EventService {
     this.clearAllEventSource.next(true);
   }
 
-  private zoomToFitEventSource = new Subject<boolean>();
-  zoomToFitEvent$ = this.zoomToFitEventSource.asObservable();
-  emitZoomToFitEvent() {
-    this.zoomToFitEventSource.next(true);
-  }  
-
   private nodeSelectedEventSource = new Subject<Node>();
   nodeSelectedEvent$ = this.nodeSelectedEventSource.asObservable();
   emitNodeSelectedEvent(node: Node) {
@@ -85,24 +79,6 @@ export class EventService {
   narrowLayoutEvent$ = this.narrowLayoutEventSource.asObservable();
   emitNarrowLayoutEvent(value: boolean) {
     this.narrowLayoutEventSource.next(value);
-  }  
-
-  private centerTopologyEventSource = new Subject<boolean>();
-  centerTopologyEvent$ = this.centerTopologyEventSource.asObservable();
-  emitCenterTopologyEvent() {
-    this.centerTopologyEventSource.next(true);
-  }
-
-  private toggleClustersEventSource = new Subject<boolean>();
-  toggleClustersEvent$ = this.toggleClustersEventSource.asObservable();
-  emitToggleClustersEvent() {
-    this.toggleClustersEventSource.next(true);
-  }  
-
-  private toggleViewEventSource = new Subject<string>();
-  toggleViewEvent$ = this.toggleViewEventSource.asObservable();
-  emitToggleViewEvent(value: string) {
-    this.toggleViewEventSource.next(value);
   }  
 
   private filterByTableInEventSource = new Subject<string>();

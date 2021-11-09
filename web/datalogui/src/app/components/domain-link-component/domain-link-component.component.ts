@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Project } from 'src/app/classes/project';
-import { Topology } from 'src/app/classes/topology';
 import { EventService } from 'src/app/services/events.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TemplateService } from 'src/app/services/template.service';
+import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'domain-link-component',
@@ -37,7 +38,17 @@ export class DomainLinkComponentComponent implements OnInit {
   selectedDomainProjectItemName: string = "None";
   selectedLinkType: string = "None";
 
-  constructor(private projectService: ProjectService, private templateService: TemplateService, private eventService: EventService) { 
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {currentProject: string, currentItem: string}, 
+    private _bottomSheetRef: MatBottomSheetRef<DomainLinkComponentComponent>, 
+    private projectService: ProjectService, private templateService: TemplateService, 
+    private eventService: EventService) { 
+      
+    this._currentProject = data.currentProject;
+    this._currentItem = data.currentItem;
+
+    this.inputChaged();
+    
     projectService.getProjects().subscribe(projects =>this.domainProjects = projects.filter(p=>p.domain == true))
   }
 

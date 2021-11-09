@@ -1,38 +1,50 @@
 <ng-container *ngIf="currentProject && currentItem">
-    <mat-form-field appearance="fill">
-        <mat-label>Select link type</mat-label>
-        <mat-select [(value)]="selectedLinkType">
-            <mat-option>None</mat-option>
-            <mat-option value="in">in</mat-option>
-            <mat-option value="out">out</mat-option>
-        </mat-select>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Select domain</mat-label>
-        <mat-select [(value)]="selectedDomainProjectName" (selectionChange)="projectChanged($event)" >
-            <mat-option value="undefined">None</mat-option>
-            <mat-option *ngFor="let project of domainProjects" value="{{project.name}}">{{project.name}}</mat-option>    
-        </mat-select>
-    </mat-form-field>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Add domain link to {{currentItem}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Select domain item</mat-label>
-        <mat-select [(value)]="selectedDomainProjectItemName">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let dataset of selectedDomainProject?.data?.datasets" value="{{dataset.name}}">{{dataset.name}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Select link type</mat-label>
+            <mat-select [(value)]="selectedLinkType">
+                <mat-option>None</mat-option>
+                <mat-option value="in">in</mat-option>
+                <mat-option value="out">out</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Select domain</mat-label>
+            <mat-select [(value)]="selectedDomainProjectName" (selectionChange)="projectChanged($event)" >
+                <mat-option value="undefined">None</mat-option>
+                <mat-option *ngFor="let project of domainProjects" value="{{project.name}}">{{project.name}}</mat-option>    
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Select domain item</mat-label>
+            <mat-select [(value)]="selectedDomainProjectItemName">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let dataset of selectedDomainProject?.data?.datasets" value="{{dataset.name}}">{{dataset.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <button enabled="selectedLinkType != 'None'  && selectedDomainProject != 'None' && selectedDomainProjectItemName != 'None'" mat-mini-fab color="basic" matTooltip="Add link" (click)="addLink()">
-        <mat-icon>add</mat-icon>
-    </button>
-
+        <mat-action-row>
+            <button enabled="selectedLinkType != 'None'  && selectedDomainProject != 'None' && selectedDomainProjectItemName != 'None'" mat-mini-fab color="basic" matTooltip="Add link" (click)="addLink()">
+                <mat-icon>add</mat-icon>
+            </button>        
+        </mat-action-row>
+    </mat-expansion-panel>
+  
 </ng-container>
 
 <mat-nav-list>
+    <mat-list-item>All domain links for project {{currentProject}}</mat-list-item>
     <mat-list-item *ngFor="let link of links?.domainLinks">
-      <button mat-mini-fab color="basic" matTooltip="Remove link" (click)="deleteLink(link)">
+      <button mat-button color="basic" matTooltip="Remove link" (click)="deleteLink(link)">
         <mat-icon>remove</mat-icon>
       </button>        
       <label>{{link.dataset}}</label>

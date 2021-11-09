@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Field, TopologyNode } from 'src/app/classes/dataset';
+import { Field, Named, TopologyNode } from 'src/app/classes/dataset';
 import { EventService } from 'src/app/services/events.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { SourceFilesService } from 'src/app/services/files.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { DomainLinkComponentComponent } from '../domain-link-component/domain-link-component.component';
+
+class Data {
+  useInProjects: Named[] | undefined = undefined
+}
 
 @Component({
   selector: 'selected-item-inspector',
@@ -15,16 +21,18 @@ export class SelectedItemInspectorComponent implements OnInit {
 
   selected: any;
   selectedNodeProject: string | undefined;
-  currentProject: string | undefined;  
+  currentProject: string | undefined;
+  data: Data = new Data();
 
   treeControl = new NestedTreeControl<Field>(node => node.sources);
 
   dataSource = new MatTreeNestedDataSource<Field>();
 
-  constructor(private eventService: EventService, private sourceFilesService: SourceFilesService, 
+  constructor(private _bottomSheet: MatBottomSheet, private eventService: EventService, private sourceFilesService: SourceFilesService, 
     private projectService: ProjectService) {
     eventService.nodeSelectedEvent$.subscribe(value => {
       this.selected = value;
+      this.getProjects();
       this.dataSource.data = this.selected?.data?.dataset?.fields;
       this.eventService.emitGetGetSelectedNodeProjectEvent(value);
     })
@@ -33,6 +41,7 @@ export class SelectedItemInspectorComponent implements OnInit {
     })
     this.eventService.clearAllEvent$.subscribe(value => {
       this.selected = undefined;
+      this.data = new Data();
       this.selectedNodeProject = undefined;
     })
     this.eventService.projectEvent$.subscribe(value => {
@@ -98,6 +107,27 @@ export class SelectedItemInspectorComponent implements OnInit {
 
   selectTable(value: string|undefined) {
     this.eventService.emitTableSelectedEvent(value)
+  }  
+
+  getProjects() {
+    return this.projectService.getAllDatasetProjects(this.selected?.data?.dataset?.name)
+    .subscribe(      
+      (projects: any) => {
+        this.data.useInProjects = projects.docs
+      }
+    )
+  }
+  
+  openBottomSheet(): void {
+    this._bottomSheet.open(DomainLinkComponentComponent, {
+      data: { currentProject: this.currentProject, currentItem:  this.selected?.data?.dataset?.name },
+    });
+  }
+  
+  loadDatasetVirtualProject(datasetName: string | undefined) {
+    if(datasetName) {
+      this.projectService.buildDatasetVirtualProject(datasetName)
+    }
   }  
 
 }
