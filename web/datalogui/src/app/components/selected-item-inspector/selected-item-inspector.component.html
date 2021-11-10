@@ -1,7 +1,7 @@
 <mat-tab-group>
   <mat-tab label="Props">
 
-    <mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{selected?.data?.dataset?.name}}
@@ -12,9 +12,10 @@
         <label>{{getAction()}}</label>
       </ng-container>
       <mat-chip-list aria-label="Projects" *ngIf="selected">
-        <mat-chip *ngFor="let project of data?.useInProjects" (click)="loadProject(project.name)" matTooltip="Load project {{project.name}}">{{project.name}}</mat-chip>
-        <mat-chip (click)="loadDatasetVirtualProject(this.selected?.data?.dataset?.name)" matTooltip="Build full project for {{this.selected?.data?.dataset?.name}}">Full</mat-chip>
+        <mat-chip *ngFor="let project of data?.useInProjects" (click)="loadProject(project.name)" [selected]="project.name == currentProject" matTooltip="Load project {{project.name}}">{{project.name}}</mat-chip>
+        <mat-chip (click)="loadDatasetVirtualProject(this.selected?.data?.dataset?.name)" selected color="accent" matTooltip="Build full project for {{this.selected?.data?.dataset?.name}}">Full</mat-chip>
       </mat-chip-list>
+      <br />
       <textarea cols="30" rows="2" *ngIf="selected" disabled>{{getSource()}}</textarea>
       <mat-action-row *ngIf="selected">
         <button mat-button color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
