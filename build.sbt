@@ -28,9 +28,10 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-http-spray-json"     % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
       "com.typesafe.akka" %% "akka-stream"              % akkaVersion,
-      "ch.qos.logback"    % "logback-classic"           % "1.2.3",
+      "ch.qos.logback"    % "logback-classic"           % "1.2.5",
       "org.scalatra.scalate" %% "scalate-core" % "1.9.6",
       "org.json4s" %% "json4s-jackson" % "3.6.11",
+      //"org.json4s" %% "json4s-jackson" % "4.0.3",
       "org.apache.spark" %% "spark-catalyst" % "3.1.2",
 
       "com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % Test,

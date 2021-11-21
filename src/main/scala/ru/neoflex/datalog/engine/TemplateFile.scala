@@ -4,6 +4,7 @@ import org.apache.spark.sql.catalyst.analysis.{UnresolvedAttribute, UnresolvedRe
 import org.apache.spark.sql.catalyst.expressions.{Alias, CaseWhen, ScalarSubquery}
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 import org.apache.spark.sql.catalyst.plans.logical.{InsertIntoStatement, Join, LogicalPlan, Project, SubqueryAlias, With}
+import org.slf4j.LoggerFactory
 import ru.neoflex.datalog.engine.dto.{DestTable, Field}
 
 import scala.collection.mutable.ListBuffer
@@ -18,7 +19,7 @@ case class TemplateFile(fileName: String, templateContent: String)
 object Parser {
 
   implicit val codec: Codec = Codec("UTF-8")
-
+  val log = LoggerFactory.getLogger("ru.neoflex.datalog.engine.Parser")
   def getFileText(fileName: String,
                   lineProcessor: LineProcessor): String = {
     val source = fromFile(fileName)
@@ -118,11 +119,13 @@ object Parser {
                        tables: ListBuffer[DestTable],
                        testTable: String => Boolean = _ => true,
                        layer: String = "",
-                       defaultOut: Seq[String] = Seq()
+                       defaultOut: Seq[String] = Seq(),
+                       findPatterns: Boolean = false
                       ): Unit = {
     val logical: LogicalPlan = CatalystSqlParser.parsePlan(sql)
     val outTables = Parser.getOutTables(logical) ++ defaultOut
     var inTables = Parser.getInTables(logical)
+    /*
     def distinctFields(tableFields: List[Field]): List[Field] = {
       val distinctTableFields = new ListBuffer[Field]()
       tableFields.foreach(field => {
@@ -136,18 +139,58 @@ object Parser {
         }
       })
       distinctTableFields.toList
+    }*/
+    def updateSources(destTable: String, sourceName: String, tableFields: List[Field]) = {
+      tables.find(f => f.name == destTable).map(f => {
+        tables -= f
+        val source = if (f.sourceFile.contains(sourceFile)) f.sourceFile else f.sourceFile + ";" + sourceFile
+        tables += DestTable(f.name, f.sources ++ List(sourceName), source, f.layer, f.fields)
+      }).orElse({
+        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer,
+          fields =  tableFields)
+        None
+      })
     }
     outTables.foreach(destTable => {
       if(testTable(destTable)) {
         var tableFields = List[Field]()// getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
-        tables.find(f => f.name == destTable).map(ft => {
-          inTables = inTables ++ ft.sources
-          tableFields = tableFields ++ ft.fields
-          tables -= ft
-        })
-        tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer,
-          fields = distinctFields(tableFields))
+        if(findPatterns == false) {
+          tables.find(f => f.name == destTable).map(ft => {
+            inTables = inTables ++ ft.sources
+            tableFields = tableFields ++ ft.fields
+            tables -= ft
+          })
+          tables += DestTable(destTable, inTables.toList.filter(testTable).distinct, sourceFile, layer,
+            fields = tableFields)//distinctFields(tableFields))
+        } else {
+          tables.find(f => f.name.startsWith(destTable + ".pattern") && f.sources.toSet.mkString == inTables.toList.filter(testTable).sorted.toSet.mkString)
+            .map(f => {
+              val idx = tables.filter(t => t.name.startsWith(destTable + ".pattern") && t.sources.sorted.toSet.equals(inTables.toList.filter(testTable).sorted.toSet)).length + 1
+              tables -= f
+              val source = if (f.sourceFile.contains(sourceFile)) f.sourceFile else f.sourceFile + ";" + sourceFile
+              tables += DestTable(f.name, f.sources, source, f.layer, f.fields, matched = idx)
+            })
+            .orElse({
+              val idx = tables.filter(t => t.name.startsWith(destTable + ".pattern")).length + 1
+              val pname = destTable + ".pattern" + "(" + idx + ")"
+              tables += DestTable(pname, inTables.toList.filter(testTable).sorted.distinct, sourceFile, layer,
+                fields = tableFields)
+              updateSources(destTable, pname, tableFields)
+              None
+            })
+        }
       }
+    })
+  }
+
+  private def clearZeroMathPatterns(tables: ListBuffer[DestTable]): Unit = {
+    val zeroMatch = tables.filter(d => d.matched == 0 && d.name.contains(".pattern"))
+    zeroMatch.foreach(d => {
+      tables.find(f => f.name == d.name.substring(0, d.name.indexOf(".pattern"))).foreach(parent => {
+        tables -= parent
+        tables += DestTable(parent.name, (parent.sources ++ d.sources).filter(s => s!=d.name).distinct, parent.sourceFile, parent.layer, parent.fields)
+        tables -= d
+      })
     })
   }
 
@@ -158,7 +201,8 @@ object Parser {
                        testTable: String => Boolean = _ => true,
                        layer: String = "",
                        filesFilter: String = """.*\.*""",
-                       deep: Int = 1
+                       deep: Int = 1,
+                       findPatterns: Boolean = false
                       ): Unit = {
     object SqlScriptLineProcessor2 extends SqlScriptLineProcessor {
       override def processLine(line: String): String = {
@@ -168,26 +212,29 @@ object Parser {
       }
     }
 
-    println(folder)
-    println(filesFilter)
+    log.info(folder)
+    log.info(filesFilter)
     folder.toDirectory.deepList(deep).filter(_.isFile).filter(p=>p.path matches filesFilter)
       .foreach(file => {
         try {
-          println(file.path)
+          log.info(file.path)
           val sqlScript = getFileText(file.path, SqlScriptLineProcessor2)
           sqlScript.split(';').filter(_.trim.nonEmpty).filter(!_.toUpperCase().contains("ALTER ")).foreach(sql =>
           {
             if(!(sql.toUpperCase().contains("INSERT") || sql.toUpperCase().contains("CREATE")) && sql.toUpperCase().contains("SELECT")) {
               val defaultOut = Seq("db." + file.name.replaceFirst("[.][^.]+$", ""))
-              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer, defaultOut = defaultOut)
+              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer, defaultOut = defaultOut, findPatterns = findPatterns)
             } else {
-              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer)
+              processSqlScript(sql, file.path.replace("\\","/"), tables, testTable, layer, findPatterns = findPatterns)
             }
           })
         } catch {
           case e:  Throwable => e.printStackTrace()
         }
     })
+    if(findPatterns) {
+      clearZeroMathPatterns(tables)
+    }
   }
 
   private def buildFieldsFromSources(fields: Seq[String], sources: List[Field], fieldType: String): List[Field] = {

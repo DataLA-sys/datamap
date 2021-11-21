@@ -10,10 +10,11 @@ import akka.http.scaladsl.server.Directives.{complete, _}
 import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
-import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor}
+import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor, SystemUtilActor}
 import org.json4s.DefaultFormats
 import ru.neoflex.datalog.actors.ProjectDataActor.{CompleteDataCommandMessage, FindProjectStatCommand, GetProjectStatCommand, ProjectStatMessage, SaveProjectStatCommand}
 import ru.neoflex.datalog.actors.SourceFilesActor.{CompleteFileCommandMessage, FileContentMessage, GetFileContentCommand}
+import ru.neoflex.datalog.actors.SystemUtilActor.{CommandOutResult, GetOutCommand, RunCommand, RunCommandResult, SystemCommandResultMessage}
 import ru.neoflex.datalog.engine.TemplateFile
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
@@ -57,9 +58,11 @@ trait CORSHandler{
 
 class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
                    sourceFilesActor: ActorRef[SourceFilesActor.FileCommand],
-                   projectDataActor: ActorRef[ProjectDataActor.DataCommand]
+                   projectDataActor: ActorRef[ProjectDataActor.DataCommand],
+                   systemUtilActor: ActorRef[SystemUtilActor.SystemCommand]
                   )
                   (projectFile: String)
+                  (systemUtilsConfigFile: String)
                   (implicit val system: ActorSystem[_]) extends CORSHandler  {
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
@@ -172,6 +175,39 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
             case JobRepository.OK         => complete("Job added")
             case JobRepository.KO(reason) => complete(StatusCodes.InternalServerError -> reason)
           }*/
+        }
+      },
+      get {
+        path("runit") {
+          parameters("sh".as[String]) { (sh) =>
+            system.log.info("run: " + sh)
+            println(sh)
+            complete(
+              systemUtilActor
+                .ask(RunCommand(sh, _: ActorRef[SystemCommandResultMessage]))
+                .map{
+                  case RunCommandResult(value, _) =>
+                    Future(value)
+                })
+          }
+        }
+      },
+      get {
+        path("sysout") {
+          parameters("runid".as[String]) { (runId) =>
+            complete(
+              systemUtilActor
+                .ask(GetOutCommand(runId, _: ActorRef[SystemCommandResultMessage]))
+                .map{
+                  case CommandOutResult(commandId, stdOut, _) =>
+                    Future(stdOut)
+                })
+          }
+        }
+      },
+      get {
+        path("hello") {
+          complete("Hello! I am alive!")
         }
       },
       assets
