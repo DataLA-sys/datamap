@@ -10,7 +10,9 @@ import ru.neoflex.datalog.domain.Topology
 
 import java.io.{BufferedReader, File, InputStreamReader}
 import java.nio.file.Paths
+import java.util.Calendar
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.{Future, blocking}
 import scala.concurrent.duration.DurationInt
 import scala.io.Source._
 
@@ -27,33 +29,45 @@ object SystemUtilRunnerActor {
 
   def runSh(runId: String, shCommand: String, system: ActorSystem[Nothing]): String = {
     system.log.info("runner: " + shCommand)
-    println(shCommand)
+    implicit val ex = system.executionContext
     val p = new ProcessBuilder(shCommand.split(' ').toArray:_*)
-    try  {
-      val p2 = p.start()
-      val br = new BufferedReader(new InputStreamReader(p2.getInputStream()))
 
-      val strBuffer = new ListBuffer[String]()
+    val r: Future[Boolean] = Future {
+      blocking {
+        try {
+          val strBuffer = new ListBuffer[String]()
+          strBuffer += Calendar.getInstance.getTime.toString
+          strBuffer += "Start: " + shCommand
+          val p2 = p.start()
+          val br = new BufferedReader(new InputStreamReader(p2.getInputStream()))
+          commandsOutput += (runId -> (shCommand, strBuffer))
 
-      commandsOutput += (runId -> (shCommand, strBuffer))
-
-      var line:String = ""
-      while ({line = br.readLine();  line!= null}) {
-        strBuffer += line
-        println(line)
+          var line: String = ""
+          while ( {
+            line = br.readLine();
+            line != null
+          }) {
+            strBuffer += line
+          }
+          br.close()
+          strBuffer += Calendar.getInstance.getTime.toString
+          strBuffer += "Finish: " + shCommand
+          true
+        } catch {
+          case e: Throwable => {
+            println("Error")
+            val strBuffer = new ListBuffer[String]()
+            strBuffer += e.getMessage
+            strBuffer ++= e.getStackTrace.toList.map(l=>l.toString)
+            system.log.error(strBuffer.mkString("\n"))
+            commandsOutput += (runId -> (shCommand, strBuffer))
+            false
+          }
+          case _ => false
+        }
       }
-      println("Success run")
-    }  catch {
-      case e: Throwable => {
-        println("Error")
-        val strBuffer = new ListBuffer[String]()
-        strBuffer += e.getMessage
-        strBuffer ++= e.getStackTrace.toList.map(l=>l.toString)
-        system.log.error(strBuffer.mkString("\n"))
-        commandsOutput += (runId -> (shCommand, strBuffer))
-      }
-      case _ => println("Some error")
     }
+    r.map(v=>v)
 
     runId
   }
@@ -66,7 +80,7 @@ object SystemUtilRunnerActor {
           Behaviors.same
         }
         case GetOutCommand(commandRunId, replyTo) => {
-          commandsOutput.get(commandRunId).map(o => replyTo ! CommandOutResult(commandRunId, o._2.mkString))
+          commandsOutput.get(commandRunId).map(o => replyTo ! CommandOutResult(commandRunId, o._2.mkString("\r\n")))
           Behaviors.same
         }
       }

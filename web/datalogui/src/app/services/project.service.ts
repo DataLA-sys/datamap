@@ -202,7 +202,7 @@ export class ProjectService {
     let params = new HttpParams()
       .set('project', project)
       .set('propsName', propsName)
-    return this.http.get("/projectStat", { params })    
+    return this.http.get("/projectStat", { params })
   }
 
   getProjectData(project: Project) {

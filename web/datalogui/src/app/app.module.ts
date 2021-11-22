@@ -49,6 +49,7 @@ import { TopologyGridViewComponent } from './components/topology-grid-view/topol
 import { AgGridModule } from 'ag-grid-angular';
 import 'material-icons/iconfont/material-icons.css';
 import { DomainLinkComponentComponent } from './components/domain-link-component/domain-link-component.component';
+import { CommandsComponent } from './components/commands/commands.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DomainLinkComponentComponent } from './components/domain-link-component
     SelectedItemInspectorComponent,
     SelectedItemInfoComponent,
     TopologyGridViewComponent,
-    DomainLinkComponentComponent
+    DomainLinkComponentComponent,
+    CommandsComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
