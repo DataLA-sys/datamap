@@ -7,6 +7,7 @@ import akka.util.Timeout
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.concurrent.duration.DurationInt
+import sys.process._
 import scala.util.{Failure, Success}
 
 object SystemUtilActor {
@@ -15,6 +16,7 @@ object SystemUtilActor {
   }
   trait SystemCommand
   case class RunCommand(shCommand: String, replyTo: ActorRef[SystemCommandResultMessage]) extends SystemCommand
+  case class RunCommandNoWait(shCommand: String, replyTo: ActorRef[SystemCommandResultMessage]) extends SystemCommand
   case class GetOutCommand(commandRunId: String, replyTo: ActorRef[SystemCommandResultMessage]) extends SystemCommand
   trait SystemCommandResultMessage
   case class RunCommandResult(commandRunId: String, from: ActorRef[SystemCommand]) extends SystemCommandResultMessage
@@ -25,10 +27,18 @@ object SystemUtilActor {
       implicit val scheduler: akka.actor.typed.Scheduler = context.system.scheduler
       implicit val ec: ExecutionContextExecutor = context.system.executionContext
       message match {
-        case RunCommand(shCommand: String, replyTo) => {
+        case RunCommand(shCommand, replyTo) => {
           val runId = java.util.UUID.randomUUID().toString
           runner ! SystemUtilRunnerActor.RunCommand(runId, shCommand)
           replyTo ! RunCommandResult(runId, context.self)
+          Behaviors.same
+        }
+        case RunCommandNoWait(shCommand, replyTo) => {
+          try {
+            replyTo ! RunCommandResult(shCommand !!, context.self)
+          } catch {
+            case e: Throwable => replyTo ! RunCommandResult(e.getMessage + "\r\n" + e.getStackTrace.toList.map(s=>s.toString).mkString("\r\n"), context.self)
+          }
           Behaviors.same
         }
         case GetOutCommand(commandRunId, replyTo) => {
@@ -37,12 +47,6 @@ object SystemUtilActor {
             .map {
               case SystemUtilRunnerActor.CommandOutResult(commandRunId, stdOut) => replyTo ! CommandOutResult(commandRunId, stdOut, context.self)
             }
-
-
-/*          {
-            case Success(SystemUtilRunnerActor.CommandOutResult(commandRunId, stdOut)) => replyTo ! CommandOutResult(commandRunId, stdOut, context.self)
-            case Failure(_) => replyTo ! CommandOutResult(commandRunId, "Fail to find!", context.self)
-          }*/
           Behaviors.same
         }
       }

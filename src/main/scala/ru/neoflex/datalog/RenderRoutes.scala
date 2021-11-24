@@ -14,7 +14,7 @@ import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActo
 import org.json4s.DefaultFormats
 import ru.neoflex.datalog.actors.ProjectDataActor.{CompleteDataCommandMessage, FindProjectStatCommand, GetProjectStatCommand, ProjectStatMessage, SaveProjectStatCommand}
 import ru.neoflex.datalog.actors.SourceFilesActor.{CompleteFileCommandMessage, FileContentMessage, GetFileContentCommand}
-import ru.neoflex.datalog.actors.SystemUtilActor.{CommandOutResult, GetOutCommand, RunCommand, RunCommandResult, SystemCommandResultMessage}
+import ru.neoflex.datalog.actors.SystemUtilActor.{CommandOutResult, GetOutCommand, RunCommand, RunCommandNoWait, RunCommandResult, SystemCommandResultMessage}
 import ru.neoflex.datalog.engine.TemplateFile
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
@@ -179,16 +179,25 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
       },
       get {
         path("runit") {
-          parameters("sh".as[String]) { (sh) =>
+          parameters("sh".as[String], "nowait".withDefault((false))) { (sh, nowait) =>
             system.log.info("run: " + sh)
             println(sh)
-            complete(
-              systemUtilActor
-                .ask(RunCommand(sh, _: ActorRef[SystemCommandResultMessage]))
-                .map{
-                  case RunCommandResult(value, _) =>
-                    Future(value)
-                })
+            if(nowait) {
+              complete(
+                systemUtilActor
+                  .ask(RunCommandNoWait(sh, _: ActorRef[SystemCommandResultMessage]))
+                  .map{
+                    case RunCommandResult(value, _) => Future(value)
+                    case _ => Future("Some error")
+                  })
+            } else {
+              complete(
+                systemUtilActor
+                  .ask(RunCommand(sh, _: ActorRef[SystemCommandResultMessage]))
+                  .map{
+                    case RunCommandResult(value, _) => Future(value)
+                  })
+            }
           }
         }
       },
