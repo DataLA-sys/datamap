@@ -1,63 +1,31 @@
-<mat-tab-group>
-  <mat-tab label="Props">
-
-    <mat-expansion-panel expanded="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{selected?.data?.dataset?.name}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ng-container *ngIf="getAction() != undefined">
-        <label>Action:</label>
-        <label>{{getAction()}}</label>
-      </ng-container>
-      <mat-chip-list aria-label="Projects" *ngIf="selected">
-        <mat-chip *ngFor="let project of data?.useInProjects" (click)="loadProject(project.name)" [selected]="project.name == currentProject" matTooltip="Load project {{project.name}}">{{project.name}}</mat-chip>
-        <mat-chip (click)="loadDatasetVirtualProject(this.selected?.data?.dataset?.name)" selected color="accent" matTooltip="Build full project for {{this.selected?.data?.dataset?.name}}">Full</mat-chip>
-      </mat-chip-list>
-      <br />
-      <textarea cols="30" rows="2" *ngIf="selected" disabled>{{getSource()}}</textarea>
-      <mat-action-row *ngIf="selected">
-        <button mat-button color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
-          <mat-icon>done</mat-icon>
-        </button>
-        <button mat-button color="basic" matTooltip="Filter. Show object usage" (click)="filterByTableUsage(selected?.data?.dataset?.name)">
-          <mat-icon>filter_alt</mat-icon>
-        </button>                    
-        <button mat-button color="basic" matTooltip="Clear filter" (click)="clearTableFilter()">
-          <mat-icon>clear</mat-icon>
-        </button>
-        <button mat-button color="basic" matTooltip="Show domain links" (click)="openBottomSheet()">
-          <mat-icon>link</mat-icon>
-        </button>        
-      </mat-action-row>
-    </mat-expansion-panel>
-  </mat-tab>
-  <mat-tab label="Fields ({{selected?.data?.dataset?.fields?.length}})">
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>          
-          <button mat-icon-button matTreeNodeToggle>
-            <mat-icon class="mat-icon-rtl-mirror">
-              code
-            </mat-icon>          
-          </button>
-          {{node.name}}
-      </mat-tree-node>
-      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-          <div class="mat-tree-node">
-            <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'Toggle ' + node.name">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            {{node.name}}
-          </div>
-          <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
-              role="group">
-            <ng-container matTreeNodeOutlet></ng-container>
-        </div>
-      </mat-nested-tree-node>
-    </mat-tree>
-  </mat-tab>
-</mat-tab-group>
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{selected?.data?.dataset?.name}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-container *ngIf="getAction() != undefined">
+    <label>Action:</label>
+    <label>{{getAction()}}</label>
+  </ng-container>
+  <mat-chip-list aria-label="Projects" *ngIf="selected">
+    <mat-chip *ngFor="let project of data?.useInProjects" (click)="loadProject(project.name)" [selected]="project.name == currentProject" matTooltip="Load project {{project.name}}">{{project.name}}</mat-chip>
+    <mat-chip (click)="loadDatasetVirtualProject(this.selected?.data?.dataset?.name)" selected color="accent" matTooltip="Build full project for {{this.selected?.data?.dataset?.name}}">Full</mat-chip>
+  </mat-chip-list>
+  <br />
+  <a *ngFor="let source of getSourceAsArray()" href="{{source}}" target="_blank" style="word-wrap:break-word;">{{source}}</a>
+  <mat-action-row *ngIf="selected">
+    <button mat-button color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-button color="basic" matTooltip="Filter. Show object usage" (click)="filterByTableUsage(selected?.data?.dataset?.name)">
+      <mat-icon>filter_alt</mat-icon>
+    </button>                    
+    <button mat-button color="basic" matTooltip="Clear filter" (click)="clearTableFilter()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <button mat-button color="basic" matTooltip="Show domain links" (click)="openBottomSheet()">
+      <mat-icon>link</mat-icon>
+    </button>        
+  </mat-action-row>
+</mat-expansion-panel>

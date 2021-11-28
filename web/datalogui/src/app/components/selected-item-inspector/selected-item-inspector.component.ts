@@ -88,6 +88,10 @@ export class SelectedItemInspectorComponent implements OnInit {
     return this.selected?.data?.dataset?.sourceFile;    
   }
 
+  getSourceAsArray() {
+    return this.selected?.data?.dataset?.sourceFile?.split(";");
+  }  
+
   getAction() {
     return this.selected?.data?.dataset?.action;    
   }
