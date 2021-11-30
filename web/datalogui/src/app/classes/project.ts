@@ -7,4 +7,5 @@ export class Project {
   data?: Topology;
   enable?: boolean = true;
   domain?: boolean = false;
+  virtual?: boolean = false;
 }

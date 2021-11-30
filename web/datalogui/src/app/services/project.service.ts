@@ -259,7 +259,8 @@ export class ProjectService {
         project.data = new Topology()
         project.data.datasets = []
         let normalized: TopologyNode[] = []
-        project.name = datasetName        
+        project.name = datasetName
+        project.virtual = true;
 
         res.docs.forEach(pd => {
           /***********************************/
@@ -298,7 +299,7 @@ export class ProjectService {
         })
         let allin = this.getInDatasets(datasetName, normalized)
         let allout = this.getInDatasets(datasetName, normalized, undefined, "out")
-        let namesToExclude: string[] = []        
+        let namesToExclude: string[] = []
         project.data.datasets = normalized
           .filter(d=>d.name==datasetName || allin.indexOf(d.name) != -1 || allout.indexOf(d.name) != -1)
           .map(d=>{

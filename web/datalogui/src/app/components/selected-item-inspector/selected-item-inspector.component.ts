@@ -121,6 +121,17 @@ export class SelectedItemInspectorComponent implements OnInit {
       }
     )
   }
+
+  getAdditionalProject(): string | undefined {
+    if(this.selected?.data?.dataset?.project && this.data.useInProjects) {
+      if(this.selected?.data?.dataset?.project != "") {
+        if(!this.data.useInProjects.find(p => p.name === this.selected.data.dataset.project)) {
+          return this.selected?.data?.dataset?.project
+        }
+      }
+    }
+    return undefined
+  }
   
   openBottomSheet(): void {
     this._bottomSheet.open(DomainLinkComponentComponent, {

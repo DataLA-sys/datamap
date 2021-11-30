@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventService } from "../../services/events.service";
 import 'material-icons/iconfont/material-icons.css';
+import { Project } from 'src/app/classes/project';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -11,6 +13,7 @@ export class MainToolbarComponent implements OnInit   {
 
   currentProject: string | undefined;
   projects: string[] = []
+  virtualProjects: Project[] = []
   viewMode = "datasets"
   
   @Output()
@@ -20,7 +23,7 @@ export class MainToolbarComponent implements OnInit   {
       this.onDrawerToggle.emit(true);
   };
 
-  constructor(private eventService: EventService) { 
+  constructor(private eventService: EventService, private projectServie: ProjectService) { 
     eventService.nodeSelectedEvent$.subscribe(value => {
       this.eventService.emitGetGetSelectedNodeProjectEvent(value);
     })
@@ -29,8 +32,19 @@ export class MainToolbarComponent implements OnInit   {
       this.currentProject = value.name;
       if(!this.projects.includes(value.name)) {
         this.projects.push(value.name);
+        if(value.virtual === true) {
+          let found = this.virtualProjects.find(v => v.name === value.name)
+          if(!found) {
+            this.virtualProjects.push(value)
+            if(this.virtualProjects.length == 10) {
+              this.virtualProjects.shift()
+            }            
+          } else {
+            this.virtualProjects[this.virtualProjects.indexOf(found)] = value
+          }          
+        }
       }
-      if(this.projects.length == 6) {
+      if(this.projects.length == 10) {
         this.projects.shift()
       }
     })
@@ -53,12 +67,18 @@ export class MainToolbarComponent implements OnInit   {
 
   clear() {
     this.projects = []
+    this.virtualProjects = [];
     this.eventService.emitClearAllEvent()
   }
 
   loadProject(project: string | undefined) {
     if(project) {
-      this.eventService.emitProjectNameEvent(project)
+      let virtual = this.virtualProjects.find(v => v.name === project)
+      if(virtual) {
+        this.projectServie.buildDatasetVirtualProject(project)
+      } else {
+        this.eventService.emitProjectNameEvent(project)
+      }      
     }    
   }
 
