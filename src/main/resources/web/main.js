@@ -1976,7 +1976,6 @@ class ProjectService {
             return this.getLinksToDomainProject(project.name)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((links) => {
                 var _a;
-                console.log(links);
                 (_a = links.docs) === null || _a === void 0 ? void 0 : _a.forEach(doc => {
                     var _a;
                     (_a = doc.domainLinks) === null || _a === void 0 ? void 0 : _a.forEach(link => {
@@ -1989,18 +1988,19 @@ class ProjectService {
                             linked.datasetType = _classes_node__WEBPACK_IMPORTED_MODULE_7__["NodeType"].linked;
                             linked.in = [];
                             linked.out = [];
-                            linked.layer = found.layer;
                             if (link.linkType == "in") {
                                 if (!found.in) {
                                     found.in = [];
                                 }
                                 found.in.push(linked);
+                                linked.layer = "in";
                             }
                             if (link.linkType == "out") {
                                 if (!found.out) {
                                     found.out = [];
                                 }
                                 found.out.push(linked);
+                                linked.layer = "out";
                             }
                         }
                     });

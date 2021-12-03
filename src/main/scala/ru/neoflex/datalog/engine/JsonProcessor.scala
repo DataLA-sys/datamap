@@ -8,6 +8,7 @@ import org.json4s.jackson.JsonMethods._
 
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.{ExecutionContextExecutor, Future}
+import scala.io.Codec
 import scala.io.Source.fromFile
 
 
@@ -40,8 +41,11 @@ case class MangoQuery(resultFields: List[String], query: Map[String, Map[String,
 
 object JsonProcessor {
 
+  implicit val formats = DefaultFormats
+  implicit val codec = Codec("UTF8")
+
   def getFileText(fileName: String): String = {
-    val source = fromFile(fileName)
+    val source = fromFile(fileName)(codec)
     var text = ""
     try {
       text = source.getLines().mkString
@@ -76,8 +80,6 @@ object JsonProcessor {
     //List(Map(domain -> Map($exists -> false)), Map(domain -> Map($ne -> true)))
     MangoQuery(fields.toList, query, if(orElementsJ == JNothing) List() else orElementsJ.values.asInstanceOf[List[Map[String, Map[String, Boolean]]]])
   }
-
-  implicit val formats = DefaultFormats
 
   def matchFile(path: String, mangoQuery: MangoQuery, propsName: String = ""): Option[JObject]  = {
     if(propsName != "") {

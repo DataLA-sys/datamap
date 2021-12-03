@@ -18,7 +18,7 @@ case class TemplateFile(fileName: String, templateContent: String)
 
 object Parser {
 
-  implicit val codec: Codec = Codec("UTF-8")
+  implicit val codec: Codec = Codec("UTF8")
   val log = LoggerFactory.getLogger("ru.neoflex.datalog.engine.Parser")
   def getFileText(fileName: String,
                   lineProcessor: LineProcessor): String = {

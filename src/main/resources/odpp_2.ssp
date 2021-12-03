@@ -15,7 +15,7 @@
 <%@ val params: Option[String] = None%>
 <%	implicit val formats = DefaultFormats
 
-	implicit val codec = Codec("UTF-8")
+	implicit val codec = Codec("UTF8")
 
 	var joinScriptsFolder = ""
 	val tables = ListBuffer[DestTable]()

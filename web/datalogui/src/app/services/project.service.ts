@@ -93,7 +93,6 @@ export class ProjectService {
       return this.getLinksToDomainProject(project.name)
         .pipe(
             map((links: DomainProjectLinksSearchResult) =>  {
-              console.log(links);
               links.docs?.forEach(doc =>  {
                 doc.domainLinks?.forEach(link => {
                   let found = project.data?.datasets.find(d=>d.name == link.domainItem);
@@ -104,18 +103,19 @@ export class ProjectService {
                     linked.datasetType = NodeType.linked;
                     linked.in = []
                     linked.out = []
-                    linked.layer = found.layer
                     if(link.linkType == "in") {
                       if(!found.in) {
                         found.in = []
                       }
                       found.in.push(linked)
+                      linked.layer = "in"
                     }
                     if(link.linkType == "out") {
                       if(!found.out) {
                         found.out = []
                       }
                       found.out.push(linked)
+                      linked.layer = "out"
                     }                    
                   }
                 })

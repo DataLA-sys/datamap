@@ -1,5 +1,11 @@
 [
     {
+        "name": "Events model",
+        "template": "C:/projects/sbtprojects/datalog/src/main/resources/Events.ssp",
+        "templateParams": {},
+        "domain": true
+    },
+    {
         "name": "Ingest Data",
         "template": "C:/projects/sbtprojects/datalog/src/main/resources/IngestData.ssp",
         "templateParams": {},

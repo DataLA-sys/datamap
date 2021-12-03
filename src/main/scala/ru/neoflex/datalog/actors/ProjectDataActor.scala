@@ -98,7 +98,7 @@ object ProjectDataActor {
   def streamGetStr(system: ActorSystem[Nothing], source: Source[ByteString, _]): Future[String] = {
     implicit val actorSystem = system
     val sinkFold: Sink[ByteString, Future[String]] = Sink.fold("") { case (acc, str) =>
-      acc + str.decodeString("US-ASCII")
+      acc + str.decodeString("UTF8")
     }
     source.runWith(sinkFold)
   }
