@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Project } from 'src/app/classes/project';
-import { EventService } from 'src/app/services/events.service';
+import { Command } from 'src/app/classes/commands';
 import { SysutilService, RunOperator } from 'src/app/services/sysutil.service';
 
 
@@ -12,9 +11,11 @@ import { SysutilService, RunOperator } from 'src/app/services/sysutil.service';
 export class CommandsComponent implements OnInit {
 
   commands: RunOperator[] = []
+  configCommands: Command[] = []
   runit: string = ""
   
-  constructor(private sysutilService: SysutilService, private eventService: EventService) { 
+  constructor(private sysutilService: SysutilService) { 
+    sysutilService.getConfigCommands().subscribe(c => this.configCommands = c)
   }
 
   ngOnInit(): void {
@@ -25,6 +26,18 @@ export class CommandsComponent implements OnInit {
       this.commands = []
       this.commands = this.sysutilService.commands;
     })
+  }
+
+  addToConfig() {
+    let name = prompt("New command name:")
+    if(name != null) {
+      let newCommand = new Command()
+      newCommand.name = name
+      newCommand.template = this.runit
+      this.configCommands.push(newCommand)
+      this.sysutilService.saveConfigCommands(this.configCommands)
+        .subscribe(v => this.sysutilService.getConfigCommands().subscribe(c => this.configCommands = c))
+    }
   }
 
   refreshlog(command: RunOperator) {

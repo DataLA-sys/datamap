@@ -16,6 +16,7 @@ export class DomainLinkComponentComponent implements OnInit {
   _currentProject?: string = "";
   _currentItem?: string = "";
   links: any = undefined;
+  _tables: string[] = [];
 
   @Input() set currentProject(value: string | undefined) {    
     this._currentProject = value;
@@ -30,6 +31,13 @@ export class DomainLinkComponentComponent implements OnInit {
   }
   get currentItem(): string {
      return this._currentItem || ""; 
+  }
+
+  @Input() set tables(value: string[]) {    
+    this._tables = value;
+  }
+  get tables(): string[] {
+     return this._tables || []; 
   }  
 
   domainProjects?: Project[] = undefined;
@@ -39,13 +47,13 @@ export class DomainLinkComponentComponent implements OnInit {
   selectedLinkType: string = "None";
 
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {currentProject: string, currentItem: string}, 
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {currentProject: string, currentItem: string, tables: string[] }, 
     private _bottomSheetRef: MatBottomSheetRef<DomainLinkComponentComponent>, 
-    private projectService: ProjectService, private templateService: TemplateService, 
-    private eventService: EventService) { 
+    private projectService: ProjectService, private templateService: TemplateService) { 
       
     this._currentProject = data.currentProject;
     this._currentItem = data.currentItem;
+    this._tables = data.tables;
 
     this.inputChaged();
     

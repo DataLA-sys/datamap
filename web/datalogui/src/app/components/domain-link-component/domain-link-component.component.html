@@ -8,6 +8,13 @@
         </mat-expansion-panel-header>
 
         <mat-form-field appearance="fill">
+            <mat-select [(value)]="currentItem">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let table of tables" value="{{table}}">{{table}}</mat-option>    
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>Select link type</mat-label>
             <mat-select [(value)]="selectedLinkType">
                 <mat-option>None</mat-option>

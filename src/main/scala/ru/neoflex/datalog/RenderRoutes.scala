@@ -7,6 +7,7 @@ import akka.http.scaladsl.model.StatusCodes.PermanentRedirect
 import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import akka.http.scaladsl.model.headers.{`Access-Control-Allow-Credentials`, `Access-Control-Allow-Headers`, `Access-Control-Allow-Methods`, `Access-Control-Allow-Origin`}
 import akka.http.scaladsl.server.Directives.{complete, _}
+import akka.http.scaladsl.server.directives.RouteDirectives
 import akka.http.scaladsl.server.{Directive0, Route}
 import akka.util.Timeout
 import ru.neoflex.datalog.actors.RenderActor.{RenderTemplate, RenderedMessage}
@@ -21,6 +22,7 @@ import scala.concurrent.{ExecutionContextExecutor, Future}
 import spray.json.DefaultJsonProtocol._
 import spray.json.RootJsonFormat
 
+import java.io.{FileNotFoundException, PrintWriter}
 import java.nio.file.{Files, Paths}
 import scala.io.Source.fromFile
 
@@ -67,6 +69,7 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
 
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
   private implicit val timeout: Timeout = Timeout.create(system.settings.config.getDuration("my-app.routes.ask-timeout"))
+  private val commandsFile: String = system.settings.config.getString("my-app.system.commandsFile")
   implicit val ec: ExecutionContextExecutor = system.executionContext
   implicit val jobFormat: RootJsonFormat[TemplateFile] = jsonFormat2(TemplateFile)
   implicit val formats: DefaultFormats.type = DefaultFormats
@@ -107,6 +110,32 @@ class RenderRoutes(renderActor: ActorRef[RenderActor.RenderCommand],
           } else {
             println(s"Not found $projectFile")
             complete(s"""{"message": "project file $projectFile not found"}""")
+          }
+        }
+      },
+      get {
+        path("commandFile") {
+          if(Files.exists(Paths.get(commandsFile))) {
+            val source = fromFile(commandsFile)
+            val s = source.getLines.mkString
+            source.close()
+            complete(s)
+          } else {
+            println(s"Not found $commandsFile")
+            complete(s"""{"message": "command file $commandsFile not found"}""")
+          }
+        }
+      },
+      post {
+        path("commandFile") {
+          if(Files.exists(Paths.get(commandsFile))) {
+            entity(as[String]) { ent => {
+                new PrintWriter(commandsFile) { write(ent); close() }
+                complete("saved!")
+              }
+            }
+          } else {
+            failWith(new FileNotFoundException(commandsFile))
           }
         }
       },

@@ -23,6 +23,7 @@ export class SelectedItemInspectorComponent implements OnInit {
   selectedNodeProject: string | undefined;
   currentProject: string | undefined;
   data: Data = new Data();
+  tables: string[] = [];
 
   treeControl = new NestedTreeControl<Field>(node => node.sources);
 
@@ -47,6 +48,10 @@ export class SelectedItemInspectorComponent implements OnInit {
     this.eventService.projectEvent$.subscribe(value => {
       this.currentProject = value.name;
     })
+    eventService.tableListEvent$.subscribe(value => {
+      this.tables = value.map(d => (d?.name)||"").sort()
+    })
+
   }
 
   hasChild = (_: number, node: Field) => !!node.sources && node.sources.length > 0;
@@ -135,7 +140,7 @@ export class SelectedItemInspectorComponent implements OnInit {
   
   openBottomSheet(): void {
     this._bottomSheet.open(DomainLinkComponentComponent, {
-      data: { currentProject: this.currentProject, currentItem:  this.selected?.data?.dataset?.name },
+      data: { currentProject: this.currentProject, currentItem:  this.selected?.data?.dataset?.name, tables: this.tables },
     });
   }
   

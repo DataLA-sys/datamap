@@ -6,10 +6,18 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <p matLine>
-      <input type="text" size="160" [(ngModel)]="runit">
+      <input type="text" size="120" [(ngModel)]="runit" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let command of configCommands" [value]="command.template">
+          {{command.name + ": " + command.template}}
+        </mat-option>
+      </mat-autocomplete>
+      <button mat-button color="basic" matTooltip="Save this command" (click)="addToConfig()">
+        <mat-icon>add</mat-icon>
+      </button>      
     </p>
     <mat-action-row>
-      <button mat-button color="basic" (click)="runIt(runit)">
+      <button mat-button color="basic" matTooltip="Run this command" (click)="runIt(runit)">
           Run
           <mat-icon>play_arrow</mat-icon>
       </button>
