@@ -1,0 +1,656 @@
+[2022-05-15 21:19:56,399] [INFO] - C:/projects/temp/alfabank/groupOf/sql
+[2022-05-15 21:19:56,429] [INFO] - .*\.*
+[2022-05-15 21:19:56,456] [INFO] - C:\projects\temp\alfabank\groupOf\sql\DMOUTCDJ_LMB_RELATEDGROUP_LSTAT.sql
+[2022-05-15 21:19:57,360] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_EGRIPINDENTERPRENEUR_SDIM__EGRIPINDENTERPRENEUR_DMDELTA.sql
+[2022-05-15 21:19:57,386] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_EGRIPKIND_SDIM__EGRIPKIND_DMDELTA.sql
+[2022-05-15 21:19:57,394] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_EGRIPOWNER2LEGALPERSON_PROC__EGRIPOWNER2LEGALPERSON_DMDELTA.sql
+[2022-05-15 21:19:57,637] [INFO] - C:\projects\temp\alfabank\groupOf\sql\M_EGRIPOWNER2LEGALPERSON_SHIST__EGRIPOWNER2LEGALPERSON_DMDELTA.sql
+[2022-05-15 21:19:58,029] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_EGRIPSTATUS_SDIM__EGRIPSTATUS_DMDELTA.sql
+[2022-05-15 21:19:58,038] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_MODULE_LDIM__MODULE_DMDELTA.sql
+[2022-05-15 21:19:58,047] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_RELATEDGROUP_LMB_ERPGF_PROC__RELATEDGROUP_LMB_DMDELTA.sql
+[2022-05-15 21:19:58,627] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_RELATEDGROUP_LMB_RPGF_PROC__RELATEDGROUP_LMB_DMDELTA.sql
+[2022-05-15 21:19:58,877] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_RELATEDGROUP_PROC__RELATEDGROUP_DMDELTA.sql
+[2022-05-15 21:19:58,899] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_RELATEDGROUP_PROC__RELATEDGROUP_DMDELTA_2.sql
+[2022-05-15 21:19:58,982] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_RELATEDGROUP_SHIST__RELATEDGROUP_DMDELTA.sql
+[2022-05-15 21:19:59,009] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_SPARKCOMPANY_EDIM__SPARKCOMPANY_DMDELTA.sql
+[2022-05-15 21:19:59,020] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_SPARKSTATUS_SDIM__SPARKSTATUS_DMDELTA.sql
+[2022-05-15 21:19:59,025] [INFO] - C:\projects\temp\alfabank\groupOf\sql\m_SPARKSTRUCTURESOURCE_SDIM__SPARKSTRUCTURESOURCE_DMDELTA.sql
+[2022-05-15 21:22:59,820] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts
+[2022-05-15 21:22:59,822] [INFO] - .*\.*
+[2022-05-15 21:22:59,825] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inaccount_t.ql
+[2022-05-15 21:23:00,367] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inbalance_t.ql
+[2022-05-15 21:23:00,384] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incalcmegure_t.ql
+[2022-05-15 21:23:00,417] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incashflow_t.ql
+[2022-05-15 21:23:01,582] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inclient_t.ql
+[2022-05-15 21:23:01,606] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incontract_t.ql
+[2022-05-15 21:23:01,685] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\increditline_t.ql
+[2022-05-15 21:23:01,700] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t.ql
+[2022-05-15 21:23:01,710] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t_ext.ql
+[2022-05-15 21:23:01,734] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\intransaction_t.ql
+[2022-05-15 21:23:01,750] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\marketdata_t.ql
+[2022-05-15 21:36:55,466] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 21:36:55,537] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 21:36:55,564] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 21:36:55,594] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 21:36:55,612] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 21:36:55,630] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 21:36:55,647] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 21:36:55,670] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 21:36:55,685] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 21:36:55,703] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 21:36:55,720] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 21:36:55,745] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 21:36:55,761] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 21:36:55,776] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 21:36:55,798] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 21:36:55,818] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 21:36:55,843] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 21:36:55,861] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 21:36:55,938] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 21:36:55,956] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 21:36:55,978] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 21:36:55,986] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 21:36:55,995] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 21:36:56,004] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 21:36:56,563] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 21:36:56,580] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 21:36:56,596] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 21:36:56,614] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 21:36:56,640] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 21:36:56,657] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 21:36:56,690] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 21:36:56,706] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 21:36:56,718] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 21:36:56,735] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 21:36:56,751] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 21:36:56,773] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 21:36:56,790] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 21:36:56,803] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 21:36:56,818] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 21:36:56,836] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 21:36:56,853] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 21:36:56,873] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 21:36:56,904] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 21:36:56,917] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 21:36:56,933] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 21:36:56,951] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 21:36:56,969] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 21:36:56,981] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 21:36:56,997] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 21:36:57,014] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 21:36:57,032] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 21:42:54,637] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 21:42:54,658] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 21:42:54,670] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 21:42:54,678] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 21:42:54,684] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 21:42:54,694] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 21:42:54,702] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 21:42:54,713] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 21:42:54,725] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 21:42:54,731] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 21:42:54,738] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 21:42:54,749] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 21:42:54,755] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 21:42:54,762] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 21:42:54,770] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 21:42:54,778] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 21:42:54,794] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 21:42:54,799] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 21:42:54,829] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 21:42:54,837] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 21:42:54,846] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 21:42:54,851] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 21:42:54,859] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 21:42:54,866] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 21:42:54,874] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 21:42:54,882] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 21:42:54,888] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 21:42:54,895] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 21:42:54,907] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 21:42:54,915] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 21:42:54,930] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 21:42:54,938] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 21:42:54,943] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 21:42:54,953] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 21:42:54,960] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 21:42:54,970] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 21:42:54,977] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 21:42:54,984] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 21:42:54,991] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 21:42:54,998] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 21:42:55,005] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 21:42:55,016] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 21:42:55,037] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 21:42:55,042] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 21:42:55,049] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 21:42:55,059] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 21:42:55,070] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 21:42:55,075] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 21:42:55,081] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 21:42:55,089] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 21:42:55,096] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 21:50:37,646] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 21:50:37,654] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 21:50:37,666] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 21:50:37,672] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 21:50:37,678] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 21:50:37,684] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 21:50:37,688] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 21:50:37,696] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 21:50:37,703] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 21:50:37,708] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 21:50:37,714] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 21:50:37,721] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 21:50:37,727] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 21:50:37,733] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 21:50:37,742] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 21:50:37,748] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 21:50:37,758] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 21:50:37,764] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 21:50:37,784] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 21:50:37,789] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 21:50:37,798] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 21:50:37,802] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 21:50:37,807] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 21:50:37,813] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 21:50:37,818] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 21:50:37,825] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 21:50:37,831] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 21:50:37,836] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 21:50:37,843] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 21:50:37,849] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 21:50:37,862] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 21:50:37,867] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 21:50:37,872] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 21:50:37,880] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 21:50:37,886] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 21:50:37,896] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 21:50:37,901] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 21:50:37,906] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 21:50:37,911] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 21:50:37,917] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 21:50:37,923] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 21:50:37,931] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 21:50:37,945] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 21:50:37,949] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 21:50:37,955] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 21:50:37,964] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 21:50:37,970] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 21:50:37,976] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 21:50:37,982] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 21:50:37,988] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 21:50:37,994] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 21:52:55,556] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 21:52:55,592] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 21:52:55,601] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 21:52:55,607] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 21:52:55,612] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 21:52:55,617] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 21:52:55,621] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 21:52:55,628] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 21:52:55,636] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 21:52:55,642] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 21:52:55,654] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 21:52:55,667] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 21:52:55,671] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 21:52:55,676] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 21:52:55,683] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 21:52:55,689] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 21:52:55,698] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 21:52:55,700] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 21:52:55,727] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 21:52:55,734] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 21:52:55,742] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 21:52:55,747] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 21:52:55,756] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 21:52:55,761] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 21:52:55,767] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 21:52:55,775] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 21:52:55,780] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 21:52:55,784] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 21:52:55,795] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 21:52:55,800] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 21:52:55,820] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 21:52:55,828] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 21:52:55,832] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 21:52:55,839] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 21:52:55,844] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 21:52:55,849] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 21:52:55,857] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 21:52:55,861] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 21:52:55,864] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 21:52:55,870] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 21:52:55,875] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 21:52:55,884] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 21:52:55,899] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 21:52:55,904] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 21:52:55,909] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 21:52:55,915] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 21:52:55,922] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 21:52:55,926] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 21:52:55,931] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 21:52:55,937] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 21:52:55,943] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 21:58:55,732] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts
+[2022-05-15 21:58:55,732] [INFO] - .*\.*
+[2022-05-15 21:58:55,736] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inaccount_t.ql
+[2022-05-15 21:58:55,814] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inbalance_t.ql
+[2022-05-15 21:58:55,853] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incalcmegure_t.ql
+[2022-05-15 21:58:55,903] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incashflow_t.ql
+[2022-05-15 21:58:56,185] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inclient_t.ql
+[2022-05-15 21:58:56,194] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incontract_t.ql
+[2022-05-15 21:58:56,298] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\increditline_t.ql
+[2022-05-15 21:58:56,318] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t.ql
+[2022-05-15 21:58:56,326] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t_ext.ql
+[2022-05-15 21:58:56,373] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\intransaction_t.ql
+[2022-05-15 21:58:56,409] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\marketdata_t.ql
+[2022-05-15 21:59:52,506] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 21:59:52,523] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 21:59:52,540] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 21:59:52,545] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 21:59:52,551] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 21:59:52,561] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 21:59:52,567] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 21:59:52,575] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 21:59:52,581] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 21:59:52,584] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 21:59:52,593] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 21:59:52,601] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 21:59:52,604] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 21:59:52,609] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 21:59:52,616] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 21:59:52,621] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 21:59:52,634] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 21:59:52,637] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 21:59:52,670] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 21:59:52,703] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 21:59:52,710] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 21:59:52,713] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 21:59:52,717] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 21:59:52,721] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 21:59:52,729] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 21:59:52,735] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 21:59:52,738] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 21:59:52,745] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 21:59:52,750] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 21:59:52,754] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 21:59:52,769] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 21:59:52,776] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 21:59:52,779] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 21:59:52,785] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 21:59:52,792] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 21:59:52,798] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 21:59:52,803] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 21:59:52,808] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 21:59:52,813] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 21:59:52,818] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 21:59:52,825] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 21:59:52,831] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 21:59:52,846] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 21:59:52,850] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 21:59:52,859] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 21:59:52,866] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 21:59:52,874] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 21:59:52,879] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 21:59:52,885] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 21:59:52,893] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 21:59:52,898] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 22:01:21,557] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 22:01:21,566] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 22:01:21,575] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 22:01:21,579] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 22:01:21,585] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 22:01:21,589] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 22:01:21,592] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 22:01:21,597] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 22:01:21,604] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 22:01:21,607] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 22:01:21,610] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 22:01:21,616] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 22:01:21,619] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 22:01:21,621] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 22:01:21,626] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 22:01:21,629] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 22:01:21,640] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 22:01:21,643] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 22:01:21,667] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 22:01:21,671] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 22:01:21,676] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 22:01:21,678] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 22:01:21,680] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 22:01:21,685] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 22:01:21,690] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 22:01:21,694] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 22:01:21,696] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 22:01:21,699] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 22:01:21,704] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 22:01:21,707] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 22:01:21,716] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 22:01:21,720] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 22:01:21,723] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 22:01:21,762] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 22:01:21,766] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 22:01:21,771] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 22:01:21,774] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 22:01:21,777] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 22:01:21,780] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 22:01:21,786] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 22:01:21,789] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 22:01:21,794] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 22:01:21,806] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 22:01:21,809] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 22:01:21,813] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 22:01:21,822] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 22:01:21,827] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 22:01:21,830] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 22:01:21,835] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 22:01:21,838] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 22:01:21,842] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 22:02:03,627] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 22:02:03,636] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 22:02:03,647] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 22:02:03,651] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 22:02:03,654] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 22:02:03,659] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 22:02:03,663] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 22:02:03,667] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 22:02:03,673] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 22:02:03,676] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 22:02:03,680] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 22:02:03,686] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 22:02:03,690] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 22:02:03,694] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 22:02:03,700] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 22:02:03,720] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 22:02:03,729] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 22:02:03,733] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 22:02:03,757] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 22:02:03,761] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 22:02:03,766] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 22:02:03,768] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 22:02:03,772] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 22:02:03,775] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 22:02:03,781] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 22:02:03,787] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 22:02:03,789] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 22:02:03,792] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 22:02:03,796] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 22:02:03,799] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 22:02:03,808] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 22:02:03,811] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 22:02:03,813] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 22:02:03,818] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 22:02:03,824] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 22:02:03,829] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 22:02:03,834] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 22:02:03,839] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 22:02:03,842] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 22:02:03,846] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 22:02:03,848] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 22:02:03,855] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 22:02:03,866] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 22:02:03,870] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 22:02:03,874] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 22:02:03,879] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 22:02:03,886] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 22:02:03,890] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 22:02:03,894] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 22:02:03,898] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 22:02:03,902] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 22:02:29,729] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 22:02:29,732] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 22:02:29,740] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 22:02:29,743] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 22:02:29,745] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 22:02:29,749] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 22:02:29,751] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 22:02:29,755] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 22:02:29,760] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 22:02:29,762] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 22:02:29,765] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 22:02:29,773] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 22:02:29,777] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 22:02:29,780] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 22:02:29,785] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 22:02:29,789] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 22:02:29,797] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 22:02:29,799] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 22:02:29,819] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 22:02:29,823] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 22:02:29,828] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 22:02:29,829] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 22:02:29,832] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 22:02:29,834] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 22:02:29,837] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 22:02:29,841] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 22:02:29,844] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 22:02:29,846] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 22:02:29,850] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 22:02:29,853] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 22:02:29,861] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 22:02:29,864] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 22:02:29,867] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 22:02:29,871] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 22:02:29,875] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 22:02:29,880] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 22:02:29,883] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 22:02:29,885] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 22:02:29,888] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 22:02:29,892] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 22:02:29,895] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 22:02:29,900] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 22:02:29,912] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 22:02:29,914] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 22:02:29,918] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 22:02:29,925] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 22:02:29,929] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 22:02:29,932] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 22:02:29,935] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 22:02:29,939] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 22:02:29,943] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 22:03:00,773] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 22:03:00,777] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 22:03:00,784] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 22:03:00,787] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 22:03:00,789] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 22:03:00,793] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 22:03:00,796] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 22:03:00,799] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 22:03:00,803] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 22:03:00,806] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 22:03:00,809] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 22:03:00,814] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 22:03:00,817] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 22:03:00,821] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 22:03:00,827] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 22:03:00,831] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 22:03:00,839] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 22:03:00,842] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 22:03:00,864] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 22:03:00,866] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 22:03:00,870] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 22:03:00,872] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 22:03:00,875] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 22:03:00,877] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 22:03:00,881] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 22:03:00,884] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 22:03:00,886] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 22:03:00,889] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 22:03:00,894] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 22:03:00,897] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 22:03:00,904] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 22:03:00,909] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 22:03:00,911] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 22:03:00,915] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 22:03:00,918] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 22:03:00,923] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 22:03:00,928] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 22:03:00,932] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 22:03:00,936] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 22:03:00,941] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 22:03:00,945] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 22:03:00,950] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 22:03:00,961] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 22:03:00,964] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 22:03:00,968] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 22:03:00,972] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 22:03:00,979] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 22:03:00,982] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 22:03:00,986] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 22:03:00,990] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 22:03:00,994] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 22:04:36,951] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 22:04:36,959] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 22:04:36,972] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 22:04:36,979] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 22:04:36,985] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 22:04:36,991] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 22:04:36,995] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 22:04:37,000] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 22:04:37,009] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 22:04:37,013] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 22:04:37,017] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 22:04:37,025] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 22:04:37,028] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 22:04:37,033] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 22:04:37,039] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 22:04:37,044] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 22:04:37,063] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 22:04:37,069] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 22:04:37,091] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 22:04:37,094] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 22:04:37,101] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 22:04:37,105] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 22:04:37,108] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 22:04:37,111] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 22:04:37,115] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 22:04:37,122] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 22:04:37,126] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 22:04:37,130] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 22:04:37,138] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 22:04:37,142] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 22:04:37,150] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 22:04:37,155] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 22:04:37,158] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 22:04:37,162] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 22:04:37,167] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 22:04:37,196] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 22:04:37,202] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 22:04:37,206] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 22:04:37,209] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 22:04:37,213] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 22:04:37,217] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 22:04:37,222] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 22:04:37,232] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 22:04:37,238] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 22:04:37,243] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 22:04:37,248] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 22:04:37,254] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 22:04:37,258] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 22:04:37,261] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 22:04:37,266] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 22:04:37,271] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 23:01:21,800] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 23:01:21,926] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 23:01:21,945] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 23:01:21,961] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 23:01:21,968] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 23:01:21,977] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 23:01:21,985] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 23:01:21,997] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 23:01:22,007] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 23:01:22,014] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 23:01:22,020] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 23:01:22,033] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 23:01:22,041] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 23:01:22,048] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 23:01:22,060] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 23:01:22,070] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 23:01:22,086] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 23:01:22,095] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 23:01:22,137] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 23:01:22,147] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 23:01:22,162] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 23:01:22,169] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 23:01:22,178] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 23:01:22,185] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 23:01:22,196] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 23:01:22,207] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 23:01:22,215] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 23:01:22,223] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 23:01:22,238] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 23:01:22,252] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 23:01:22,271] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 23:01:22,282] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 23:01:22,290] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 23:01:22,305] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 23:01:22,317] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 23:01:22,328] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 23:01:22,336] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 23:01:22,345] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 23:01:22,351] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 23:01:22,358] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 23:01:22,364] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 23:01:22,377] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 23:01:22,399] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 23:01:22,405] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 23:01:22,415] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 23:01:22,427] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 23:01:22,436] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 23:01:22,442] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 23:01:22,450] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 23:01:22,458] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 23:01:22,466] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 23:02:46,453] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\Admindup\AdminDUPMain.kjb
+[2022-05-15 23:02:46,458] [INFO] - process file: C:\projects\temp\ac\localRep\Broadcasts\EstaffUserImport\estaff_mail.kjb
+[2022-05-15 23:02:46,468] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FULL.kjb
+[2022-05-15 23:02:46,473] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBI.kjb
+[2022-05-15 23:02:46,477] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\separateEasyBI.kjb
+[2022-05-15 23:02:46,481] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Reports.kjb
+[2022-05-15 23:02:46,486] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\FIN\Обновить сводные данные.kjb
+[2022-05-15 23:02:46,491] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\FULL\STG\STG.kjb
+[2022-05-15 23:02:46,500] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\JiraAutomations.kjb
+[2022-05-15 23:02:46,504] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\JiraAutomation\VerticalEmployeeAccessJob.kjb
+[2022-05-15 23:02:46,509] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Night.kjb
+[2022-05-15 23:02:46,518] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Django\Django.kjb
+[2022-05-15 23:02:46,521] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\JIRA NEW\JIRA NEW.kjb
+[2022-05-15 23:02:46,526] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\Night\Portal\Portal.kjb
+[2022-05-15 23:02:46,532] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\ProjectPortalMain.kjb
+[2022-05-15 23:02:46,537] [INFO] - process file: C:\projects\temp\ac\localRep\Integrations\ProjectPortal\Datalake\Datalake.kjb
+[2022-05-15 23:02:46,543] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\runFullAndNight.kjb
+[2022-05-15 23:02:46,545] [INFO] - process file: C:\projects\temp\ac\localRep\jira8migration\testChangedTransformations.kjb
+[2022-05-15 23:02:46,564] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\AbsenceReport\AbsenceMain.kjb
+[2022-05-15 23:02:46,570] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Allocation\Allocation.kjb
+[2022-05-15 23:02:46,576] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\consolidation.kjb
+[2022-05-15 23:02:46,578] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\detalisation.kjb
+[2022-05-15 23:02:46,581] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\FBBJ.kjb
+[2022-05-15 23:02:46,584] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\fixation.kjb
+[2022-05-15 23:02:46,588] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingBonus\f_billing_bonus_job - Copy.kjb
+[2022-05-15 23:02:46,591] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings\BillingReportJob.kjb
+[2022-05-15 23:02:46,594] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Billings Forecast\BillingsForecast.kjb
+[2022-05-15 23:02:46,596] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\BillingsBonus.kjb
+[2022-05-15 23:02:46,601] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate substrate.kjb
+[2022-05-15 23:02:46,604] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\BillingsBonus\Calculate total.kjb
+[2022-05-15 23:02:46,612] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\CubeIssuesReport\CubeReport.kjb
+[2022-05-15 23:02:46,615] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsOfProjectPrograms\DOPPJob.kjb
+[2022-05-15 23:02:46,618] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\DebtsStatistics\ExcelTotalAmounts.kjb
+[2022-05-15 23:02:46,622] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Grades detalization\Детализация по грейдам.kjb
+[2022-05-15 23:02:46,627] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\LKK Reports\LKK Delays.kjb
+[2022-05-15 23:02:46,633] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\ManagersReport\ManagersReportMain.kjb
+[2022-05-15 23:02:46,638] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\NFO\nfo_bug_job.kjb
+[2022-05-15 23:02:46,641] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\POInvoice\invoicejob.kjb
+[2022-05-15 23:02:46,643] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RegisterContracts\RegisterContractsJob.kjb
+[2022-05-15 23:02:46,646] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\RFPP.kjb
+[2022-05-15 23:02:46,650] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Простые статьи.kjb
+[2022-05-15 23:02:46,654] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\RFPP\Составные статьи.kjb
+[2022-05-15 23:02:46,664] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SalePlan\SalePlan.kjb
+[2022-05-15 23:02:46,667] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\SpecialistsBonus\SpecialistsBonus.kjb
+[2022-05-15 23:02:46,671] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\TurnaroundWorklogs\TurnaroundUpdate.kjb
+[2022-05-15 23:02:46,676] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\SOAVTB.kjb
+[2022-05-15 23:02:46,679] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\jira_bugs\Дефекты окно для ВТБ.kjb
+[2022-05-15 23:02:46,682] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\RELEASE\RELEASE.kjb
+[2022-05-15 23:02:46,686] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\Spira\jira-spira-bugs.kjb
+[2022-05-15 23:02:46,689] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\VTB\VTBSLA\VTBSLA.kjb
+[2022-05-15 23:02:46,693] [INFO] - process file: C:\projects\temp\ac\localRep\Reports\Долги_статистика\Итоговый расчет.kjb
+[2022-05-15 23:02:58,545] [INFO] - C:\projects\temp\ac\localRep\Integrations\FULL\EasyBI\EasyBIPlanWorklogs.ktr

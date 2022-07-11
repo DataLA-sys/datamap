@@ -20,6 +20,7 @@ object Parser {
 
   implicit val codec: Codec = Codec("UTF8")
   val log = LoggerFactory.getLogger("ru.neoflex.datalog.engine.Parser")
+
   def getFileText(fileName: String,
                   lineProcessor: LineProcessor): String = {
     val source = fromFile(fileName)
@@ -74,6 +75,16 @@ object Parser {
     tables.toList
   }
 
+  // fake
+  /*case class Relation(left: String, right: String)
+  def getJoins(logicalPlan: LogicalPlan) : Seq[Relation] = {
+    val relations = scala.collection.mutable.LinkedHashSet.empty[Relation]
+    logicalPlan.foreach(_ => {
+      case f: Join => f.left
+    })
+    relations.toSeq
+  }*/
+
   def getInTables(logical: LogicalPlan) : Seq[String] ={
     val tables = scala.collection.mutable.LinkedHashSet.empty[String]
     var i = 0
@@ -109,7 +120,7 @@ object Parser {
       getFields(logical)
     } catch {
       case e: Exception =>
-        e.printStackTrace()
+        log.error("error get fields from plan:", e)
         List[Field](Field(name ="Error While Processing", tableName = "", fieldPlanType = "error"))
     }
   }
@@ -229,7 +240,7 @@ object Parser {
             }
           })
         } catch {
-          case e:  Throwable => e.printStackTrace()
+          case e:  Throwable => log.error("error parse sql:", e)
         }
     })
     if(findPatterns) {

@@ -1,0 +1,114 @@
+<% escapeMarkup = false %>
+<%
+	import ru.neoflex.datalog.engine.dto.DestTable
+
+	import scala.collection.mutable.ListBuffer
+	import scala.reflect.io.Path
+	import scala.io.Codec
+	import Path._
+	import scala.xml._
+	import ru.neoflex.datalog.engine.{Parser, LineProcessor, SqlScriptLineProcessor}
+	import org.json4s._
+	import org.json4s.jackson.JsonMethods._
+	import org.json4s.jackson.Serialization
+	import org.slf4j.LoggerFactory
+	%>
+<%@ val params: Option[String] = None%>
+
+<%
+	implicit val formats = DefaultFormats
+	implicit val codec = Codec("UTF8")
+
+	val log = LoggerFactory.getLogger("ru.neoflex.datalog.engine.Parser")
+	var joinScriptsFolder = ""
+	var filesFilter = ".*\\.kjb"
+	val resTables = ListBuffer[DestTable]()
+	var project = ""
+	var sourceFile = ""
+	var  folder = "C:\\projects\\temp\\ac\\localRep"
+	var deep = -1
+	params.map(s => {
+		val j = parse(s)
+		folder = (j \ "folder").extract[String]
+		project = (j \ "project").extract[String]
+		sourceFile = (j \ "sourcePrefix").extract[String]
+		(j \ "deep").toOption.map(v=> deep = v.extract[Int])
+		(j \ "filesFilter").toOption.map(v=> filesFilter = v.extract[String])
+	})
+
+	var tranList = Map[String, String]()
+
+	folder.toDirectory.deepList(deep).filter(_.isFile).filter(p=>p.path matches filesFilter)
+		.foreach(file => {
+			val fileName = file.path
+			log.info("process file: " + fileName)
+			try {
+				val xml = XML.loadFile(fileName)
+				val jobName = (xml \ "name").text
+
+				(xml \\ "entry").foreach(entry => if ((entry \ "type").text == "TRANS") {
+						val transName = jobName + "." + (entry \ "transname").text
+						val entryName = jobName + "." + (entry \ "name").text
+						tranList += (entryName -> transName)
+					}
+				)
+
+				(xml \\ "hop").foreach(hop => {
+					val stepTo = jobName + "." + (hop \ "to").text
+					val stepFrom = jobName + "." + (if ((hop \ "from").text.toLowerCase() == "start")  "start" else (hop \ "from").text)
+					if(!resTables.exists(t => t.name == stepTo)) {
+					  resTables += DestTable(stepTo, List(stepFrom), fileName.replace("\\", "/"), jobName)
+					} else {
+						val f = resTables.find(t => t.name == stepTo).get
+						resTables -= f
+						val sources = ListBuffer[String]()
+						sources ++= f.sources
+						sources += stepFrom
+						val sourceFiles = if(f.sourceFile.contains(fileName.replace("\\", "/"))) f.sourceFile else f.sourceFile + ";\\r\\n" + fileName.replace("\\", "/")
+						resTables += DestTable(stepTo, sources.toList.distinct, sourceFiles, jobName)
+					}
+				})
+			} catch {
+				case e: Throwable => log.error("error in temlate:", e)
+			}
+		})
+
+	def getType(name: String): String = {
+		if(tranList.keySet.contains(name)) {
+			return "project"
+		}
+		"Component"
+	}
+	def getDescription(name: String): String = {
+		tranList.getOrElse(name, "")
+	}
+%>
+{
+"datasets":
+	[
+	#for (i <- 0 to resTables.size - 1)
+		{
+			"name": "${resTables(i).name}",
+			"layer": "${resTables(i).layer}",
+			"project": "ac_transformation",
+			"datasetType": "${getType(resTables(i).name)}",
+			"sourceFile": "${resTables(i).sourceFile}",
+			"description": "${getDescription(resTables(i).name)}",
+			"in": [
+			#for(j <- 0 to resTables(i).sources.size - 1)
+				{
+					"name": "${resTables(i).sources(j)}",
+					"layer": "${resTables(i).layer}",
+					"project": "ac_transformation",
+					"sourceFile": "${resTables(i).sourceFile}",
+					"datasetType": "${getType(resTables(i).sources(j))}",
+					"description": "${getDescription(resTables(i).sources(j))}",
+					"in": []
+				}#if(j != resTables(i).sources.size - 1) , #end
+			#end
+			],
+			"out": []
+			}#if(i != resTables.size - 1) , #end
+	#end
+	]
+}

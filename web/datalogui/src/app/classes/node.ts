@@ -32,6 +32,9 @@ export class NodeData {
     if(dataset.datasetType == "file") {
       return "assets/file.png";
     }
+    if(dataset.datasetType == "Error") {
+      return "assets/error-icon-32.png";
+    }
     if(dataset.datasetType == NodeType.linked) {
       return "assets/linkedTable.png";
     }        

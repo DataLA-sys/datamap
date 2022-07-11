@@ -8,8 +8,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 export class SourceCodeComponent implements OnInit {
 
   @Input()
-  codeValue: string = "";
-  @ViewChild('editor') editor: any;
+  codeValue: any = undefined;
 
   constructor() { }
 

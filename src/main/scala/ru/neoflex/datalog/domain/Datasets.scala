@@ -12,5 +12,6 @@ case class Table(override val name: String,
                  sourceFile: Option[String] = None,
                  sourceFileContent: Option[String] = None,
                  action: Option[String] = None,
-                 fields: List[Field] = List()
+                 fields: List[Field] = List(),
+                 description: String = ""
                 ) extends Node

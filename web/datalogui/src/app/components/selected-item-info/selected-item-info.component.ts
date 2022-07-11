@@ -96,7 +96,10 @@ export class SelectedItemInfoComponent implements OnInit {
         fileContent => {
           alert(fileContent)
         },
-        error => alert(error.message)
+        error => {
+          console.log(error)
+          alert(error.message)
+        }
       )
   }
 

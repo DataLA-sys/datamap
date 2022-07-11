@@ -1,4 +1,4 @@
-<mat-button-toggle-group  [(ngModel)]="viewMode" (change)="viewModeChanged()">
+<mat-button-toggle-group  [(ngModel)]="viewMode" (change)="viewModeChanged()" class="noprint">
   <mat-button-toggle value="datasets" matTooltip="View datasets" ngDefaultControl>
     <mat-icon>table_view</mat-icon>      
   </mat-button-toggle>
@@ -10,15 +10,15 @@
   </mat-button-toggle>
 </mat-button-toggle-group>
 
-<button mat-button color="basic" matTooltip="Zoom to fit" (click)="zoomToFit()">
+<button mat-button color="basic" matTooltip="Zoom to fit" (click)="zoomToFit()" class="noprint">
   <mat-icon>fit_screen</mat-icon>
 </button>
 
-<button mat-button color="basic" matTooltip="Center topology" (click)="centerGraph()">
+<button mat-button color="basic" matTooltip="Center topology" (click)="centerGraph()" class="noprint">
   <mat-icon>open_with</mat-icon>
 </button>
 
-<mat-button-toggle matTooltip="Clusters on/off" [checked]="showClusters" (change)="clustersOnOff()">
+<mat-button-toggle matTooltip="Clusters on/off" [checked]="showClusters" (change)="clustersOnOff()" class="noprint">
   <mat-icon>select_all</mat-icon>
 </mat-button-toggle>
 

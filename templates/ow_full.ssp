@@ -1,0 +1,170 @@
+<%
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
+import scala.io.Source.fromFile
+
+case class Step2(destTable: String, fieldName: String, isArray: Boolean, jsonsql: String) {
+	def this(destTable: String, fieldName: String,  jsonsql: String) = this(destTable, fieldName, false,  jsonsql)
+	def this(destTable: String, fieldName: String) = this(destTable, fieldName, false,  null)
+}
+case class Step2Custom(jsonsql: Option[String], destTable: Option[String], fieldName: Option[String], udf: Option[String])
+case class Xml(xmlField: Option[String], ns: Option[String], sql: Option[String], destTable: Option[String])
+
+case class Table(destTable: String, jsonsql: String, code: Option[String], disabled: Boolean,
+	step2: List[Step2] = List(),
+	xml: List[Xml] = List(),
+	step2_custom: List[Step2Custom] = List())
+
+case class Tables(tables: List[Table])
+
+val project: String = "Oliver_Wyman"
+val sourceFile: String = "conf.json"
+
+implicit val formats = DefaultFormats + FieldSerializer[Step2]()
+val path = "C:/projects/temp/alfabank/Oliver_Wyman/oozie_workflows/reg/wf_reg_ow_logs_deriveddata_daily/config/conf.json"
+val data = parse(fromFile(path).getLines.mkString)
+
+val tables: Tables = data.extract[Tables]
+%>
+{
+"actions":[
+	{"name": "Oozie",
+		"out": [
+			{"name": "Sqoop", "tool": "Sqoop"},
+			{"name": "Spark",
+				"out": [
+					{
+						"name": "prepareJson",
+						"out":
+							[{
+								"name": "readJson",
+								"out": [
+									{"name": "readJsonStep2"},
+									{"name": "readJsonStep2Custom"}
+									]
+							}]
+					},
+					{"name": "prepareXML", "out": [{"name": "readXML"}]}
+				]
+			}
+		]
+	}
+],
+"datasets":
+	[
+	#for (i <- 0 to tables.tables.size - 1)
+		{
+			"name": "${tables.tables(i).destTable}",
+			"layer": "DataMart",
+			"project": "${project}",
+			"sourceFile": "${sourceFile}",
+			"action": "readJson",
+			"in": [
+			#if(project == "Oliver_Wyman")
+				{
+					#if (tables.tables(i).destTable == "showcase_errors_backend")
+						"name": "ow_ow_prod_data_errors",
+						"action": "load",
+						"in": [{"name": "ow_prod_data.errors", "action": "Sqoop", "project": "Oliver_Wyman", "layer": "Oracle", "sourceFile": "${sourceFile}"}],
+						#elseif (tables.tables(i).destTable == "showcase_requests")
+						"name": "ow_ow_prod_data_requests",
+						"action": "Sqoop",
+						"in": [{"name": "ow_prod_data.requests", "action": "Sqoop", "project": "Oliver_Wyman", "layer": "Oracle", "sourceFile": "${sourceFile}"}],
+						#elseif (tables.tables(i).destTable == "showcase_request_items_input")
+						"name": "ow_ow_prod_data_request_items",
+						"action": "Sqoop",
+						"in": [{"name": "ow_prod_data.request_items", "action": "Sqoop", "project": "Oliver_Wyman", "layer": "Oracle", "sourceFile": "${sourceFile}"}],
+						#elseif (tables.tables(i).destTable == "showcase_request_items_output")
+						"name": "ow_ow_prod_data_request_items",
+						"action": "Sqoop",
+						"in": [{"name": "ow_prod_data.request_items", "action": "Sqoop", "project": "Oliver_Wyman", "layer": "Oracle", "sourceFile": "${sourceFile}"}],
+					#else
+						#if (tables.tables(i).jsonsql == "common_array.sql")
+							"name": "ow_ow_prod_data_source_processing_a",
+							"action": "Sqoop",
+							"in": [{
+								"name": "ow_prod_data_source_processing",
+								"action": "Sqoop",
+								"project": "Oliver_Wyman",
+								"layer": "Hive",
+								"sourceFile": "${sourceFile}",
+								"in": [
+									{"name": "ow_prod_data.source_processing",
+									"action": "Sqoop",
+									"project": "Oliver_Wyman",
+									"layer": "Oracle",
+									"sourceFile": "${sourceFile}"}
+								]}],
+						#else
+							"name": "ow_ow_prod_data_source_processing_p",
+							"action": "Sqoop",
+							"in": [{
+								"name": "ow_prod_data_source_processing",
+								"action": "Sqoop",
+								"project": "Oliver_Wyman",
+								"layer": "Hive",
+								"sourceFile": "${sourceFile}",
+								"in": [
+									{"name": "ow_prod_data.source_processing",
+									"action": "Sqoop",
+									"project": "Oliver_Wyman",
+									"layer": "Oracle",
+									"sourceFile": "${sourceFile}"
+									}
+								]}],
+						#end
+					#end
+
+					"layer": "Hive",
+					"project": "${project}",
+					"sourceFile": "${sourceFile}"
+				}
+			#end
+			#if(project == "Connector_data")
+				{"name": "credreg_alfacre_connector_data", "layer": "Raw", "project": "Connector_data", "sourceFile": "${sourceFile}"},
+				{"name": "cr_source2_connector_data", "layer": "Raw", "project": "Connector_data", "sourceFile": "${sourceFile}"}
+			#end
+			],
+			"out": [
+				<%
+				val s2count = tables.tables(i).step2.size + tables.tables(i).step2_custom.size + tables.tables(i).xml.size
+				var s2idx = 1
+				%>
+				#for (j <- 0 to tables.tables(i).step2.size - 1)
+				{
+					"name": "${tables.tables(i).step2(j).destTable}",
+					"action": "readJsonStep2",
+					"layer": "DataMart",
+					"project": "${project}",
+					"sourceFile": "${sourceFile}"
+				}
+				#if (s2idx != s2count), #end
+				<% s2idx += 1 %>
+				#end
+				#for (jj <- 0 to tables.tables(i).step2_custom.size - 1)
+					{
+					"name": "${tables.tables(i).step2_custom(jj).destTable}",
+					"action": "readJsonStep2Custom",
+					"layer": "DataMart",
+					"project": "${project}",
+					"sourceFile": "${sourceFile}"
+					}
+					#if (s2idx != s2count) , #end
+					<% s2idx += 1 %>
+				#end
+				#for (j <- 0 to tables.tables(i).xml.size - 1)
+				{
+					"name": "${tables.tables(i).xml(j).destTable.getOrElse(tables.tables(i).destTable + "_" + tables.tables(i).xml(j).xmlField.get)}",
+					"action": "readXML",
+					"layer": "DataMart",
+					"project": "${project}",
+					"sourceFile": "${sourceFile}"
+				}
+				#if (s2idx != s2count) , #end
+				<% s2idx += 1 %>
+				#end
+			]
+		}#if(i != tables.tables.size - 1) , #end
+	#end
+	]
+}

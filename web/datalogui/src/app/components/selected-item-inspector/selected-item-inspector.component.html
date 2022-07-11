@@ -1,7 +1,8 @@
 <mat-expansion-panel expanded="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      {{selected?.data?.dataset?.name}}
+      {{selected?.data?.dataset?.name}}<br />
+      {{selected?.data?.dataset?.description}}
     </mat-panel-title>
   </mat-expansion-panel-header>
   <ng-container *ngIf="getAction() != undefined">
@@ -14,7 +15,7 @@
     <mat-chip (click)="loadDatasetVirtualProject(this.selected?.data?.dataset?.name)" selected color="accent" matTooltip="Build full project for {{this.selected?.data?.dataset?.name}}">Full</mat-chip>
   </mat-chip-list>
   <br />
-  <a *ngFor="let source of getSourceAsArray()" href="{{source}}" target="_blank" style="word-wrap:break-word;">{{source}}</a>
+  <a *ngFor="let source of getSourceAsArray()" [routerLink]="" style="word-wrap:break-word;" (click)="getSourceFile()">{{source}}</a>
   <mat-action-row *ngIf="selected">
     <button mat-button color="basic" matTooltip="Filter. Show this object lineage" (click)="filterByTableIn(selected?.data?.dataset?.name)">
       <mat-icon>done</mat-icon>

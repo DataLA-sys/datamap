@@ -1,0 +1,35 @@
+{
+    "name": "Client Products Data",
+    "domain": true,
+    "datasets":[
+        {
+            "name": "Client",
+            "project": "Client Data",
+            "layer": "Hive",
+            "datasetType": "Table",
+            "in": [
+                {"name": "Client Info"},
+                {"name": "Client transactions"},
+                {"name": "Client history"}
+            ]
+        },
+        {"name": "Client Info", "project": "Client Data", "layer": "Hive", "datasetType": "Table"},
+        {"name": "Client transactions", "project": "Client Data", "layer": "Hive", "datasetType": "Table"},
+        {"name": "Client history", "project": "Client Data", "layer": "Hive", "datasetType": "Table"},
+        {"name": "Product", "project": "Client Data", "layer": "Hive", "datasetType": "Table"},
+        {"name": "Selected Product", "project": "Client Data", "layer": "Hive2", "datasetType": "Table"},
+        {
+            "name": "Modeling1",
+            "project": "Client Data",
+            "layer": "Hive2",
+            "datasetType": "project",
+            "in": [
+                {"name": "Client"},
+                {"name": "Product"}
+            ],
+            "out": [
+                {"name": "Selected Product"}
+            ]
+        }
+    ]
+}

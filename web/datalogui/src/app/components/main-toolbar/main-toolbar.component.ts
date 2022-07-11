@@ -3,6 +3,7 @@ import { EventService } from "../../services/events.service";
 import 'material-icons/iconfont/material-icons.css';
 import { Project } from 'src/app/classes/project';
 import { ProjectService } from 'src/app/services/project.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-main-toolbar',

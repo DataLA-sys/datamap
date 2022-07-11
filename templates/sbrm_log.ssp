@@ -1,0 +1,110 @@
+<%
+	import org.json4s.DefaultFormats
+	import org.json4s.jackson.{JsonMethods, Serialization}
+	import org.json4s.jackson.JsonMethods.{compact, parse, render}
+
+	import scala.io.Source.fromFile
+	import ru.neoflex.datalog.engine.Parser
+	import ru.neoflex.datalog.engine.dto.DestTable
+
+	import scala.collection.mutable.ListBuffer
+	import scala.io.Source.fromFile
+	import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
+	%>
+<%@ val params: Option[String] = None%>
+<%
+	implicit val formats = DefaultFormats
+	var projectFolder = "C:/projects/temp/alfabank/SBRM_LOG"
+	var project = ""
+
+	params.map(s => {
+		val j = parse(s)
+		projectFolder = (j \ "folder").extract[String]
+		project = (j \ "project").extract[String]
+	})
+
+	case class Table(name: Option[String],
+		sql: Option[String],
+		schema: Option[String],
+		xml_name: Option[String],
+		sql_block: Option[String],
+		blocks: Option[List[String]])
+
+	val confFile = projectFolder + "/oozie_workflows/reg/wf_reg_sbrm_deriveddata_daily/conf/parser_conf.json"
+	val data = parse(fromFile(confFile).getLines.mkString)
+	val tables = data \ "tables"
+
+	val ptables = ListBuffer[DestTable]()
+
+	val list = tables.values.asInstanceOf[Map[String, Map[String, _]]]
+
+	val mainTable = (for {
+		(tname, t) <- list
+		("sql", _) <- t
+	} yield tname).head
+
+	list.keySet.foreach(s => {
+		val tableJ = data \ "tables" \ s
+		val table = Serialization.read[Table](compact(render(tableJ)))
+
+		if(table.sql != Option.empty) {
+			val sqlFile = projectFolder + "/hdfs_home/scripts/sbrm_log/" + table.sql.get
+
+			val source = fromFile(sqlFile)
+			var inTables: Seq[String] = Seq.empty
+			try {
+				val sqlScript = source.getLines.mkString("\n")
+					.replace("{", "")
+					.replace("}", "")
+				ptables += DestTable(s, Parser.getInTables(CatalystSqlParser.parsePlan(sqlScript)).toList, sqlFile, "Hive")
+			} finally {
+				source.close()
+			}
+		} else {
+			ptables += DestTable(s, List(mainTable), confFile, "Hive")
+		}
+	})
+
+	Parser.processSqlFolder(projectFolder + "/hdfs_home/scripts", "",
+		ptables,
+		Seq(
+			("SET hive.exec.dynamic.partition.mode=non-strict;", ""),
+			("SET hive.exec.dynamic.partition=true;", ""),
+			("SET hive.exec.max.dynamic.partitions=12288;", ""),
+			("SET hive.exec.max.dynamic.partitions.pernode=6144;", ""),
+			("SET hive.enforce.bucketing=true;", ""),
+			("SET mapreduce.map.memory.mb=6144;", ""),
+			("SET mapreduce.map.java.opts=-Xmx6144m;", ""),
+			("SET mapreduce.map.reduce.mb=6144;", ""),
+			("SET mapreduce.reduce.java.opts=-Xmx6144m;", ""),
+			("${", ""), ("}", "")
+		).map(t=>("\\Q" + t._1 + "\\E", t._2)),
+		layer = "Hive"
+	)
+%>
+{
+"datasets":
+	[
+	#for (i <- 0 to ptables.size - 1)
+		{
+			"name": "${ptables(i).name}",
+			"layer": "${ptables(i).layer}",
+			"project": "${project}",
+			"sourceFile": "${confFile}",
+			"in": [
+			#for(j <- 0 to ptables(i).sources.size - 1)
+				{
+					"name": "${ptables(i).sources(j)}",
+					"layer": "Hive",
+					"project": "${project}",
+					"sourceFile": "${ptables(i).sourceFile}",
+					"in": []
+				}#if(j != ptables(i).sources.size - 1) , #end
+			#end
+			],
+			"out": [
+			]
+			}#if(i != ptables.size - 1) , #end
+	#end
+	]
+}

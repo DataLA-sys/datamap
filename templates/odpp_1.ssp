@@ -1,0 +1,104 @@
+<%
+	import java.io.File
+	import scala.collection.mutable.ListBuffer
+	import scala.io.Source.fromFile
+	import scala.io.Codec
+	import scala.util.control.Breaks._
+	import scala.io.Source
+	import org.json4s._
+	import org.json4s.jackson.JsonMethods._
+	import ru.neoflex.datalog.engine.Parser
+	%>
+<%@ val params: Option[String] = None%>
+<%	implicit val formats = DefaultFormats
+
+	implicit val codec = Codec("UTF8")
+
+	case class DestTable(name: String, sources: List[String], sourceFile: String)
+
+	def getListOfFiles(dir: String):List[File] = {
+		val d = new File(dir)
+		if (d.exists && d.isDirectory) {
+			d.listFiles.filter(_.isFile).toList
+		} else {
+			List[File]()
+		}
+	}
+	var joinScriptsFolder = ""
+	val tables = ListBuffer[DestTable]()
+	var project = ""
+	var sourceFile = ""
+	params.map(s => {
+		val j = parse(s)
+		joinScriptsFolder = (j \ "folder").extract[String]
+		project = (j \ "project").extract[String]
+		sourceFile = (j \ "sourcePrefix").extract[String]
+	})
+	//val tables = Parser.sqlTokens(joinScriptsFolder, sourceFile) //ListBuffer[DestTable]()
+	val files = getListOfFiles(joinScriptsFolder)
+	files.foreach(file => {
+		val fn = sourceFile + file.getName()
+
+		val source = fromFile(file.getAbsolutePath())
+		val lines = source.getLines()
+		var destTable = ""
+		val sources = ListBuffer[String]()
+
+		lines.foreach(s => {
+			val insTokens = List("insert into", "insert overwrite")
+			val fromTokens = List("from odpp", " join ")
+			breakable {insTokens.foreach(insToken => {
+				if(s.contains(insToken)) {
+					destTable = s.replace(insToken, "").replace("table", "").trim.split(' ')(0)
+					break
+					}
+				}
+			)}
+			fromTokens.foreach(token => {
+				if(s.contains(token)) {
+					val source = s.split(" on ")(0).split(' ').find(w => w.contains('.'))
+					source.map(w =>{
+						if(!sources.exists(item => item == w)) {
+							sources += w
+						}
+					})
+
+				}
+			})
+		})
+		if(destTable.contains(".")) {
+			tables.find(f => f.name == destTable).map(ft => {
+				sources ++= ft.sources;
+				tables -= ft
+			})
+			tables += DestTable(destTable, sources.toList.distinct, fn)
+		}
+		source.close()
+	})
+%>
+{
+"datasets":
+	[
+	#for (i <- 0 to tables.size - 1)
+		{
+			"name": "${tables(i).name}",
+			"layer": "${tables(i).name.split('.')(0)}",
+			"project": "${project}",
+			"sourceFile": "${tables(i).sourceFile}",
+			"in": [
+			#for(j <- 0 to tables(i).sources.size - 1)
+				{
+					"name": "${tables(i).sources(j)}",
+					"layer": "${tables(i).sources(j).split('.')(0)}",
+					"project": "${project}",
+					"sourceFile": "${tables(i).sourceFile}",
+					"in": []
+				}#if(j != tables(i).sources.size - 1) , #end
+			#end
+			],
+			"out": [
+			]
+			}#if(i != tables.size - 1) , #end
+	#end
+	]
+}

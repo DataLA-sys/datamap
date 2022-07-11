@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpUrlEncodingCodec } from '@angular/common/http';
 import { ProjectService } from './project.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { ProjectService } from './project.service';
 export class SourceFilesService {
   
   constructor(private http: HttpClient, private projectService: ProjectService) { }
-
+  private codec = new HttpUrlEncodingCodec()
   private getFolder(): string {
     if(this.projectService.currentProject?.templateParams) {
       const params: any = this.projectService.currentProject?.templateParams
@@ -18,9 +18,11 @@ export class SourceFilesService {
   }
 
   getSourceFileContent(fileName: string) {
-    let params = new HttpParams()
-      .set('fileName', this.getFolder() + fileName)
-    params.append("fileName",  this.getFolder() + fileName)    
-    return this.http.get("/sourceFileContent", { params })
+    let params = new HttpParams().set('fileName', encodeURIComponent(fileName))   
+    let opt: Object = {
+      params,
+      responseType: 'text' as 'json'
+    }
+    return this.http.get<string>("/sourceFileContent", opt)
   }
 }

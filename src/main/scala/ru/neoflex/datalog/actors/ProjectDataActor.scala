@@ -4,20 +4,25 @@ import akka.Done
 import akka.actor.typed.scaladsl.Behaviors
 import akka.actor.typed.{ActorRef, ActorSystem, Behavior, SupervisorStrategy}
 
-import java.io.PrintWriter
 import scala.io.Source.fromFile
-import akka.http.scaladsl.client.RequestBuilding.{Get, Post, Put}
+import akka.http.scaladsl.client.RequestBuilding.{Get, Put}
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{ContentType, ContentTypes, HttpEntity, HttpMethods, HttpRequest, HttpResponse}
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpMethods, HttpRequest, HttpResponse}
 import akka.http.scaladsl.model.headers.BasicHttpCredentials
+import akka.pattern.StatusReply
 import akka.stream.scaladsl.{Sink, Source}
 import akka.util.ByteString
+import org.json4s.JsonAST.{JArray, JString}
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
+import scala.io.Source.fromFile
 import org.json4s._
+import org.json4s.jackson.JsonMethods
 import org.json4s.jackson.JsonMethods._
 import ru.neoflex.datalog.engine.JsonProcessor
+
+import java.io.{File, PrintWriter}
 
 object ProjectDataActor {
   def apply(): Behavior[DataCommand] = Behaviors.supervise(process).onFailure(SupervisorStrategy.restart)
@@ -26,21 +31,21 @@ object ProjectDataActor {
   case class GetProjectStatCommand(project: String, propsName: String, replyTo: ActorRef[CompleteDataCommandMessage]) extends DataCommand
   case class FindProjectStatCommand(query: String, replyTo: ActorRef[CompleteDataCommandMessage]) extends DataCommand
   case class SaveProjectStatCommand(project: String, propsName: String, data: String, replyTo: ActorRef[CompleteDataCommandMessage]) extends DataCommand
+  case class RemoveLostDataFilesCommand(projectFile: String, replyTo: ActorRef[StatusReply[CompleteDataCommandMessage]]) extends DataCommand
   trait CompleteDataCommandMessage
   case class ProjectStatMessage(value: String, from: ActorRef[DataCommand]) extends CompleteDataCommandMessage
+  case class CompleteDataMessage(from: ActorRef[DataCommand]) extends CompleteDataCommandMessage
 
   implicit val formats = DefaultFormats
 
   def getFileText(fileName: String): String = {
+    val source = fromFile(fileName)
     try {
-      val source = fromFile(fileName)
-      try {
-        source.getLines().mkString("\n")
-      } finally {
-        source.close()
-      }
+      source.getLines().mkString("\n")
     } catch {
       case e: Exception => e.getMessage + "\n" + e.getStackTrace.mkString("\n")
+    } finally {
+      source.close()
     }
   }
 
@@ -116,38 +121,58 @@ object ProjectDataActor {
   }
 
   def findProjectsProps(system: ActorSystem[Nothing], query: String): Future[String] = {
-    implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    val useDB = system.settings.config.getBoolean("my-app.db.useDB")
-    if(useDB) {
-      checkDBAvailable(system).flatMap(av =>
-        if(av) {
-          findDocs(system, query).flatMap(res => streamGetStr(system, res.entity.dataBytes))
-        } else {
-          Future.failed(new Exception("Database unavailable!"))
-        }
-      )
-    } else {
-      val q = JsonProcessor.parseMangoQuery(query)
-      val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
-      Future(JsonProcessor.matchDir(dataFolder, q))
+    DataService.getService(system).findProjectsProps(system, query)
+  }
+
+  object DataService {
+    trait ProjectPros {
+      def getProjectProps(system: ActorSystem[Nothing], project: String, propsName: String): Future[String] = {
+        //implicit val executionContext: ExecutionContextExecutor = system.executionContext
+        val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
+        val fileName = dataFolder + project + "." + propsName + ".json"
+        Future(getFileText(fileName))
+      }
+      def findProjectsProps(system: ActorSystem[Nothing], query: String): Future[String] = {
+        //implicit val executionContext: ExecutionContextExecutor = system.executionContext
+        val q = JsonProcessor.parseMangoQuery(query)
+        val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
+        Future(JsonProcessor.matchDir(dataFolder, q))
+      }
+    }
+    trait DbProjectPros extends ProjectPros {
+      override def getProjectProps(system: ActorSystem[Nothing], project: String, propsName: String): Future[String] = {
+//        implicit val executionContext: ExecutionContextExecutor = system.executionContext
+        checkDBAvailable(system).flatMap({
+          case true => getDoc(system, project, propsName).flatMap(res => streamGetStr(system, res.entity.dataBytes))
+          case false => Future.failed(new Exception("Database unavailable!"))
+        })
+      }
+      override def findProjectsProps(system: ActorSystem[Nothing], query: String): Future[String] = {
+        //implicit val executionContext: ExecutionContextExecutor = system.executionContext
+        checkDBAvailable(system).flatMap(av =>
+          if(av) {
+            findDocs(system, query).flatMap(res => streamGetStr(system, res.entity.dataBytes))
+          } else {
+            Future.failed(new Exception("Database unavailable!"))
+          }
+        )
+      }
+    }
+    object NoDb extends ProjectPros
+    object WithDb extends DbProjectPros
+    implicit var executionContext: ExecutionContextExecutor = null
+
+    def getService(system: ActorSystem[Nothing]): ProjectPros = {
+      executionContext = system.executionContext
+      system.settings.config.getBoolean("my-app.db.useDB") match {
+        case true => WithDb
+        case false => NoDb
+      }
     }
   }
 
   def getProjectProps(system: ActorSystem[Nothing], project: String, propsName: String): Future[String] = {
-    implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    val useDB = system.settings.config.getBoolean("my-app.db.useDB")
-    if(useDB) {
-      checkDBAvailable(system).flatMap(av =>
-        if(av) {
-          getDoc(system, project, propsName).flatMap(res => streamGetStr(system, res.entity.dataBytes))
-        } else {
-          Future.failed(new Exception("Database unavailable!"))
-        })
-    } else {
-      val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
-      val fileName = dataFolder + project + "." + propsName + ".json"
-      Future(getFileText(fileName))
-    }
+    DataService.getService(system).getProjectProps(system, project, propsName)
   }
 
   def save(system: ActorSystem[Nothing], project: String, propsName: String, data: String): Unit = {
@@ -190,10 +215,11 @@ object ProjectDataActor {
           case Failure(_) => sys.error("CouchDb unavailable")
         }
     } else {
+      val fileName = project + "." + propsName + ".json"
       val dataFolder = system.settings.config.getString("my-app.system.dataFolder")
-      val fileName = dataFolder + project + "." + propsName + ".json"
-      new PrintWriter(fileName) { write(data); close() }
+      new PrintWriter(dataFolder + fileName) {write(data); close()}
     }
+
   }
 
   val process: Behavior[DataCommand] = Behaviors.receive { (context, message) =>
@@ -214,6 +240,26 @@ object ProjectDataActor {
       case message: SaveProjectStatCommand =>
         save(context.system, message.project, message.propsName, message.data)
         message.replyTo ! ProjectStatMessage(message.data, context.self)
+        Behaviors.same
+      case message: RemoveLostDataFilesCommand =>
+        try {
+          val projects = fromFile(message.projectFile)
+          try {
+            val JArray(names: List[JString]) = (JsonMethods.parse(projects.mkString) \ "name")
+            val d = new File(context.system.settings.config.getString("my-app.system.dataFolder"))
+            if (d.exists && d.isDirectory) {
+              d.listFiles.filter(_.isFile).filter(f =>
+                names.filter(a => a.extract[String] == f.getName.replace(".json", "")
+                  .split('.').dropRight(1).mkString(".")).length == 0).foreach(f => f.delete())
+            }
+          } finally {
+            projects.close()
+          }
+          message.replyTo ! StatusReply.success(CompleteDataMessage(context.self))
+        } catch {
+          case e: Throwable =>
+            message.replyTo ! StatusReply.error(e)
+        }
         Behaviors.same
       case _ => Behaviors.same
     }

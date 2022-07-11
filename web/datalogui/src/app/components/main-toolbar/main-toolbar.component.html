@@ -1,20 +1,19 @@
 <div fxLayout="row">
   <div fxFlex="97%" fxLayoutAlign="space-between center">
+    <button mat-button matTooltip="Open project" (click)="toggleDrawer()">
+      <mat-icon>folder_open</mat-icon>
+    </button>
 
-      <button mat-button matTooltip="Open project" (click)="toggleDrawer()">
-        <mat-icon>folder_open</mat-icon>
-      </button>
+    <span>&nbsp;</span>
 
-      <span>&nbsp;</span>
-
-      <mat-chip-list aria-label="Projects" cdkDropListOrientation="horizontal">
-        <mat-chip *ngFor="let project of projects" 
-          (click)="loadProject(project)" 
-          [selected]="project == currentProject" 
-          matTooltip="Load project {{project}}">
-          {{project}}
-        </mat-chip>
-      </mat-chip-list>
+    <mat-chip-list aria-label="Projects" cdkDropListOrientation="horizontal">
+      <mat-chip *ngFor="let project of projects" 
+        (click)="loadProject(project)" 
+        [selected]="project == currentProject" 
+        matTooltip="Load project {{project}}">
+        {{project}}
+      </mat-chip>
+    </mat-chip-list>
 
   </div>
   <div fxFlex="3%" fxLayoutAlign="end center space-around">

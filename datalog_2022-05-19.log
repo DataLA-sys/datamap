@@ -1,0 +1,146 @@
+[2022-05-19 13:14:34,567] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts
+[2022-05-19 13:14:34,613] [INFO] - .*\.*
+[2022-05-19 13:14:34,625] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inaccount_t.ql
+[2022-05-19 13:14:34,752] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inbalance_t.ql
+[2022-05-19 13:14:34,770] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incalcmegure_t.ql
+[2022-05-19 13:14:34,804] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incashflow_t.ql
+[2022-05-19 13:14:34,951] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inclient_t.ql
+[2022-05-19 13:14:34,968] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incontract_t.ql
+[2022-05-19 13:14:35,083] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\increditline_t.ql
+[2022-05-19 13:14:35,120] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t.ql
+[2022-05-19 13:14:35,131] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t_ext.ql
+[2022-05-19 13:14:35,180] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\intransaction_t.ql
+[2022-05-19 13:14:35,214] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\marketdata_t.ql
+[2022-05-19 14:58:08,462] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts
+[2022-05-19 14:58:08,480] [INFO] - .*\.*
+[2022-05-19 14:58:08,492] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inaccount_t.ql
+[2022-05-19 14:58:08,611] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inbalance_t.ql
+[2022-05-19 14:58:08,622] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incalcmegure_t.ql
+[2022-05-19 14:58:08,648] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incashflow_t.ql
+[2022-05-19 14:58:08,751] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inclient_t.ql
+[2022-05-19 14:58:08,758] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incontract_t.ql
+[2022-05-19 14:58:08,826] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\increditline_t.ql
+[2022-05-19 14:58:08,836] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t.ql
+[2022-05-19 14:58:08,840] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t_ext.ql
+[2022-05-19 14:58:08,863] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\intransaction_t.ql
+[2022-05-19 14:58:08,878] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\marketdata_t.ql
+[2022-05-19 15:13:47,507] [INFO] - C:/projects/temp/alfabank/catalog/l_deriveddata.dealloanbalance_sstat/hive
+[2022-05-19 15:13:47,517] [INFO] - .*\.*
+[2022-05-19 15:13:47,533] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.dealloanbalance_sstat\hive\deriveddata_dealloanbalance_tmp.hql
+[2022-05-19 15:14:42,772] [INFO] - C:/projects/temp/alfabank/catalog/s_dmrb.cardtransaction_stran/hive
+[2022-05-19 15:14:42,773] [INFO] - .*\.*
+[2022-05-19 15:14:42,777] [INFO] - C:\projects\temp\alfabank\catalog\s_dmrb.cardtransaction_stran\hive\hive.hql
+[2022-05-19 15:14:42,792] [ERROR] - error parse sql:
+org.apache.spark.sql.catalyst.parser.ParseException: 
+mismatched input 'DATE_PART' expecting {')', ','}(line 3, pos 89)
+
+== SQL ==
+
+
+insert overwrite table MART_DATABASE.cardtransaction_stran_rubbles PARTITION(date_part=''DATE_PART'')
+-----------------------------------------------------------------------------------------^^^
+select s0.card_uk,
+           s0.client_pin,
+           s0.opdate_time,
+           s0.summarur_amt,
+           s0.conamt_cur_amt,
+           s0.cardtrnmrcname_name,
+           s0.cardtrnopkind_ccode,
+           s1.ccode as cardtrnmcc_ccode,
+           s2.iso3_ccode as country_iso3_ccode,
+           s3.city_name as cardtrncity_name,
+           s4.iso_ccode as currency_op_ccode,
+           s5.iso_ccode as currency_account_ccode,
+           s6.ccode as cardtrnoptypegroup_ccode,
+           s7.ccode as cardtrnterminaltype_code
+from environment_dmrb.cardtransaction_stran s0
+                left join environment_dmrb.cardtrnmcc_sdim s1 on s0.cardtrnmcc_uk=s1.uk
+                left join environment_dmrb.country_sdim s2 on s0.country_uk=s2.uk
+                left join environment_dmrb.cardtrncity_xdim s3 on s0.cardtrncity_nk=s3.nk
+                left join environment_dmrb.currency_sdim s4 on s0.currency_op_uk=s4.uk
+                left join environment_dmrb.currency_sdim s5 on s0.currency_account_uk=s5.uk
+                left join environment_dmrb.cardtrnoptypegroup_ldim s6 on s0.cardtrnoptypegroup_uk=s6.uk
+                left join environment_dmrb.cardtrnterminaltype_ldim s7 on s0.cardtrnterminaltype_uk=s7.uk
+         WHERE s0.date_part = ''DATE_PART''
+
+	at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:255)
+	at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:124)
+	at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:75)
+	at ru.neoflex.datalog.engine.Parser$.processSqlScript(TemplateFile.scala:126)
+	at ru.neoflex.datalog.engine.Parser$.$anonfun$processSqlFolder$6(TemplateFile.scala:229)
+	at ru.neoflex.datalog.engine.Parser$.$anonfun$processSqlFolder$6$adapted(TemplateFile.scala:223)
+	at scala.collection.IndexedSeqOptimized.foreach(IndexedSeqOptimized.scala:32)
+	at scala.collection.IndexedSeqOptimized.foreach$(IndexedSeqOptimized.scala:29)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:191)
+	at ru.neoflex.datalog.engine.Parser$.$anonfun$processSqlFolder$3(TemplateFile.scala:223)
+	at ru.neoflex.datalog.engine.Parser$.$anonfun$processSqlFolder$3$adapted(TemplateFile.scala:219)
+	at scala.collection.Iterator.foreach(Iterator.scala:929)
+	at scala.collection.Iterator.foreach$(Iterator.scala:929)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1417)
+	at ru.neoflex.datalog.engine.Parser$.processSqlFolder(TemplateFile.scala:219)
+	at C_.projects.sbtprojects.datalog.src.main.resources.$_scalate_$odpp_2_ssp$.$_scalate_$render(odpp_2.ssp.scala:51)
+	at C_.projects.sbtprojects.datalog.src.main.resources.$_scalate_$odpp_2_ssp.render(odpp_2.ssp.scala:122)
+	at org.fusesource.scalate.layout.NullLayoutStrategy$.layout(LayoutStrategy.scala:43)
+	at org.fusesource.scalate.TemplateEngine.$anonfun$layout$2(TemplateEngine.scala:567)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)
+	at org.fusesource.scalate.RenderContext.withUri(RenderContext.scala:439)
+	at org.fusesource.scalate.RenderContext.withUri$(RenderContext.scala:431)
+	at org.fusesource.scalate.DefaultRenderContext.withUri(DefaultRenderContext.scala:31)
+	at org.fusesource.scalate.TemplateEngine.$anonfun$layout$1(TemplateEngine.scala:567)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)
+	at org.fusesource.scalate.RenderContext$.using(RenderContext.scala:49)
+	at org.fusesource.scalate.TemplateEngine.layout(TemplateEngine.scala:563)
+	at org.fusesource.scalate.TemplateEngine.layout(TemplateEngine.scala:603)
+	at org.fusesource.scalate.TemplateEngine.layout(TemplateEngine.scala:615)
+	at org.fusesource.scalate.TemplateEngine.layout(TemplateEngine.scala:583)
+	at ru.neoflex.datalog.actors.RenderActor$.justRender(RenderActor.scala:23)
+	at ru.neoflex.datalog.actors.RenderActor$.$anonfun$render$1(RenderActor.scala:33)
+	at akka.actor.typed.internal.BehaviorImpl$ReceiveBehavior.receive(BehaviorImpl.scala:136)
+	at akka.actor.typed.Behavior$.interpret(Behavior.scala:274)
+	at akka.actor.typed.Behavior$.interpretMessage(Behavior.scala:230)
+	at akka.actor.typed.internal.InterceptorImpl$$anon$2.apply(InterceptorImpl.scala:57)
+	at akka.actor.typed.internal.RestartSupervisor.aroundReceive(Supervision.scala:268)
+	at akka.actor.typed.internal.InterceptorImpl.receive(InterceptorImpl.scala:85)
+	at akka.actor.typed.Behavior$.interpret(Behavior.scala:274)
+	at akka.actor.typed.Behavior$.interpretMessage(Behavior.scala:230)
+	at akka.actor.typed.internal.adapter.ActorAdapter.handleMessage(ActorAdapter.scala:131)
+	at akka.actor.typed.internal.adapter.ActorAdapter.aroundReceive(ActorAdapter.scala:107)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:579)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:547)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+[2022-05-19 15:17:51,984] [INFO] - C:/projects/temp/alfabank/catalog/l_deriveddata.default_deal_v1/Hive
+[2022-05-19 15:17:51,984] [INFO] - .*\.*
+[2022-05-19 15:17:51,987] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\1_step_intermedtmptable_v1.hql
+[2022-05-19 15:17:52,017] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\21_step_intermedtmptable_v1.hql
+[2022-05-19 15:17:52,054] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\22_step_intermedtmptable_v1.hql
+[2022-05-19 15:17:52,092] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\23_step_intermedtmptable_v1.hql
+[2022-05-19 15:17:52,106] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\24_step_intermedtmptable_v1.hql
+[2022-05-19 15:17:52,122] [INFO] - C:\projects\temp\alfabank\catalog\l_deriveddata.default_deal_v1\Hive\default_deal_v1.hql
+[2022-05-19 23:31:56,970] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts
+[2022-05-19 23:31:56,980] [INFO] - .*\.*
+[2022-05-19 23:31:56,989] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inaccount_t.ql
+[2022-05-19 23:31:57,108] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inbalance_t.ql
+[2022-05-19 23:31:57,132] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incalcmegure_t.ql
+[2022-05-19 23:31:57,171] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incashflow_t.ql
+[2022-05-19 23:31:57,337] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inclient_t.ql
+[2022-05-19 23:31:57,351] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\incontract_t.ql
+[2022-05-19 23:31:57,472] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\increditline_t.ql
+[2022-05-19 23:31:57,494] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t.ql
+[2022-05-19 23:31:57,502] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\inevent_t_ext.ql
+[2022-05-19 23:31:57,537] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\intransaction_t.ql
+[2022-05-19 23:31:57,561] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\acc\join_scripts\marketdata_t.ql
+[2022-05-19 23:35:18,522] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/utm/acc/join_scripts
+[2022-05-19 23:35:18,522] [INFO] - .*\.*
+[2022-05-19 23:35:18,524] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\utm\acc\join_scripts\utm_abs.ql
+[2022-05-19 23:35:18,723] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\utm\acc\join_scripts\utm_bis.ql
+[2022-05-19 23:35:37,483] [INFO] - C:/projects/temp/rosbank/odpp/legacy/config/test/mr/utm/acc/join_scripts
+[2022-05-19 23:35:37,483] [INFO] - .*\.*
+[2022-05-19 23:35:37,484] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\utm\acc\join_scripts\utm_abs.ql
+[2022-05-19 23:35:37,512] [INFO] - C:\projects\temp\rosbank\odpp\legacy\config\test\mr\utm\acc\join_scripts\utm_bis.ql

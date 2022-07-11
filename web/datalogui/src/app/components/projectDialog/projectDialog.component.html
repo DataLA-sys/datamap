@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Project</h2>
+<mat-dialog-content>
+  Project name <input [(ngModel)]="data.name"><br />
+  Template <input [(ngModel)]="data.template"><br />
+  <mat-checkbox [(ngModel)]="data.domain">Domain</mat-checkbox><br />
+  <textarea cols="60" rows="6" [(ngModel)]="data.templateParams"></textarea>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Save</button>
+</mat-dialog-actions>

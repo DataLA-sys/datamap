@@ -7,6 +7,7 @@ import { SourceFilesService } from 'src/app/services/files.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { DomainLinkComponentComponent } from '../domain-link-component/domain-link-component.component';
+import { ContentFile } from 'src/app/classes/files'
 
 class Data {
   useInProjects: Named[] | undefined = undefined
@@ -105,9 +106,12 @@ export class SelectedItemInspectorComponent implements OnInit {
     this.sourceFilesService.getSourceFileContent(this.selected.data?.dataset?.sourceFile)    
       .subscribe(
         fileContent => {
-          alert(fileContent)
+          this.eventService.emitOpenSourceFileEvent(new ContentFile(this.selected.data?.dataset?.sourceFile, fileContent))
         },
-        error => alert(error.message)
+        error => {
+          console.log(error)
+          alert(error.error)
+        }
       )
   }
 

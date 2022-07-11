@@ -39,5 +39,6 @@ lazy val root = (project in file(".")).
       "org.scalatest"     %% "scalatest"                % "3.1.4"         % Test
     )
   )
+  lazy val logback = "ch.qos.logback" % "logback-classic" % "1.2.5"
 
 (compile in Compile) := ((compile in Compile) dependsOn execNpmBuildScript).value

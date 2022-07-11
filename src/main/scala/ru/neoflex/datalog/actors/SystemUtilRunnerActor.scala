@@ -15,6 +15,7 @@ import scala.collection.mutable.ListBuffer
 import scala.concurrent.{Future, blocking}
 import scala.concurrent.duration.DurationInt
 import scala.io.Source._
+import scala.util.{Failure, Success}
 
 object SystemUtilRunnerActor {
   def apply(configFile: String): Behavior[SystemRunnerCommand] = Behaviors.supervise(render).onFailure(SupervisorStrategy.restart)
@@ -30,16 +31,14 @@ object SystemUtilRunnerActor {
   def runSh(runId: String, shCommand: String, system: ActorSystem[Nothing]): String = {
     system.log.info("runner: " + shCommand)
     implicit val ex = system.executionContext
-    val p = new ProcessBuilder(shCommand.split(' ').toArray:_*)
 
-    val r: Future[Boolean] = Future {
+    Future {
       blocking {
-        try {
+          val p = new ProcessBuilder(shCommand.split(' ').toArray:_*)
           val strBuffer = new ListBuffer[String]()
           strBuffer += Calendar.getInstance.getTime.toString
           strBuffer += "Start: " + shCommand
-          val p2 = p.start()
-          val br = new BufferedReader(new InputStreamReader(p2.getInputStream()))
+          val br = new BufferedReader(new InputStreamReader(p.start().getInputStream()))
           commandsOutput += (runId -> (shCommand, strBuffer))
 
           var line: String = ""
@@ -52,22 +51,16 @@ object SystemUtilRunnerActor {
           br.close()
           strBuffer += Calendar.getInstance.getTime.toString
           strBuffer += "Finish: " + shCommand
-          true
-        } catch {
-          case e: Throwable => {
-            println("Error")
+      }
+    } onComplete {
+      case Failure(e) =>
             val strBuffer = new ListBuffer[String]()
             strBuffer += e.getMessage
             strBuffer ++= e.getStackTrace.toList.map(l=>l.toString)
             system.log.error(strBuffer.mkString("\n"))
             commandsOutput += (runId -> (shCommand, strBuffer))
-            false
-          }
-          case _ => false
-        }
-      }
+      case _ =>
     }
-    r.map(v=>v)
 
     runId
   }

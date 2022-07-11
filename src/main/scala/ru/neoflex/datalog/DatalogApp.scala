@@ -3,12 +3,9 @@ package ru.neoflex.datalog
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Route
+import akka.http.scaladsl.server.{Route}
 import ru.neoflex.datalog.actors.{ProjectDataActor, RenderActor, SourceFilesActor, SystemUtilActor, SystemUtilRunnerActor}
 
-import java.lang.Thread.sleep
-import java.util.Calendar
-import scala.concurrent.{Future, blocking}
 import scala.util.Failure
 import scala.util.Success
 
@@ -33,7 +30,6 @@ object DatalogApp {
   //#start-http-server
 
   def main(args: Array[String]): Unit = {
-
       val rootBehavior = Behaviors.setup[Nothing] { context =>
         val projectsFileName = {
           if(args.length > 0) {
@@ -54,7 +50,7 @@ object DatalogApp {
         val systemUtilActor = context.spawn(SystemUtilActor(systemUtilConfigFileName, systemUtilRunnerActor), "SystemUtilActor")
 
         val routes = new RenderRoutes(renderActor, filesActor,
-          projectDataActor, systemUtilActor)(projectsFileName)(systemUtilConfigFileName)(context.system)
+          projectDataActor, systemUtilActor)(projectsFileName)(context.system)
         startHttpServer(routes.renderRoutes())(context.system)
 
         Behaviors.empty

@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Node, NodeData } from "../classes/node";
 import { Project } from '../classes/project';
+import { ContentFile } from 'src/app/classes/files'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService { 
   constructor() { }
+
+  ngOnDestroy() {
+    this.clearAllEventSource.complete()
+  }
 
   private clearAllEventSource = new Subject<boolean>();
   clearAllEvent$ = this.clearAllEventSource.asObservable();
@@ -37,6 +42,18 @@ export class EventService {
   joinDataEvent$ = this.joinDataEventSource.asObservable();
   emitJoinDataEvent(data: any) {
     this.joinDataEventSource.next(data);
+  }
+
+  private loadProjectEventSource = new Subject<Project>();
+  loadProjectEvent$ = this.loadProjectEventSource.asObservable();
+  emitLoadProjectEvent(data: Project) {
+    this.loadProjectEventSource.next(data);
+  }
+
+  private openSourceFileEventSource = new Subject<ContentFile>();
+  openSourceFileEvent$ = this.openSourceFileEventSource.asObservable();
+  emitOpenSourceFileEvent(data: ContentFile) {
+    this.openSourceFileEventSource.next(data);
   }
 
   private projectEventSource = new Subject<Project>();

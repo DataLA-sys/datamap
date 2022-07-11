@@ -1,28 +1,23 @@
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let project of projects">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            {{project.name}}
-        </mat-panel-title>
-        <mat-panel-description>
-            <mat-icon *ngIf="project.domain == true">class</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p matLine>
-        {{project.template}}
-      </p>
-      <p matLine>
-        <textarea cols="60" rows="6" disabled>{{prettyJson(project.templateParams)}}</textarea>
-        
-      </p>
-      <mat-action-row>
-        <button mat-button color="basic" (click)="loadProject(project)">
-            Load
-            <mat-icon>content_paste</mat-icon>
-        </button>
-        <button mat-button color="basic" (click)="loadProject(project, false)" matTooltip="Add project data to current">
-            Add<mat-icon>add_circle_outline</mat-icon>
-        </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-<mat-accordion>
+<mat-nav-list>
+  <mat-list-item>
+    <button mat-icon-button (click)="createProject()" matTooltip="New">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item *ngFor="let project of projects"  (mouseover)="projectUnderMouse = project.name">
+      <a matLine [routerLink]="null" (click)="loadProject(project, true)">{{ project.name }}</a>
+      <button mat-icon-button (click)="loadProject(project, false)" 
+        matTooltip="Add" *ngIf="projectUnderMouse == project.name">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+      <button mat-icon-button (click)="editProject(project)"
+        matTooltip="Edit" *ngIf="projectUnderMouse == project.name">
+        <mat-icon>info</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteProject(project)"
+        matTooltip="Del" *ngIf="projectUnderMouse == project.name">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <mat-icon matTooltip="Item is domain project" *ngIf="project.domain == true">class</mat-icon>
+  </mat-list-item>
+</mat-nav-list>

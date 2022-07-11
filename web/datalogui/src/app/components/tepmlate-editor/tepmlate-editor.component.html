@@ -1,13 +1,22 @@
-<button mat-icon-button aria-label="Render" matTooltip="Render template" (click)="renderTemplate()">
-  <mat-icon>cake</mat-icon>
+<button mat-icon-button aria-label="Render" matTooltip="Render body" (click)="renderTemplateByBody()">
+  <mat-icon>check_circle</mat-icon>
 </button>
 <input type="text" [(ngModel)]="fileName">
 <input type="params" [(ngModel)]="params">
 <button mat-icon-button aria-label="Set data" matTooltip="Set json data to topology graph" (click)="setData()">
+  <mat-icon>assessment</mat-icon>
+</button>
+<button mat-icon-button aria-label="Save" matTooltip="Save" (click)="saveTemplate()">
   <mat-icon>done</mat-icon>
 </button>
 
-<ace-editor
-[(text)]="fileContent"
- #templateEditor style="height:600px;">
-</ace-editor>
+<div style="width: 100%; height: 80.4vh; background: yellow;">
+  <as-split direction="horizontal">
+    <as-split-area [size]="50">
+    <div ace-editor [(text)]="fileBody" [mode]="'scala'" style="height:100%;"></div>
+    </as-split-area>
+    <as-split-area [size]="50">
+    <div ace-editor [(text)]="rendered" [mode]="'json'" [readonly]="true" style="height:100%;"></div>
+    </as-split-area>
+  </as-split>
+</div>

@@ -1,6 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { EventService } from 'src/app/services/events.service';
-import { TopologyComponent } from '../topology/topology.component'
+import { TopologyComponent } from '../topology/topology.component';
+import { ContentFile } from 'src/app/classes/files'
+import 'brace'
+import 'brace/mode/sql'
+import 'brace/theme/eclipse'
 
 @Component({
   selector: 'app-main-layout',
@@ -16,6 +20,9 @@ export class MainLayoutComponent implements OnInit {
   leftArea = "25%"
   mainArea = "75%"
 
+  openFiles: ContentFile[] = []
+  selectedTabIndex = 0;
+
   constructor(private eventService: EventService, public cd: ChangeDetectorRef) {
     eventService.spinnerEvent$.subscribe(value => {
       this.showSpinner = value;
@@ -28,7 +35,13 @@ export class MainLayoutComponent implements OnInit {
     eventService.narrowLayoutEvent$.subscribe(_ => {
       this.leftArea = "25%";
       this.mainArea = "75%"
-    })    
+    }) 
+    eventService.openSourceFileEvent$.subscribe(value => {
+      this.openFiles = this.openFiles.filter(f => f.name != value.name)
+      this.openFiles.push(value)
+      this.selectedTabIndex = 4 + this.openFiles.length - 1
+    })
+    eventService.clearAllEvent$.subscribe(_ => this.openFiles = [])
   }
 
   zoomToFit() {
@@ -36,6 +49,10 @@ export class MainLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  deleteFile(fileName: string) {
+    this.openFiles.splice(this.openFiles.indexOf(this.openFiles.filter(f=>f.name===fileName)[0]), 1)
   }
 
 }

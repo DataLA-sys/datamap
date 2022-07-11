@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocationStrategy, HashLocationStrategy} from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopologyComponent } from './components/topology/topology.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
-import { AceEditorModule } from 'ngx-ace-editor-wrapper';
+import { AceEditorModule } from 'ng2-ace-editor';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,9 +32,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularSplitModule } from 'angular-split';
 
 import { FilesTreeComponent } from './components/files-tree/files-tree.component';
 import { SourceCodeComponent } from './components/source-code/source-code.component';
@@ -50,6 +52,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import 'material-icons/iconfont/material-icons.css';
 import { DomainLinkComponentComponent } from './components/domain-link-component/domain-link-component.component';
 import { CommandsComponent } from './components/commands/commands.component';
+import { ProjectDialogComponent } from './components/projectDialog/projectDialog.component';
+
+import { CacheInterceptor } from './http-interceptors/cache-interceptor';
 
 @NgModule({
   declarations: [
@@ -66,7 +71,8 @@ import { CommandsComponent } from './components/commands/commands.component';
     SelectedItemInfoComponent,
     TopologyGridViewComponent,
     DomainLinkComponentComponent,
-    CommandsComponent
+    CommandsComponent,
+    ProjectDialogComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -101,12 +107,15 @@ import { CommandsComponent } from './components/commands/commands.component';
     MatSidenavModule,
     MatChipsModule,
     MatBottomSheetModule,
+    MatDialogModule,
     ScrollingModule,
     AceEditorModule,
     FlexLayoutModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    AngularSplitModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
     { provide: MatBottomSheetRef, useValue: {} },    

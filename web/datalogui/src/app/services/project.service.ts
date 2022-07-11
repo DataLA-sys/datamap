@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, of, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, forkJoin, pipe, from, merge, iif, EMPTY } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { Project } from '../classes/project';
 import { TemplateService } from './template.service';
 import { environment } from 'src/environments/environment';
@@ -67,25 +67,49 @@ export class ProjectService {
       "limit": 1000
     } 
 }
+  private selectedNode: any;
   
   constructor(private http: HttpClient, private templateService: TemplateService, private eventService: EventService) { 
     eventService.projectNameEvent$.subscribe(value => {
-      this.getProject(value).subscribe(p =>{
-        if(p) {
-          this.loadProject(p)
-        }          
-      })
+      of(value).
+      pipe(
+        mergeMap(()=>this.http.get<Project[]>("/projectFile")),
+        map((projects: Project[])=>projects.find(p=>p.name==value)),
+        //mergeMap((value: string)=>this.getProject(value)),
+        map(project=>this.loadProject(project))
+      ).
+      subscribe((v)=>console.log(v))
     })
+    eventService.nodeSelectedEvent$.subscribe(value => {
+      this.selectedNode = value;
+    })    
   }
 
   getProjects(): Observable<Project[]> {    
     return this.http.get<Project[]>("/projectFile")
   }
 
+  saveProjects(projects: Project[]) {
+    let opt: Object = {
+       responseType: 'text' as 'json'
+    }
+    let formattedJSON = JSON.stringify(projects.map(p => new Project(p.name, p.template, p.templateParams, p.domain)), null, 4)
+    return this.http.post<string>("/projectFile", formattedJSON, opt).pipe(mergeMap((res: string) => this.clearLostDataFiles()))
+  }
+  
+ clearLostDataFiles() {
+    let opt: Object = {
+      responseType: 'text' as 'json'
+    }
+    return this.http.post<string>("/removeLostDataFiles", "", opt)
+  }
+
   getProject(name: string): Observable<Project | undefined> {
-    let p: Observable<Project | undefined> = this.getProjects()
-      .pipe(map((projects: Project[]) => projects.find(project => project.name === name)));
-    return p;
+    return of(name).
+    pipe(
+      mergeMap(() => this.getProjects()),
+      map((projects: Project[]) => projects.find(project => project.name === name))
+    )
   }
 
   private processProjectData(project: Project): Observable<Project> {
@@ -123,29 +147,47 @@ export class ProjectService {
               return project;
             }));
     }
-    return of(project);
-  }
-
-  loadProject(project: Project, clearAll: boolean = true) {
-    this.currentProject = project;
-    if(clearAll === true) {
-      this.eventService.emitClearAllEvent()
-    }
-    if(!project.data && !environment.singleHtml) {
-      this.eventService.emitSpinnerEvent(true)
-      this.templateService.renderTemplate(project.template, JSON.stringify(project.templateParams))
-        .subscribe((s: any) => {
-          project.data = s
-          this.processProjectData(project).subscribe(p => {
-            this.eventService.emitProjectEvent(p);
-            this.eventService.emitSpinnerEvent(false)
+    return of(project)/*.pipe(map(p => {
+          this.loadProjectStat(p.name, "additionalProps").subscribe((addProps: any) => {
+            p.additionalData = addProps.datasetsAdditionalProps;
+            return p;
           })
-        })
-    } else {
-      this.eventService.emitProjectEvent(project);
-    }
+          return p;
+        }
+      ));*/
   }
   
+  loadProject(project: Project | undefined, clearAll: boolean = true) {
+    this.currentProject = project;
+    if(project) {
+      if(clearAll === true) {
+        this.eventService.emitClearAllEvent()
+      }
+      this.eventService.emitLoadProjectEvent(project);
+      if(!project.data && !environment.singleHtml) {
+        of(project).
+        pipe(
+          map((project: Project) => {this.eventService.emitSpinnerEvent(true); return project}),
+          mergeMap((project: Project) => this.templateService.renderTemplate(
+            project.template, 
+            JSON.stringify(project.templateParams).replace("@description", this.selectedNode?.data?.dataset?.description))),
+          map((data: any) => {project.data = data; return project}),
+          mergeMap((project: Project) => this.processProjectData(project))
+        ).subscribe((p) => {
+          this.eventService.emitProjectEvent(p);
+          this.eventService.emitSpinnerEvent(false)
+        }, error => {
+          this.eventService.emitSpinnerEvent(false)
+          console.log(error)
+          alert(error.error)
+        })
+      } else {
+        this.eventService.emitProjectEvent(project)
+      }
+    }
+    return project
+  }
+
   getProjectsInputOutput(normalisedTopologyTree: TopologyNode[], project: string): TopologyNode {
     let newNode = function(node: any) {
       let ioNode = new Dataset()
@@ -255,11 +297,10 @@ export class ProjectService {
     q.selector.datasets.$elemMatch.name = datasetName    
     let resp = (this.search(q) as Observable<ProjectsDataResponse>)
       .subscribe(res => {
-        let project = new Project()
+        let project = new Project(datasetName, "", undefined, undefined)
         project.data = new Topology()
         project.data.datasets = []
         let normalized: TopologyNode[] = []
-        project.name = datasetName
         project.virtual = true;
 
         res.docs.forEach(pd => {

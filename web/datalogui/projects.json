@@ -1,209 +1,314 @@
 [
     {
+        "enable": true,
+        "domain": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Events model",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/Events.ssp",
-        "templateParams": {},
-        "domain": true
+        "template": "Events.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "domain": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Ingest Data",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/IngestData.ssp",
-        "templateParams": {},
-        "domain": true
+        "template": "IngestData.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "domain": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Client Products",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/ClientData.ssp",
-        "templateParams": {},
-        "domain": true
-    },    
+        "template": "ClientData.ssp",
+        "templateParams": {}
+    },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "odpp projects",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_projects.ssp",
-        "templateParams": {},
-        "dataExists": false
+        "template": "odpp_projects.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "ODPP.Legacy.acc",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts", 
-            "project": "ODPP.Legacy.acc", 
-            "sourcePrefix": "oddp_legacy/config/test/mr/acc/join_scripts/"},
-        "dataExists": true
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/acc/join_scripts",
+            "project": "ODPP.Legacy.acc",
+            "sourcePrefix": "oddp_legacy/config/test/mr/acc/join_scripts/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "ODPP.Legacy.events",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/events/join_scripts", 
-            "project": "ODPP.Legacy.events", 
-            "sourcePrefix": "oddp_legacy/config/test/mr/events/join_scripts/"},
-        "dataExists": true
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/events/join_scripts",
+            "project": "ODPP.Legacy.events",
+            "sourcePrefix": "oddp_legacy/config/test/mr/events/join_scripts/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "ODPP.Legacy.events.patterns",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_3.ssp",
+        "template": "odpp_3.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/events/join_scripts", 
-            "project": "ODPP.Legacy.events", 
-            "sourcePrefix": "oddp_legacy/config/test/mr/events/join_scripts/"},
-        "dataExists": true
-    },    
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/events/join_scripts",
+            "project": "ODPP.Legacy.events",
+            "sourcePrefix": "oddp_legacy/config/test/mr/events/join_scripts/"
+        }
+    },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "ODPP.Legacy.utm.acc",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/utm/acc/join_scripts", 
-            "project": "ODPP.Legacy.utm.acc", 
-            "sourcePrefix": "oddp_legacy/config/test/mr/utm/acc/join_scripts/"},
-        "dataExists": true
+            "folder": "C:/projects/temp/rosbank/odpp/legacy/config/test/mr/utm/acc/join_scripts",
+            "project": "ODPP.Legacy.utm.acc",
+            "sourcePrefix": "oddp_legacy/config/test/mr/utm/acc/join_scripts/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Olywer_Wyman",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/ow_full.ssp",
-        "templateParams": {},
-        "dataExists": true
+        "template": "ow_full.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Connector Data",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/connector_data_full.ssp",
-        "templateParams": {},
-        "dataExists": true
+        "template": "connector_data_full.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Triggers",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/triggers.ssp",
-        "templateParams": {},
-        "dataExists": true
+        "template": "triggers.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "BKI",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/bki2topology_full.ssp",
-        "templateParams": {},
-        "dataExists": true
+        "template": "bki2topology_full.ssp",
+        "templateParams": {}
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "sbrm.log",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/sbrm_log.ssp",
+        "template": "sbrm_log.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/SBRM_LOG/", 
-            "project": "sbrm.log"},
-        "dataExists": true
+            "folder": "C:/projects/temp/alfabank/SBRM_LOG/",
+            "project": "sbrm.log"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "OW and CR parsers QA",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/cr_ow_qa.ssp",
+        "template": "cr_ow_qa.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/cr_ow_qa/", 
+            "folder": "C:/projects/temp/alfabank/cr_ow_qa/",
             "project": "OW and CR parsers QA",
-            "sourcePrefix": "C:/projects/temp/alfabank/cr_ow_qa/"},
-        "dataExists": true
+            "sourcePrefix": "C:/projects/temp/alfabank/cr_ow_qa/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "l_deriveddata.dealloanbalance_sstat",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.dealloanbalance_sstat/hive", 
-            "project": "dealloanbalance_sstat", 
-            "sourcePrefix": "C:/projects/temp/alfabank/catalog/l_deriveddata.dealloanbalance_sstat/hive/"},
-        "dataExists": false
+            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.dealloanbalance_sstat/hive",
+            "project": "dealloanbalance_sstat",
+            "sourcePrefix": "C:/projects/temp/alfabank/catalog/l_deriveddata.dealloanbalance_sstat/hive/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "l_deriveddata.recoverywoifrs_tran_day",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.recoverywoifrs_tran_day/sql_from_sh", 
-            "project": "recoverywoifrs_tran_day", 
-            "sourcePrefix": ""},
-        "dataExists": false
+            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.recoverywoifrs_tran_day/sql_from_sh",
+            "project": "recoverywoifrs_tran_day",
+            "sourcePrefix": ""
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "l_deriveddata_default_deal_v1",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.default_deal_v1/Hive", 
-            "project": "l_deriveddata.default_deal_v1", 
-            "sourcePrefix": ""},
-        "dataExists": false
+            "folder": "C:/projects/temp/alfabank/catalog/l_deriveddata.default_deal_v1/Hive",
+            "project": "l_deriveddata.default_deal_v1",
+            "sourcePrefix": ""
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "Group of associated",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/groupOf/sql", 
-            "project": "GroupOf", 
-            "sourcePrefix": ""},
-        "dataExists": false
-    }
-    ,
+            "folder": "C:/projects/temp/alfabank/groupOf/sql",
+            "project": "GroupOf",
+            "sourcePrefix": ""
+        }
+    },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "s_dmrb.cardtransaction_stran",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
             "folder": "C:/projects/temp/alfabank/catalog/s_dmrb.cardtransaction_stran/hive",
-            "project": "s_dmrb.cardtransaction_stran", 
-            "sourcePrefix": ""},
-        "dataExists": false
+            "project": "s_dmrb.cardtransaction_stran",
+            "sourcePrefix": ""
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "sample.project1",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/sample/project1/sql", 
-            "project": "sample.project1", 
-            "sourcePrefix": "C:/projects/temp/sample/project1/sql"},
-        "dataExists": false
+            "folder": "C:/projects/temp/sample/project1/sql",
+            "project": "sample.project1",
+            "sourcePrefix": "C:/projects/temp/sample/project1/sql"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "sample.project2",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/sample/project2/sql", 
-            "project": "sample.project2", 
-            "sourcePrefix": "C:/projects/temp/sample/project2/sql/"},
-        "dataExists": false
+            "folder": "C:/projects/temp/sample/project2/sql",
+            "project": "sample.project2",
+            "sourcePrefix": "C:/projects/temp/sample/project2/sql/"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "l_deriveddata@bda11",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/etl/etl/hive_scripts/l_deriveddata@bda11", 
-            "project": "l_deriveddata@bda11", 
-            "sourcePrefix": "hive_scripts/l_deriveddata@bda11"},
-        "dataExists": false
+            "folder": "C:/projects/temp/alfabank/etl/etl/hive_scripts/l_deriveddata@bda11",
+            "project": "l_deriveddata@bda11",
+            "sourcePrefix": "hive_scripts/l_deriveddata@bda11"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "etl_full",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/etl/etl/atom", 
-            "project": "etl_full", 
+            "folder": "C:/projects/temp/alfabank/etl/etl/atom",
+            "project": "etl_full",
             "sourcePrefix": "C:/projects/temp/alfabank/etl/etl/atom",
             "deep": -1,
-            "filesFilter": ".*\\.hql"},
-        "dataExists": false
+            "filesFilter": ".*\\.hql"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "derivedData",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/odpp_2.ssp",
+        "template": "odpp_2.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/alfabank/etl/etl/atom", 
-            "project": "dd", 
+            "folder": "C:/projects/temp/alfabank/etl/etl/atom",
+            "project": "dd",
             "sourcePrefix": "dd",
             "deep": -1,
-            "filesFilter": ".*wf_deriveddata.*\\.hql"},
-        "dataExists": false
+            "filesFilter": ".*wf_deriveddata.*\\.hql"
+        }
     },
     {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
         "name": "vtb",
-        "template": "C:/projects/sbtprojects/datalog/src/main/resources/vtb.ssp",
+        "template": "vtb.ssp",
         "templateParams": {
-            "folder": "C:/projects/temp/vtb", 
-            "project": "vtb", 
+            "folder": "C:/projects/temp/vtb",
+            "project": "vtb",
             "sourcePrefix": "C:/projects/temp/vtb",
             "deep": -1,
-            "filesFilter": ".*\\.sql"},
-        "dataExists": false
-    }    
+            "filesFilter": ".*\\.sql"
+        }
+    },
+    {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
+        "name": "ac_transformation",
+        "template": "ac_ktr.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/ac/localRep",
+            "project": "localRep_tr",
+            "sourcePrefix": "C:/projects/temp/ac/localRep/",
+            "deep": -1,
+            "filesFilter": ".*.@description\\.ktr"
+        }
+    },
+    {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
+        "name": "ac_job",
+        "template": "ac_kjb.ssp",
+        "templateParams": {
+            "folder": "C:/projects/temp/ac/localRep",
+            "project": "localRep_jb",
+            "sourcePrefix": "C:/projects/temp/ac/localRep/",
+            "deep": -1,
+            "filesFilter": ".*.*\\.kjb"
+        }
+    },
+    {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
+        "name": "ddddddddd",
+        "template": "",
+        "templateParams": {}
+    }
 ]
