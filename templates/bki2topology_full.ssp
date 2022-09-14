@@ -10,9 +10,12 @@ import org.json4s.jackson.Serialization.{read}
 import scala.collection.mutable.ListBuffer
 import scala.io.Source.fromFile
 import scala.xml._
+import scala.io.Codec
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 
 import ru.neoflex.datalog.engine.Parser
+
+implicit val codec = Codec("UTF8")
 
 val pathToConfJson = 	"C:\\projects\\temp\\alfabank\\bki\\C5486671.Обогащение данных введённых в область dmin_risk\\oozie_workflows\\reg\\wf_reg_imbr_cre_req_deriveddata_daily\\conf\\conf.json"
 val pathToSql = 		"C:\\projects\\temp\\alfabank\\bki\\C5486671.Обогащение данных введённых в область dmin_risk\\hdfs_home\\scripts\\imbr_request"

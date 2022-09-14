@@ -147,22 +147,6 @@ export class TopologyComponent implements OnInit {
     cluster.childNodeIds.add(tablesId.find(k => k.key == nodeName)?.value)
   }
   
-  findFileContent(dirs: ProjectFileDir[] | undefined, project: string | undefined, fileName: string | undefined): ProjectFileDir | undefined {
-    let found: ProjectFileDir | undefined = undefined
-    if(dirs) {
-      found = dirs.find(d => d.project == project && d.isFile == true && d.name == fileName)
-      if(!found) {
-        for(let d of dirs) {
-          found = this.findFileContent(d.childDirs, project, fileName)
-          if(found) {
-            break
-          }        
-        }
-      }    
-    }
-    return found
-  }
-
   nodeClick(node: Node) {
     this.selected = node
     this.eventService.emitNodeSelectedEvent(node)
@@ -189,7 +173,7 @@ export class TopologyComponent implements OnInit {
   }
 
   private getNodes(): TopologyNode[] {
-    if(this.viewMode === "actions") {
+    if(this.viewMode === "actions") {    
       return this.data?.actions || []
     }
     if(this.viewMode === "inout" && this.inOut) {

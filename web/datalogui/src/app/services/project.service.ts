@@ -11,6 +11,7 @@ import { Topology } from '../classes/topology';
 import { DomainProjectLinksSearchResult } from '../classes/domain';
 import { NodeType } from '../classes/node';
 import { ProjectsDataResponse, SearchApiResponse } from '../classes/api';
+import { ToolAction } from '../classes/toolAction';
 
 @Injectable({
   providedIn: 'root'

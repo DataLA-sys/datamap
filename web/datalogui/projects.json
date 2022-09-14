@@ -307,8 +307,20 @@
         "enable": true,
         "virtual": false,
         "additionalData": [],
-        "name": "ddddddddd",
-        "template": "",
+        "name": "OliverWyman",
+        "template": "oliverWiman.ssp",
         "templateParams": {}
+    },
+    {
+        "enable": true,
+        "virtual": false,
+        "additionalData": [],
+        "name": "sqlFolder",
+        "template": "odpp_2.ssp",
+        "templateParams": {
+            "folder": "C:/projects/sbtprojects/dataq/quarryProjects/Example1/scripts",
+            "project": "sql",
+            "sourcePrefix": "scrips"
+        }
     }
 ]

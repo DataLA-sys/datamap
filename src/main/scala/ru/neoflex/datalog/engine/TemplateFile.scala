@@ -93,7 +93,7 @@ object Parser {
         return tables.toSeq
       } else if (logical(i).isInstanceOf[UnresolvedRelation]) {
         val tableIdentifier = logical(i).asInstanceOf[UnresolvedRelation].tableName
-        tables += tableIdentifier.toLowerCase()
+        tables += tableIdentifier //.toLowerCase()
       }
       i = i + 1
     }
@@ -165,7 +165,7 @@ object Parser {
     outTables.foreach(destTable => {
       if(testTable(destTable)) {
         var tableFields = List[Field]()// getFieldsFromScript(logical).filter(f => f.fieldPlanType == "MainProject")
-        if(findPatterns == false) {
+        if(!findPatterns) {
           tables.find(f => f.name == destTable).map(ft => {
             inTables = inTables ++ ft.sources
             tableFields = tableFields ++ ft.fields
@@ -176,13 +176,13 @@ object Parser {
         } else {
           tables.find(f => f.name.startsWith(destTable + ".pattern") && f.sources.toSet.mkString == inTables.toList.filter(testTable).sorted.toSet.mkString)
             .map(f => {
-              val idx = tables.filter(t => t.name.startsWith(destTable + ".pattern") && t.sources.sorted.toSet.equals(inTables.toList.filter(testTable).sorted.toSet)).length + 1
+              val idx = tables.count(t => t.name.startsWith(destTable + ".pattern") && t.sources.sorted.toSet.equals(inTables.toList.filter(testTable).sorted.toSet)) + 1
               tables -= f
               val source = if (f.sourceFile.contains(sourceFile)) f.sourceFile else f.sourceFile + ";" + sourceFile
               tables += DestTable(f.name, f.sources, source, f.layer, f.fields, matched = idx)
             })
             .orElse({
-              val idx = tables.filter(t => t.name.startsWith(destTable + ".pattern")).length + 1
+              val idx = tables.count(t => t.name.startsWith(destTable + ".pattern")) + 1
               val pname = destTable + ".pattern" + "(" + idx + ")"
               tables += DestTable(pname, inTables.toList.filter(testTable).sorted.distinct, sourceFile, layer,
                 fields = tableFields)

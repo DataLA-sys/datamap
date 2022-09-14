@@ -15,7 +15,7 @@ case class Table(destTable: String, jsonsql: String, code: Option[String], disab
 	xml: List[Xml] = List(),
 	step2_custom: List[Step2Custom] = List())
 
-case class Tables(tables: List[Table])
+case class Tables(tables: List[Table]) s
 
 val project: String = "Oliver_Wyman"
 val sourceFile: String = "conf.json"

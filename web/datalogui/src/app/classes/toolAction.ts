@@ -1,7 +1,7 @@
 import { TopologyNode } from "./dataset";
 
 export class Tool {
-  name!: string;
+  name!: string;  
 }
 
 export class ToolAction extends TopologyNode {

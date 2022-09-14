@@ -15,7 +15,7 @@ import akka.util.ByteString
 import org.json4s.JsonAST.{JArray, JString}
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 import scala.io.Source.fromFile
 import org.json4s._
 import org.json4s.jackson.JsonMethods
@@ -242,23 +242,24 @@ object ProjectDataActor {
         message.replyTo ! ProjectStatMessage(message.data, context.self)
         Behaviors.same
       case message: RemoveLostDataFilesCommand =>
-        try {
+        val res = Try[Boolean] {
           val projects = fromFile(message.projectFile)
           try {
-            val JArray(names: List[JString]) = (JsonMethods.parse(projects.mkString) \ "name")
+            val JArray(names: List[JString]) = JsonMethods.parse(projects.mkString) \ "name"
             val d = new File(context.system.settings.config.getString("my-app.system.dataFolder"))
             if (d.exists && d.isDirectory) {
               d.listFiles.filter(_.isFile).filter(f =>
                 names.filter(a => a.extract[String] == f.getName.replace(".json", "")
                   .split('.').dropRight(1).mkString(".")).length == 0).foreach(f => f.delete())
             }
+            true
           } finally {
             projects.close()
           }
-          message.replyTo ! StatusReply.success(CompleteDataMessage(context.self))
-        } catch {
-          case e: Throwable =>
-            message.replyTo ! StatusReply.error(e)
+        }
+        res match {
+          case Success(_) => message.replyTo ! StatusReply.success(CompleteDataMessage(context.self))
+          case Failure(exception) => message.replyTo ! StatusReply.error(exception)
         }
         Behaviors.same
       case _ => Behaviors.same

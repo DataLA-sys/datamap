@@ -42,22 +42,22 @@
                     Topology
                   </ng-template>              
 
-                  <div style="overflow: hidden;height: 86.5vh;">
+                  <div style="overflow: hidden;height: 87vh;">
                     <app-topology></app-topology>      
                   </div>
                 </mat-tab>
                 <mat-tab label="Data" class="noprint">
-                  <div style="overflow: auto;height: 86.5vh;">
+                  <div style="overflow: auto;height: 87vh;">
                     <topology-grid-view></topology-grid-view>
                   </div>              
                 </mat-tab>            
                 <mat-tab label="Templates" class="noprint">
-                  <div style="overflow: auto;height: 86.5vh;">
+                  <div style="overflow: auto;height: 87vh;">
                     <tepmlate-editor></tepmlate-editor>
                   </div>
                 </mat-tab>
                 <mat-tab label="Commands" class="noprint">
-                  <div style="overflow: auto;height: 86.5vh;">
+                  <div style="overflow: auto;height: 87vh;">
                     <app-commands></app-commands>
                   </div>
                 </mat-tab>
@@ -67,7 +67,7 @@
                       <mat-icon (click)="deleteFile(file.name)">close</mat-icon>
                       {{file.shortName()}}
                     </ng-template>
-                    <div style="overflow: auto;height: 86.5vh;">
+                    <div style="overflow: auto;height: 87vh;">
                       <div ace-editor [text]="file.content||''" [theme]="'eclipse'" [mode]="'sql'" style="height:100%;" [readOnly]="true"></div>
                     </div>
                   </mat-tab>
